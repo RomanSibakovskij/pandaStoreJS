@@ -97,6 +97,232 @@ class GeneralPage extends BasePage{
         await actions.move({ origin: gotItButton }).click().perform();
     }
 
+    //general page text element getters
+    //header section
+    async getLowerHeaderNavFashionLinkText(){
+        const fashionNavLink = await this.driver.findElement(this._lowerHeadNavFashionDropdownLink);
+        return await fashionNavLink.getText();
+    }
+    async getLowerHeaderNavElementsLinkText(){
+        const elementsNavLink = await this.driver.findElement(this._lowerHeadNavElementsDropdownLink);
+        return await elementsNavLink.getText();
+    }
+    async getLowerHeaderNavProductLinkText(){
+        const productNavLink = await this.driver.findElement(this._lowerHeadNavProductDropdownLink);
+        return await productNavLink.getText();
+    }
+    async getLowerHeaderNavBlogLinkText(){
+        const blogNavLink = await this.driver.findElement(this._lowerHeadNavBlogDropdownLink);
+        return await blogNavLink.getText();
+    }
+    async getLowerHeaderNavStoresLinkText(){
+        const storesNavLink = await this.driver.findElement(this._lowerHeadNavStoresDropdownLink);
+        return await storesNavLink.getText();
+    }
+    async getLowerHeaderNavPagesLinkText(){
+        const pagesNavLink = await this.driver.findElement(this._lowerHeadNavPagesDropdownLink);
+        return await pagesNavLink.getText();
+    }
+    async getLowerHeaderNavMixedLinkText(){
+        const mixedNavLink = await this.driver.findElement(this._lowerHeadNavMixedDropdownLink);
+        return await mixedNavLink.getText();
+    }
+    async getLowerHeaderNavMenLinkText(){
+        const menNavLink = await this.driver.findElement(this._lowerHeadNavMenDropdownLink);
+        return await menNavLink.getText();
+    }
+    async getLowerHeaderNavBuyThemeLinkText(){
+        const buyThemeNavLink = await this.driver.findElement(this._lowerHeadNavBuyThemeLink);
+        return await buyThemeNavLink.getText();
+    }
+    //upper footer section
+    //page
+    async getFooterPageTitle(){
+        const footerPageTitle = await this.driver.findElement(this._footerPageTitle);
+        return await footerPageTitle.getText();
+    }
+    async getFooterSubtextOne(){
+        const footerSubtextOne = await this.driver.findElement(this._footerSubtextOne);
+        return await footerSubtextOne.getText();
+    }
+    async getFooterSubtextTwo(){
+        const footerSubtextTwo = await this.driver.findElement(this._footerSubtextTwo);
+        return await footerSubtextTwo.getText();
+    }
+    async getFooterSubtextThree(){
+        const footerSubtextThree = await this.driver.findElement(this._footerSubtextThree);
+        return await footerSubtextThree.getText();
+    }
+    async getFooterBuyThisThemeLinkText(){
+        const footerBuyThisThemeLinkText = await this.driver.findElement(this._footerBuyThisThemeLink);
+        return await footerBuyThisThemeLinkText.getText();
+    }
+    //specials (products) section
+    async getFooterSpecialsSectionTitleLinkText(){
+        const footerSpecialsSectionTitleLinkText = await this.driver.findElement(this._footerSpecialsSectionTitleLink);
+        return await footerSpecialsSectionTitleLinkText.getText();
+    }
+    //recent articles section
+    async getFooterRecentArticlesSectionTitle(){
+        const footerRecentArticlesSectionTitle = await this.driver.findElement(this._footerRecentArticlesSectionTitle);
+        return await footerRecentArticlesSectionTitle.getText();
+    }
+
+    async getFooterRecentArticlesSectionTitleLinkText() {
+        const elements = await this.driver.findElements(this._footerRecentArticlesTitleLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer recent articles section title link text(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getFooterRecentArticlesTimespan() {
+        const elements = await this.driver.findElements(this._footerRecentArticlesTimespanElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer recent articles timespan(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //newsletter section
+    async getFooterNewsletterSectionTitle() {
+        const footerNewsletterTitle = await this.driver.findElement(this._footerNewsletterSectionTitle);
+        return await footerNewsletterTitle.getText();
+    }
+    async getFooterNewsletterSectionSubtitle() {
+        const footerNewsletterSubtitle = await this.driver.findElement(this._footerNewsletterSectionSubtitle);
+        return await footerNewsletterSubtitle.getText();
+    }
+
+    //lower footer section
+    //support section
+    async getFooterSupportSectionTitle() {
+        const footerSupportSectionTitle = await this.driver.findElement(this._footerSupportSectionTitle);
+        return await footerSupportSectionTitle.getText();
+    }
+
+    async getFooterSupportSectionLinkText() {
+        const elements = await this.driver.findElements(this._footerSupportSectionLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer support section link text(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //catalog section
+    async getFooterCatalogSectionTitle() {
+        const footerCatalogSectionTitle = await this.driver.findElement(this._footerCatalogSectionTitle);
+        return await footerCatalogSectionTitle.getText();
+    }
+
+    async getFooterCatalogSectionLinkText() {
+        const elements = await this.driver.findElements(this._footerCatalogSectionLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer catalog section link text(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //my account section
+    async getFooterMyAccountSectionTitle() {
+        const footerMyAccountSectionTitle = await this.driver.findElement(this._footerMyAccountSectionTitle);
+        return await footerMyAccountSectionTitle.getText();
+    }
+
+    async getFooterMyAccountSectionLinkText() {
+        const elements = await this.driver.findElements(this._footerMyAccountSectionLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer my account section link text(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //popular tags section
+    async getFooterPopularTagsSectionTitle() {
+        const footerPopularTagsSectionTitle = await this.driver.findElement(this._footerPopularTagsSectionTitle);
+        return await footerPopularTagsSectionTitle.getText();
+    }
+
+    async getFooterPopularTagsSectionLinkText() {
+        const elements = await this.driver.findElements(this._footerPopularTagsSectionLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer catalog section link text(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //contact us section
+    async getFooterContactUsSectionTitle() {
+        const footerContactUsSectionTitle = await this.driver.findElement(this._footerContactUsSectionTitle);
+        return await footerContactUsSectionTitle.getText();
+    }
+    async getFooterContactUsAddress() {
+        const footerContactUsAddress = await this.driver.findElement(this._footerContactUsAddress);
+        return await footerContactUsAddress.getText();
+    }
+    async getFooterContactUsEmail() {
+        const footerContactUsEmail = await this.driver.findElement(this._footerContactUsEmail);
+        return await footerContactUsEmail.getText();
+    }
+    async getFooterContactUsPhone() {
+        const footerContactUsPhone = await this.driver.findElement(this._footerContactUsPhone);
+        return await footerContactUsPhone.getText();
+    }
+
+    //copyright section
+    async getFooterCopyrightText() {
+        const footerCopyrightText = await this.driver.findElement(this._footerCopyrightText);
+        return await footerCopyrightText.getText();
+    }
+
     //general page web element assert method (all pages have those elements)
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
