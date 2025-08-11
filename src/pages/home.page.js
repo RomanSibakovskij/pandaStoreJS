@@ -87,6 +87,170 @@ class HomePage extends BasePage{
         this._homePageProductBrandsIconLinkElements = By.xpath("//section[@id='brands_slider_d40e96ddab']//div[@class='pro_outer_box']/a");
     }
 
+    //home page product data getters
+    //featured products section
+    async getHomePageFeaturedProductName() {
+        const elements = await this.driver.findElements(this._homePageFeaturedProductNameLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page featured product name(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getHomePageFeaturedProductUnitPrice() {
+        const elements = await this.driver.findElements(this._homePageFeaturedProductUnitPriceElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page featured product unit price(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getHomePageFeaturedProductDiscountedPrice() {
+        const elements = await this.driver.findElements(this._homePageFeaturedProductDiscountedPriceElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page featured product discount price(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //featured categories section
+    async getHomePageFeaturedCategoriesName() {
+        const elements = await this.driver.findElements(this._homePageFeaturedCategoriesNameLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page featured category name(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //new products section
+    async getHomePageNewProductName() {
+        const elements = await this.driver.findElements(this._homePageNewProductNameLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page new product name(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getHomePageNewProductUnitPrice() {
+        const elements = await this.driver.findElements(this._homePageNewProductUnitPriceElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page new product unit price(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //featured articles section (the loggers log only first link elements, not all of them, innerText of each link has the actual text)
+    async getHomePageFeaturedArticleTitle() {
+        const elements = await this.driver.findElements(this._homePageFeaturedArticlesTitleLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element, index) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn(`Failed to get home page featured articles title(s) at index ${index}: `, error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getHomePageFeaturedArticleAuthorName() {
+        const elements = await this.driver.findElements(this._homePageFeaturedArticlesAuthorNameElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page featured articles author name(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getHomePageFeaturedArticleTimestamp() {
+        const elements = await this.driver.findElements(this._homePageFeaturedArticlesTimestampElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page featured articles timestamp(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getHomePageFeaturedArticleText() {
+        const elements = await this.driver.findElements(this._homePageFeaturedArticlesTextElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get home page featured articles text(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
     //home page text element getters
     //welcome section
     async getHomePagePrestaThemeTitle(){
