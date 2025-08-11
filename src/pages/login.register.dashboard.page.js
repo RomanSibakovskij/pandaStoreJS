@@ -29,6 +29,36 @@ class LoginRegisterDashboardPage extends BasePage{
 
     }
 
+    //login/register dashboard page text getters
+    //new customer (register) section
+    async getNewCustomerSectionTitle(){
+        const newCustomerSectionTitle = await this.driver.findElement(this._newCustomerSectionTitle);
+        return await newCustomerSectionTitle.getText();
+    }
+    async getNewCustomerSectionSubtitle(){
+        const newCustomerSectionSubtitle = await this.driver.findElement(this._newCustomerSectionSubtitle);
+        return await newCustomerSectionSubtitle.getText();
+    }
+
+    //returning customer (login) section
+    async getLoginSectionTitle(){
+        const loginSectionTitle = await this.driver.findElement(this._loginSectionTitle);
+        return await loginSectionTitle.getText();
+    }
+    //input form
+    async getLoginSectionEmailSubtext(){
+        const loginSectionEmailSubtext = await this.driver.findElement(this._loginSectionEmailSubtext);
+        return await loginSectionEmailSubtext.getText();
+    }
+    async getLoginSectionPasswordSubtext(){
+        const loginSectionPasswordSubtext = await this.driver.findElement(this._loginSectionPasswordSubtext);
+        return await loginSectionPasswordSubtext.getText();
+    }
+    async getLoginSectionForgotPasswordLinkText(){
+        const forgotPasswordLinkText = await this.driver.findElement(this._loginSectionForgotPasswordLink);
+        return await forgotPasswordLinkText.getText();
+    }
+
     //login/register dashboard page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
