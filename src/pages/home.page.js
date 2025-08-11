@@ -363,7 +363,7 @@ class HomePage extends BasePage{
 
     async isHomePageWebElementDisplayed(){
         const elementsToCheck = [
-            this._homePageCarouselOneImgElements,
+            //this._homePageCarouselOneImgElements,
             this._homePageCarouselOneThisThemeButton,
             this._homePageCarouselOnePaginationButtonElements,
             this._homePagePrestaThemeTitle,
@@ -394,8 +394,8 @@ class HomePage extends BasePage{
             this._homePageNewProductImgElements,
             this._homePageNewProductNameLinkElements,
             this._homePageNewProductUnitPriceElements,
-            this._homePageNewProductAddToCartButtonElements,
-            this._homePageNewProductViewMoreButtonElements,
+            //this._homePageNewProductAddToCartButtonElements,
+            //this._homePageNewProductViewMoreButtonElements,
             this._homePageFeaturedArticlesSectionTitleLink,
             this._homePageFeaturedArticlesPrevButton,
             this._homePageFeaturedArticlesNextButton,

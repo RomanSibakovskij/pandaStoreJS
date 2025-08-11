@@ -29,6 +29,13 @@ class LoginRegisterDashboardPage extends BasePage{
 
     }
 
+    //click "Create account" button method
+    async clickCreateAccountButton(){
+        const createAccountButton = this.driver.findElement(this._newCustomerSectionCreateAccountButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: createAccountButton }).click().perform();
+    }
+
     //login/register dashboard page text getters
     //new customer (register) section
     async getNewCustomerSectionTitle(){

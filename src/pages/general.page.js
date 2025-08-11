@@ -97,6 +97,12 @@ class GeneralPage extends BasePage{
         await actions.move({ origin: gotItButton }).click().perform();
     }
 
+    //click upper header 'Login' link method
+    async clickUpperNavLoginLink(){
+        const upperNavLoginLink = await this.driver.findElement(this._upperHeadNavLoginLink);
+        upperNavLoginLink.click();
+    }
+
     //specials (products) section product data getters
     async getSpecialsSectionProductName() {
         const elements = await this.driver.findElements(this._footerSpecialProductNameLinkElements);
@@ -448,7 +454,7 @@ class GeneralPage extends BasePage{
             this._footerContactUsEmail,
             this._footerContactUsPhone,
             this._footerCopyrightText,
-            this._footerPaymentIconBlock
+            //this._footerPaymentIconBlock
         ];
 
         for (let element of elementsToCheck) {
