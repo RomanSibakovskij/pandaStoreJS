@@ -36,7 +36,6 @@ class LoginRegisterDashPageTextElementAssert extends BaseTest {
         assert.strictEqual(loginSectionForgotPasswordLinkText, "Forgot your password?", "The login/register dashboard page returning customer (login) section forgot password link text doesn't match expectations.");
     }
 
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
