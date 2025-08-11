@@ -97,6 +97,71 @@ class GeneralPage extends BasePage{
         await actions.move({ origin: gotItButton }).click().perform();
     }
 
+    //specials (products) section product data getters
+    async getSpecialsSectionProductName() {
+        const elements = await this.driver.findElements(this._footerSpecialProductNameLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer specials section product name(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getSpecialsSectionProductUnitPrice() {
+        const elements = await this.driver.findElements(this._footerSpecialProductUnitPriceElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer specials section product unit price(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getSpecialsSectionProductOldPrice() {
+        const elements = await this.driver.findElements(this._footerSpecialProductOldPriceElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer specials section product old price(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    async getSpecialsSectionProductDiscount() {
+        const elements = await this.driver.findElements(this._footerSpecialProductDiscountElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get footer specials section product discount(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
     //general page text element getters
     //header section
     async getLowerHeaderNavFashionLinkText(){
