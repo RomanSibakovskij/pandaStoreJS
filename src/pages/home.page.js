@@ -87,6 +87,110 @@ class HomePage extends BasePage{
         this._homePageProductBrandsIconLinkElements = By.xpath("//section[@id='brands_slider_d40e96ddab']//div[@class='pro_outer_box']/a");
     }
 
+    //home page text element getters
+    //welcome section
+    async getHomePagePrestaThemeTitle(){
+        const prestaThemeTitle = await this.driver.findElement(this._homePagePrestaThemeTitle);
+        return await prestaThemeTitle.getText();
+    }
+    async getHomePageWelcomeSectionTitle(){
+        const welcomeSectionTitle = await this.driver.findElement(this._homePageWelcomeSectionTitle);
+        return await welcomeSectionTitle.getText();
+    }
+    async getHomePageWelcomeSectionSubtitle(){
+        const welcomeSectionSubtitle = await this.driver.findElement(this._homePageWelcomeSectionSubtitle);
+        return await welcomeSectionSubtitle.getText();
+    }
+    //featured products section
+    async getHomePageFeaturedProductsSectionTitle(){
+        const featuredProductsSectionTitle = await this.driver.findElement(this._homePageFeaturedProductsSectionTitleLink);
+        return await featuredProductsSectionTitle.getText();
+    }
+    //carousel two section
+    async getHomePageCarouselTwoTestimonialsTitle(){
+        const carouselTwoTestimonialsTitle = await this.driver.findElement(this._homePageCarouselTwoTestimonialsTitle);
+        return await carouselTwoTestimonialsTitle.getText();
+    }
+    //featured categories section
+    async getHomePageFeaturedCategoriesSectionTitle(){
+        const featuredCategoriesSectionTitle = await this.driver.findElement(this._homePageFeaturedCategoriesSectionTitle);
+        return await featuredCategoriesSectionTitle.getText();
+    }
+    //aside section
+    //panda theme
+    async getHomePagePandaThemeResponsiveSectionTitle(){
+        const pandaThemeResponsiveSectionTitle = await this.driver.findElement(this._homePagePandaThemeResponsiveSectionTitle);
+        return await pandaThemeResponsiveSectionTitle.getText();
+    }
+    async getHomePagePandaThemeResponsiveSectionSubtext(){
+        const pandaThemeResponsiveSectionSubtext = await this.driver.findElement(this._homePagePandaThemeResponsiveSectionSubtext);
+        return await pandaThemeResponsiveSectionSubtext.getText();
+    }
+    async getHomePagePandaThemeCustomSectionTitle(){
+        const pandaThemeCustomSectionTitle = await this.driver.findElement(this._homePagePandaThemeCustomSectionTitle);
+        return await pandaThemeCustomSectionTitle.getText();
+    }
+    async getHomePagePandaThemeCustomSectionSubtext(){
+        const pandaThemeCustomSectionSubtext = await this.driver.findElement(this._homePagePandaThemeCustomSectionSubtext);
+        return await pandaThemeCustomSectionSubtext.getText();
+    }
+    async getHomePagePandaThemeColorsSectionTitle(){
+        const pandaThemeColorsSectionTitle = await this.driver.findElement(this._homePagePandaThemeColorsSectionTitle);
+        return await pandaThemeColorsSectionTitle.getText();
+    }
+    async getHomePagePandaThemeColorsSectionSubtext(){
+        const pandaThemeColorsSectionSubtext = await this.driver.findElement(this._homePagePandaThemeColorsSectionSubtext);
+        return await pandaThemeColorsSectionSubtext.getText();
+    }
+    //new products section
+    async getHomePageNewProductsSectionTitleLinkText(){
+        const newProductsSectionTitleLinkText = await this.driver.findElement(this._homePageNewProductsSectionTitleLink);
+        return await newProductsSectionTitleLinkText.getText();
+    }
+    //featured articles section
+    async getHomePageFeaturedArticlesSectionTitleLinkText(){
+        const featuredArticlesSectionTitleLinkText = await this.driver.findElement(this._homePageFeaturedArticlesSectionTitleLink);
+        return await featuredArticlesSectionTitleLinkText.getText();
+    }
+    //lower main section
+    async getHomePageShopNewArrivalsImageTitle(){
+        const shopNewArrivalsImageTitle = await this.driver.findElement(this._homePageShopNewArrivalsImageTitle);
+        return await shopNewArrivalsImageTitle.getText();
+    }
+    async getHomePageShopNewArrivalsImageSubtitle(){
+        const shopNewArrivalsImageSubtitle = await this.driver.findElement(this._homePageShopNewArrivalsImageSubtitle);
+        return await shopNewArrivalsImageSubtitle.getText();
+    }
+    async getHomePageMaternityEssentialsImageTitle(){
+        const maternityEssentialsImageTitle = await this.driver.findElement(this._homePageMaternityEssentialsImageTitle);
+        return await maternityEssentialsImageTitle.getText();
+    }
+    async getHomePageMaternityEssentialsImageSubtitle(){
+        const maternityEssentialsImageSubtitle = await this.driver.findElement(this._homePageMaternityEssentialsImageSubtitle);
+        return await maternityEssentialsImageSubtitle.getText();
+    }
+    async getHomePageCheckOutNewBrandsImageTitle(){
+        const checkOutNewBrandsImageTitle = await this.driver.findElement(this._homePageCheckOutNewBrandsImageTitle);
+        return await checkOutNewBrandsImageTitle.getText();
+    }
+    async getHomePageCheckOutNewBrandsImageSubtitle(){
+        const checkOutNewBrandsImageSubtitle = await this.driver.findElement(this._homePageCheckOutNewBrandsImageSubtitle);
+        return await checkOutNewBrandsImageSubtitle.getText();
+    }
+    async getHomePageChangingSeasonsImageTitle(){
+        const changingSeasonsImageTitle = await this.driver.findElement(this._homePageChangingSeasonsImageTitle);
+        return await changingSeasonsImageTitle.getText();
+    }
+    async getHomePageChangingSeasonsImageSubtitle(){
+        const changingSeasonsImageSubtitle = await this.driver.findElement(this._homePageChangingSeasonsImageSubtitle);
+        return await changingSeasonsImageSubtitle.getText();
+    }
+    //product brands section
+    async getHomePageProductBrandsTitleText(){
+        const productBrandsTitleText = await this.driver.findElement(this._homePageProductBrandsTitleLink);
+        return await productBrandsTitleText.getText();
+    }
+
     //home page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
