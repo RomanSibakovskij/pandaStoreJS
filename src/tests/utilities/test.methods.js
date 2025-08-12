@@ -853,6 +853,61 @@ class TestMethods extends BaseTest{
         assert.strictEqual(currentURL, regPageURL, "The user was able to create an account with invalid first name input format, test has failed");
     }
 
+    //invalid user (male) account creation test method - invalid user last name input format (special symbols only)
+    async invalidUserAccountCreationInvalidLastNameFormatTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const registerPage = new RegisterPage(this.driver);
+        const registerPageInvalidSingularInput = new RegisterPageInvalidSingularInput(this.driver);
+        const registerPageTextElementAssert = new RegisterPageTextElementAssert(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //register page web element assert
+        await registerPage.isRegisterPageWebElementDisplayed();
+        //register page text element assert
+        await registerPageTextElementAssert.isRegisterPageTextElementAsExpected();
+        //capture screenshot of the register page display before data input
+        await captureScreenshot(this.driver, "Register Page Display Before Data Input");
+        //click "Mr." radio button
+        await registerPage.clickMrRadioButton();
+        //input valid user first name into first name input field
+        await registerPage.inputFirstNameIntoFirstNameInputField();
+        //input invalid user last name format into last name input field (special symbols only)
+        await registerPageInvalidSingularInput.inputInvalidLastNameFormatIntoLastNameInputField();
+        //input valid user email into email input field
+        await registerPage.inputEmailIntoEmailInputField();
+        //input valid user password into password input field
+        await registerPage.inputPasswordIntoPasswordInputField();
+        //click "View Password" button
+        await registerPage.clickViewRegisterPasswordButton();
+        //capture screenshot of the register page display after invalid data input - invalid last name input format
+        await captureScreenshot(this.driver, "Register Page Display After Invalid Data Input (Male) - Invalid Last Name Format");
+        //click "Save" button
+        await registerPage.clickSaveButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(4000);
+        //log the product addition issue if it gets added without any predefined actions
+        const genPageSidebarCartCountText = await generalPage.getSidebarCartButtonText();
+        const headerShoppingCartLinkText = await generalPage.getHeaderShoppingCartLinkText();
+        if(genPageSidebarCartCountText !== "Cart\n0" && headerShoppingCartLinkText !== "0\\nSHOPPING CART\\n-\\n$0.00"){
+            Logger.error(`A random product(s) is getting added without any predefined action performed. Expected header shopping cart display: '0 SHOPPING CART - $0.00', Actual: ${headerShoppingCartLinkText}`)
+        } else {
+            Logger.info("No random product has been added.");
+        }
+        //assert the user gets an expected error message
+        const nameInputErrorMsg = await registerPage.getRegisterPageInvalidInputErrorMsg();
+        assert.strictEqual(nameInputErrorMsg, "Invalid format.", "The invalid last name input error message doesn't match expectations or the error wasn't triggered.");
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Invalid User Account Creation Test Result (Male) - Invalid Last Name Format");
+        //assert the user stays on register page after inputting an invalid last name input format
+        const currentURL = await this.driver.getCurrentUrl();
+        const regPageURL = "https://panda2.sunnytoo.com/en/?controller=registration";
+        assert.strictEqual(currentURL, regPageURL, "The user was able to create an account with invalid last name input format, test has failed");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

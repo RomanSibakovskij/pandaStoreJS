@@ -152,6 +152,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationInvalidFirstNameFormatTest();
         });
 
+        //Test 002o -> invalid (male) user account creation test - invalid user last name format (special symbols only)
+        test("Invalid (Male) User Account Creation Test - Invalid Last Name Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - invalid user last name format (special symbols only)
+            await testMethods.invalidUserAccountCreationInvalidLastNameFormatTest();
+        });
+
     });
 
 
