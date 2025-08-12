@@ -116,6 +116,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationTooLongFirstNameTest();
         });
 
+        //Test 002k -> invalid (male) user account creation test - too long user last name (100 chars) (the user account was created, test has failed)
+        test("Invalid (Male) User Account Creation Test - Too Long Last Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - too long user last name (100 chars)
+            await testMethods.invalidUserAccountCreationTooLongLastNameTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
