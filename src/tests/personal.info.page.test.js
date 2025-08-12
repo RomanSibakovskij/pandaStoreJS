@@ -50,6 +50,16 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountNoFirstNameTest();
         });
 
+        //Test 003c -> invalid edit user (with login email) account test - no edited last name
+        test("Invalid Edit User Account Test - No Edited Last Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - no edited last name
+            await testMethods.invalidEditAccountNoLastNameTest();
+        });
+
     });
 
 
