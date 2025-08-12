@@ -33,6 +33,7 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
 
         //invalid personal info user data input - too long singular input
         this._tooLongEditedFirstName = "Dsdfdgdfgfewtrythgydfggfgfjmbnjnvcvcxcsdrteytuiyioipokjghhfgdgrertrdtgdfghfjhgkjbvghgdfgfhfhujhjgfhg"; //100 chars
+        this._tooLongEditedLastName = "Csdfdgdfgfewtrythgydfggfgfjmbnjnvcvcxcsdrteytuiyioipokjghhfgdgrertrdtgdfghfjhgkjbvghgdfgfhfhujhjgfhg"; //100 chars
     }
 
     //invalid user edited data input methods - no singular input
@@ -100,6 +101,13 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const tooLongEditedFirstName = this._tooLongEditedFirstName;
         Logger.info("Too long edited user first name: ", tooLongEditedFirstName);
         await editedFirstNameInputField.sendKeys(tooLongEditedFirstName);
+    }
+    async inputTooLongEditedLastNameIntoLastNameInputField(){
+        const editedLastNameInputField = await this.driver.findElement(this._personalInfoPageLastNameInputField);
+        await editedLastNameInputField.clear();
+        const tooLongEditedLastName = this._tooLongEditedLastName;
+        Logger.info("Too long edited user last name: ", tooLongEditedLastName);
+        await editedLastNameInputField.sendKeys(tooLongEditedLastName);
     }
 
 }
