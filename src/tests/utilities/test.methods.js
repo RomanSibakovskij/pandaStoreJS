@@ -1,18 +1,22 @@
 "use strict"
+const assert = require("node:assert");
 
 const BasePage = require("../../pages/utilities/base.page.js");
 const { GeneralPage } = require("../../pages/general.page.js");
 const { HomePage } = require("../../pages/home.page.js");
 const { LoginRegisterDashboardPage } = require("../../pages/login.register.dashboard.page.js");
+const { RegisterPage } = require("../../pages/register.page.js");
 
 //const GeneralPageDataLoggers = require("../data-loggers/general.page.data.loggers.js");
 const GeneralPageTextElementAssert = require("../test-text-element-asserts/general.page.text.element.assert.js");
 const HomePageTextElementAssert = require("../test-text-element-asserts/home.page.text.element.assert.js");
 const HomePageDataLoggers = require("../data-loggers/home.page.data.loggers.js");
 const LoginRegisterDashPageTextElementAssert = require("../test-text-element-asserts/login.register.dash.page.text.element.assert.js");
+const RegisterPageTextElementAssert = require("../test-text-element-asserts/register.page.text.element.assert.js");
 
 const BaseTest = require("./base.test");
 const {captureScreenshot} = require("./screehot.class.js");
+const Logger = require("../../pages/utilities/logger.js");
 
 class TestMethods extends BaseTest{
 
@@ -78,6 +82,61 @@ class TestMethods extends BaseTest{
         await loginRegisterDashboardPage.clickCreateAccountButton();
         //capture screenshot of the test result
         await captureScreenshot(this.driver, "User Navigation To Register Page Test Result");
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //valid user account creation tests
+
+    //valid user (male) account creation test method
+    async validUserAccountCreationTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const registerPage = new RegisterPage(this.driver);
+        const registerPageTextElementAssert = new RegisterPageTextElementAssert(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //register page web element assert
+        await registerPage.isRegisterPageWebElementDisplayed();
+        //register page text element assert
+        await registerPageTextElementAssert.isRegisterPageTextElementAsExpected();
+        //capture screenshot of the register page display before data input
+        await captureScreenshot(this.driver, "Register Page Display Before Data Input");
+        //click "Mr." radio button
+        await registerPage.clickMrRadioButton();
+        //input valid user first name into first name input field
+        await registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid user last name into last name input field
+        await registerPage.inputLastNameIntoLastNameInputField();
+        //input valid user email into email input field
+        await registerPage.inputEmailIntoEmailInputField();
+        //input valid user password into password input field
+        await registerPage.inputPasswordIntoPasswordInputField();
+        //click "View Password" button
+        await registerPage.clickViewRegisterPasswordButton();
+        //capture screenshot of the register page display after valid data input
+        await captureScreenshot(this.driver, "Register Page Display After Valid Data Input (Male)");
+        //click "Save" button
+        await registerPage.clickSaveButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad();
+        //assert the user account gets created (the user stays logged in after account creation)
+        const actualUsername = (await generalPage.getUpperNavAccountLinkText()).toLowerCase();
+        const expectedUsername = ((await registerPage.getFirstName()) + " " + (await registerPage.getLastName())).toLowerCase();
+        assert.strictEqual(actualUsername, expectedUsername, `The user name doesn't match expectations. Actual: ${actualUsername}, Expected: ${expectedUsername}`);
+        //log the product addition issue if it gets added without any predefined actions
+        const genPageSidebarCartCountText = await generalPage.getSidebarCartButtonText();
+        const headerShoppingCartLinkText = await generalPage.getHeaderShoppingCartLinkText();
+        if(genPageSidebarCartCountText !== "Cart\n0" && headerShoppingCartLinkText !== "0\\nSHOPPING CART\\n-\\n$0.00"){
+            Logger.error(`A random product(s) is getting added without any predefined action performed. Expected header shopping cart display: '0 SHOPPING CART - $0.00', Actual: ${headerShoppingCartLinkText}`)
+        } else {
+            Logger.info("The user account creation proceeds without any issues.");
+        }
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Valid User Account Creation Test Result (Male)");
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

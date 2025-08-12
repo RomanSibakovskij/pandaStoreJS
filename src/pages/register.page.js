@@ -2,6 +2,7 @@
 
 const {By} = require("selenium-webdriver");
 const BasePage = require("./utilities/base.page.js");
+const TestDataGenerator = require("./utilities/test.data.generator.js");
 const Logger = require("./utilities/logger.js");
 
 class RegisterPage extends BasePage{
@@ -34,6 +35,69 @@ class RegisterPage extends BasePage{
         //name singular input error message element
         this._regPageSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
 
+        const testDataGenerator = new TestDataGenerator(this.driver);
+
+        //valid user register input data
+        const { firstName, lastName } = testDataGenerator.getRandomName();
+        this._firstName = firstName;
+        this._lastName = lastName;
+        this._email = testDataGenerator.generateRandomEmailAddress(8);
+        this._password = testDataGenerator.generateRandomPassword();
+
+    }
+
+    //click "Mr." radio button method
+    async clickMrRadioButton(){
+        const mrRadioButton = this.driver.findElement(this._registerPageMrRadioButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: mrRadioButton }).click().perform();
+    }
+
+    //click "Mrs." radio button method
+    async clickMrsRadioButton(){
+        const mrsRadioButton = this.driver.findElement(this._registerPageMrsRadioButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: mrsRadioButton }).click().perform();
+    }
+
+    //valid user register data input methods
+    async inputFirstNameIntoFirstNameInputField(){
+        const firstNameInputField = await this.driver.findElement(this._registerPageFirstNameInputField);
+        const firstName = this._firstName;
+        Logger.info("Valid user first name: ", firstName);
+        await firstNameInputField.sendKeys(firstName);
+    }
+    async inputLastNameIntoLastNameInputField(){
+        const lastNameInputField = await this.driver.findElement(this._registerPageLastNameInputField);
+        const lastName = this._lastName;
+        Logger.info("Valid user last name: ", lastName);
+        await lastNameInputField.sendKeys(lastName);
+    }
+    async inputEmailIntoEmailInputField(){
+        const emailInputField = await this.driver.findElement(this._registerPageEmailInputField);
+        const email = this._email;
+        Logger.info("Valid user email: ", email);
+        await emailInputField.sendKeys(email);
+    }
+    async inputPasswordIntoPasswordInputField(){
+        const passwordInputField = await this.driver.findElement(this._registerPagePasswordInputField);
+        const password = this._password;
+        Logger.info("Valid user password: ", password);
+        await passwordInputField.sendKeys(password);
+    }
+
+    //click "View Password" button method
+    async clickViewRegisterPasswordButton(){
+        const registerViewPasswordButton = this.driver.findElement(this._registerPageViewPasswordButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: registerViewPasswordButton }).click().perform();
+    }
+
+    //click "Save" button method
+    async clickSaveButton(){
+        const registerSaveButton = this.driver.findElement(this._registerPageSaveButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: registerSaveButton }).click().perform();
     }
 
     //register page text element getters
@@ -92,9 +156,9 @@ class RegisterPage extends BasePage{
             this._registerPageSubtitle,
             this._registerPageLoginLink,
             this._registerPageSocialSubtext,
-            this._registerPageMrRadioButton,
+            //this._registerPageMrRadioButton,
             this._registerPageMrRadioSubtext,
-            this._registerPageMrsRadioButton,
+            //this._registerPageMrsRadioButton,
             this._registerPageMrsRadioSubtext,
             this._registerPageFirstNameSubtext,
             this._registerPageFirstNameInputField,
@@ -106,7 +170,7 @@ class RegisterPage extends BasePage{
             this._registerPagePasswordInputField,
             this._registerPageViewPasswordButton,
             this._registerPageNewsletterSubtext,
-            this._registerPageNewsletterSignupCheckbox,
+            //this._registerPageNewsletterSignupCheckbox,
             this._registerPageSaveButton
         ];
 

@@ -103,6 +103,24 @@ class GeneralPage extends BasePage{
         upperNavLoginLink.click();
     }
 
+    //upper header 'Login' link text getter method
+    async getUpperNavAccountLinkText(){
+        const upperNavAccountLinkText = await this.driver.findElement(this._upperHeadNavAccountLink);
+        return await upperNavAccountLinkText.getText();
+    }
+
+    //header shopping cart link text getter method
+    async getHeaderShoppingCartLinkText(){
+        const headerShoppingCartLinkText = await this.driver.findElement(this._headerShopCartLink);
+        return await headerShoppingCartLinkText.getText();
+    }
+
+    //sidebar cart button text getter method
+    async getSidebarCartButtonText(){
+        const sidebarCartLinkText = await this.driver.findElement(this._sidebarCartIconButton);
+        return await sidebarCartLinkText.getText();
+    }
+
     //specials (products) section product data getters
     async getSpecialsSectionProductName() {
         const elements = await this.driver.findElements(this._footerSpecialProductNameLinkElements);
