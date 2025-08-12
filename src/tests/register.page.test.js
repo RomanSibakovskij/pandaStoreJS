@@ -106,6 +106,18 @@ describe('Register Page Tests', () => {
 
     });
 
+    describe("Invalid User Account Creation Tests - Too Long Singular Input", () => {
+
+        //Test 002j -> invalid (male) user account creation test - too long user first name (100 chars) (the user account was created, test has failed)
+        test("Invalid (Male) User Account Creation Test - Too Long First Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - too long user first name (100 chars)
+            await testMethods.invalidUserAccountCreationTooLongFirstNameTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
