@@ -1585,11 +1585,6 @@ class TestMethods extends BaseTest{
         await personalInfoPage.clickSaveButton();
         //wait for elements to load
         await basePage.waitForElementLoad(2000);
-        //if the user account edit process isn't aborted, log the issue
-        const updateSuccessMessage = await personalInfoPage.getPersonalInfoUpdateSuccessMessage();
-        if (updateSuccessMessage === "Information successfully updated.") {
-            Logger.error("The too short first name error wasn't triggered, test has failed");
-        }
         //log the product addition issue if it gets added without any predefined actions
         const genPageSidebarCartCountText = await generalPage.getSidebarCartButtonText();
         const headerShoppingCartLinkText = await generalPage.getHeaderShoppingCartLinkText();
@@ -1600,6 +1595,95 @@ class TestMethods extends BaseTest{
         }
         //capture screenshot of the test result
         await captureScreenshot(this.driver, "Invalid Edit Account Data Test Result - Too Short Edited First Name");
+        //if the user account edit process isn't aborted, log the issue
+        const updateSuccessMessage = await personalInfoPage.getPersonalInfoUpdateSuccessMessage();
+        if (updateSuccessMessage === "Information successfully updated.") {
+            throw new Error("The too short first name error wasn't triggered, test has failed");
+        }
+    }
+
+    //invalid edit account test method - too short edited last name (1 char)
+    async invalidEditAccountTooShortLastNameTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const homePage = new HomePage(this.driver);
+        const homePageTextElementAssert = new HomePageTextElementAssert(this.driver);
+        const homePageDataLoggers = new HomePageDataLoggers(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const personalInfoPage = new PersonalInfoPage(this.driver);
+        const personalInfoPageInvalidSingularInput = new PersonalInfoPageInvalidSingularInput(this.driver);
+        const personalInfoPageTextElementAssert = new PersonalInfoPageTextElementAssert(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //home page web element assert
+        await homePage.isHomePageWebElementDisplayed();
+        //home page text element assert
+        await homePageTextElementAssert.isHomePageTextElementAsExpected();
+        //log home page featured product data
+        await homePageDataLoggers.logHomePageFeaturedProductData();
+        //log home page new product data
+        await homePageDataLoggers.logHomePageNewProductData();
+        //log home page featured articles data
+        await homePageDataLoggers.logHomePageFeaturedArticlesData();
+        //capture screenshot of the home page display
+        await captureScreenshot(this.driver, "Home Page Display");
+        //click "My Account" upper header navbar link
+        await generalPage.clickMyAccountUpperNavLink();
+        //account dashboard page breadcrumb web element assert
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside section web element assert
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page web element assert
+        await accountDashboardPage.isAccountDashboardPageWebElementDisplayed();
+        //account dashboard page aside section text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //account dashboard page text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageTextElementAsExpected();
+        //capture screenshot of the account dashboard page display
+        await captureScreenshot(this.driver, "Account Dashboard Page Display");
+        //click "Information" link method
+        await accountDashboardPage.clickAccountDashboardSetLinkMethod(0);
+        //wait for elements to load
+        await basePage.waitForElementLoad(3000);
+        //account dashboard page breadcrumb web element assert
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //personal info page web element assert
+        await personalInfoPage.isPersonalInformationPageWebElementDisplayed();
+        //personal info page text element assert
+        await personalInfoPageTextElementAssert.isPersonalInfoPageTextElementAsExpected();
+        //capture screenshot of the personal info page display before edited data input
+        await captureScreenshot(this.driver, "Personal Info Page Display Before Edited Data Input");
+        //input too short edited last name into last name input field (1 char)
+        await personalInfoPageInvalidSingularInput.inputTooShortEditedLastNameIntoLastNameInputField();
+        //input valid old password into old password input field (without it, the user won't be able to save edited data)
+        await personalInfoPage.inputOldPasswordIntoOldPasswordInputField();
+        //click "View old password" button
+        await personalInfoPage.clickViewPersonalInfoPasswordButton();
+        //capture screenshot of the personal info page display after invalid edited data input - too short edited last name
+        await captureScreenshot(this.driver, "Personal Info Page Display After Invalid Edited Data Input - Too Short Edited Last Name");
+        //click "Save" button
+        await personalInfoPage.clickSaveButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(2000);
+        //log the product addition issue if it gets added without any predefined actions
+        const genPageSidebarCartCountText = await generalPage.getSidebarCartButtonText();
+        const headerShoppingCartLinkText = await generalPage.getHeaderShoppingCartLinkText();
+        if(genPageSidebarCartCountText !== "Cart\n0" && headerShoppingCartLinkText !== "0\\nSHOPPING CART\\n-\\n$0.00"){
+            Logger.error(`A random product(s) was added (during user account creation) without any predefined action performed. Expected header shopping cart display: '0 SHOPPING CART - $0.00', Actual: ${headerShoppingCartLinkText}`)
+        } else {
+            Logger.info("No random product has been added.");
+        }
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Invalid Edit Account Data Test Result - Too Short Edited Last Name");
+        //if the user account edit process isn't aborted, log the issue
+        const updateSuccessMessage = await personalInfoPage.getPersonalInfoUpdateSuccessMessage();
+        if (updateSuccessMessage === "Information successfully updated.") {
+            throw new Error("The too short last name error wasn't triggered, test has failed");
+        }
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -40,7 +40,7 @@ describe('Personal Info Page Tests', () => {
 
     describe("Invalid Edit User Account Tests - No Singular Input", () => {
 
-        //Test 003b -> invalid edit user (with login email) account test - no edited first name
+        //Test 003b -> invalid edit user account test - no edited first name
         test("Invalid Edit User Account Test - No Edited First Name", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
@@ -50,7 +50,7 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountNoFirstNameTest();
         });
 
-        //Test 003c -> invalid edit user (with login email) account test - no edited last name
+        //Test 003c -> invalid edit user account test - no edited last name
         test("Invalid Edit User Account Test - No Edited Last Name", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
@@ -60,7 +60,7 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountNoLastNameTest();
         });
 
-        //Test 003d -> invalid edit user (with login email) account test - no edited email
+        //Test 003d -> invalid edit user account test - no edited email
         test("Invalid Edit User Account Test - No Edited Email", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
@@ -70,7 +70,7 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountNoEmailTest();
         });
 
-        //Test 003e -> invalid edit user (with login email) account test - no user password
+        //Test 003e -> invalid edit user account test - no user password
         test("Invalid Edit User Account Test - No User Password", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
@@ -84,7 +84,7 @@ describe('Personal Info Page Tests', () => {
 
     describe("Invalid Edit User Account Tests - Too Short Singular Input", () => {
 
-        //Test 003f -> invalid edit user (with login email) account test - too short edited first name (1 char) (the edit account process doesn't get aborted, test has failed)
+        //Test 003f -> invalid edit user account test - too short edited first name (1 char) (the edit account process doesn't get aborted, test has failed)
         test("Invalid Edit User Account Test - Too Short Edited First Name", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
@@ -92,6 +92,16 @@ describe('Personal Info Page Tests', () => {
             await testMethods.validUserAccountCreationTest();
             //invalid edit user (with login email) account test - too short edited first name (1 char)
             await testMethods.invalidEditAccountTooShortFirstNameTest();
+        });
+
+        //Test 003g -> invalid edit user account test - too short edited last name (1 char) (the edit account process doesn't get aborted, test has failed)
+        test("Invalid Edit User Account Test - Too Short Edited Last Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - too short edited last name (1 char)
+            await testMethods.invalidEditAccountTooShortLastNameTest();
         });
 
     });
