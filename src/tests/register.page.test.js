@@ -52,6 +52,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationNoLastNameTest();
         });
 
+        //Test 002d -> invalid (male) user account creation test - no user email
+        test("Invalid (Male) User Account Creation Test - No Email", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - no user email
+            await testMethods.invalidUserAccountCreationNoEmailTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
