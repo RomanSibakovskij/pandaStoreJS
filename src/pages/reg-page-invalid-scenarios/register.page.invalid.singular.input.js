@@ -24,6 +24,9 @@ class RegisterPageInvalidSingularInput extends BasePage{
         this._noEmail = "";
         this._noPassword = "";
 
+        //invalid user register data input - too short singular input
+        this._tooShortFirstName = "F"; //1 char
+
     }
 
     //invalid user register data input methods - no singular input
@@ -50,6 +53,14 @@ class RegisterPageInvalidSingularInput extends BasePage{
         const noPassword = this._noPassword;
         Logger.info("No user password: ", noPassword);
         await passwordInputField.sendKeys(noPassword);
+    }
+
+    //invalid user register data input methods - too short singular input
+    async inputTooShortFirstNameIntoFirstNameInputField(){
+        const firstNameInputField = await this.driver.findElement(this._registerPageFirstNameInputField);
+        const tooShortFirstName = this._tooShortFirstName;
+        Logger.info("Too short user first name: ", tooShortFirstName);
+        await firstNameInputField.sendKeys(tooShortFirstName);
     }
 
 }

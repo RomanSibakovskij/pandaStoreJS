@@ -70,6 +70,18 @@ describe('Register Page Tests', () => {
 
     });
 
+    describe("Invalid User Account Creation Tests - Too Short Singular Input", () => {
+
+        //Test 002f -> invalid (male) user account creation test - too short user first name (1 char) (the user account was created, test has failed)
+        test("Invalid (Male) User Account Creation Test - Too Short First Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - too short user first name (1 char)
+            await testMethods.invalidUserAccountCreationTooShortFirstNameTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
