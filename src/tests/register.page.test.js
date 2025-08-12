@@ -160,6 +160,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationInvalidLastNameFormatTest();
         });
 
+        //Test 002p -> invalid (male) user account creation test - invalid user email format (missing '@')
+        test("Invalid (Male) User Account Creation Test - Invalid Email Input Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - invalid user email format (missing '@')
+            await testMethods.invalidUserAccountCreationInvalidEmailFormatTest();
+        });
+
     });
 
 
