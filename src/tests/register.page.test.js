@@ -80,6 +80,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationTooShortFirstNameTest();
         });
 
+        //Test 002g -> invalid (male) user account creation test - too short user last name (1 char) (the user account was created, test has failed)
+        test("Invalid (Male) User Account Creation Test - Too Short Last Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - too short user last name (1 char)
+            await testMethods.invalidUserAccountCreationTooShortLastNameTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
