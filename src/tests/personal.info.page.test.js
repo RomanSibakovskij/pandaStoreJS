@@ -170,6 +170,20 @@ describe('Personal Info Page Tests', () => {
 
     });
 
+    describe("Invalid Edit User Account Tests - Invalid Singular Input Format", () => {
+
+        //Test 003n -> invalid edit user account test - invalid edited first name format (special symbols only)
+        test("Invalid Edit User Account Test - Invalid Edited First Name format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user account test - invalid edited first name format (special symbols only)
+            await testMethods.invalidEditAccountInvalidFirstNameFormatTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
