@@ -2421,7 +2421,7 @@ class TestMethods extends BaseTest{
         //capture screenshot of the personal info page display before edited data input
         await captureScreenshot(this.driver, "Personal Info Page Display Before Edited Data Input");
         //input invalid edited email format into email input field (missing '@')
-        await personalInfoPageInvalidSingularInput.inputTooLongEditedEmailIntoEmailInputField();
+        await personalInfoPageInvalidSingularInput.inputInvalidEditedEmailFormatIntoEmailInputField();
         //input valid old password into old password input field (without it, the user won't be able to save edited data)
         await personalInfoPage.inputOldPasswordIntoOldPasswordInputField();
         //click "View old password" button
