@@ -126,6 +126,20 @@ describe('Personal Info Page Tests', () => {
 
     });
 
+    describe("Invalid Edit User Account Tests - Too Long Singular Input", () => {
+
+        //Test 003j -> invalid edit user (with login email) account test - too long edited first name (100 chars) (the edit account process doesn't get aborted, test has failed)
+        test("Invalid Edit User Account Test - Too Long Edited First Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - too long edited first name (100 chars)
+            await testMethods.invalidEditAccountTooLongFirstNameTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
