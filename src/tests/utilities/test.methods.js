@@ -240,6 +240,50 @@ class TestMethods extends BaseTest{
         await captureScreenshot(this.driver, "Invalid User Account Creation Test Result (Male) - No First Name");
     }
 
+    //invalid user (male) account creation test method - no user last name
+    async invalidUserAccountCreationNoLastNameTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const registerPage = new RegisterPage(this.driver);
+        const registerPageInvalidSingularInput = new RegisterPageInvalidSingularInput(this.driver);
+        const registerPageTextElementAssert = new RegisterPageTextElementAssert(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //register page web element assert
+        await registerPage.isRegisterPageWebElementDisplayed();
+        //register page text element assert
+        await registerPageTextElementAssert.isRegisterPageTextElementAsExpected();
+        //capture screenshot of the register page display before data input
+        await captureScreenshot(this.driver, "Register Page Display Before Data Input");
+        //click "Mr." radio button
+        await registerPage.clickMrRadioButton();
+        //input valid user first name into first name input field
+        await registerPage.inputFirstNameIntoFirstNameInputField();
+        //don't input user last name into last name input field
+        await registerPageInvalidSingularInput.inputNoLastNameIntoLastNameInputField();
+        //input valid user email into email input field
+        await registerPage.inputEmailIntoEmailInputField();
+        //input valid user password into password input field
+        await registerPage.inputPasswordIntoPasswordInputField();
+        //click "View Password" button
+        await registerPage.clickViewRegisterPasswordButton();
+        //capture screenshot of the register page display after invalid data input - no last name
+        await captureScreenshot(this.driver, "Register Page Display After Invalid Data Input (Male) - No Last Name");
+        //click "Save" button
+        await registerPage.clickSaveButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad();
+        //assert the user stays on register page after missing last name input
+        const currentURL = await this.driver.getCurrentUrl();
+        const regPageURL = "https://panda2.sunnytoo.com/en/?controller=registration";
+        assert.strictEqual(currentURL, regPageURL, "The user was able to create an account without last name input, test has failed");
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Invalid User Account Creation Test Result (Male) - No Last Name");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
