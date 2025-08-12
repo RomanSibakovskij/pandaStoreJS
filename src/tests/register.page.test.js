@@ -88,6 +88,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationTooShortLastNameTest();
         });
 
+        //Test 002h -> invalid (male) user account creation test - too short user email (1 char -> name, domain) (the user account was created, test has failed)
+        test("Invalid (Male) User Account Creation Test - Too Short Email", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - too short user email (1 char -> name, domain)
+            await testMethods.invalidUserAccountCreationTooShortEmailTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
