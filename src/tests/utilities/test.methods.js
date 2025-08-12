@@ -2583,7 +2583,7 @@ class TestMethods extends BaseTest{
         assert.strictEqual(invalidLastNameError, "The email is already used, please choose another one or sign in", "The existing email input error doesn't match expectations or the error wasn't triggered.");
     }
 
-    //invalid edit account test method - invalid new password format (lowercase only)
+    //invalid edit account test method - invalid new password format (similar lowercases only)
     async invalidEditAccountInvalidNewPasswordFormatTest(){
         const basePage = new BasePage(this.driver);
         const generalPage = new GeneralPage(this.driver);
@@ -2642,7 +2642,7 @@ class TestMethods extends BaseTest{
         await personalInfoPage.inputOldPasswordIntoOldPasswordInputField();
         //click "View old password" button
         await personalInfoPage.clickViewPersonalInfoPasswordButton();
-        //input invalid new password format into new password input field (lowercase only)
+        //input invalid new password format into new password input field (similar lowercases only)
         await personalInfoPageInvalidSingularInput.inputInvalidNewPasswordFormatIntoNewPasswordInputField();
         //click "View new password" button
         await personalInfoPage.clickViewPersonalInfoNewPasswordButton();
@@ -2666,7 +2666,7 @@ class TestMethods extends BaseTest{
         const invalidPersonalInfoPageUpdateError = await personalInfoPage.getPersonalInfoUpdateFailureMessage();
         assert.strictEqual(invalidPersonalInfoPageUpdateError,"Could not update your information, please check your data.", "The user account info update error doesn't match expectations or the error wasn't triggered.")
         const invalidPersonalInfoPageSingularInputError = await personalInfoPage.getPersonalInfoSingularInputErrorMsg();
-        assert.strictEqual(invalidPersonalInfoPageSingularInputError,"Add different chars into your password.", "The too long edited password input error doesn't match expectations or the error wasn't triggered.")
+        assert.strictEqual(invalidPersonalInfoPageSingularInputError,"Repeats like \"aaa\" are easy to guess\n" + "Add another word or two. Uncommon words are better.\n" + "Avoid repeated words and characters", "The invalid edited new password input format error doesn't match expectations or the error wasn't triggered.")
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

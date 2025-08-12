@@ -212,13 +212,13 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountExistingEmailTest();
         });
 
-        //Test 003r -> invalid edit user account test - invalid new password format (lowercase only) (the user account gets updated, test has failed)
+        //Test 003r -> invalid edit user account test - invalid new password format (similar lowercases only)
         test("Invalid Edit User Account Test - Invalid New Password Format", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user account test - invalid new password format (lowercase only)
+            //invalid edit user account test - invalid new password format (similar lowercases only)
             await testMethods.invalidEditAccountInvalidNewPasswordFormatTest();
         });
 

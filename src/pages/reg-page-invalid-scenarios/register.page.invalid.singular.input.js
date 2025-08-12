@@ -41,7 +41,7 @@ class RegisterPageInvalidSingularInput extends BasePage{
         this._invalidLastNameFormat = "#$#$@%$#%"; //special symbols only
         this._invalidEmailFormat = "fdsfgfdfakemail.com"; //missing '@'
         this._existingEmail = "m0@example.com"; //used beforehand in manual testing
-        this._invalidPasswordFormat = "aaaaaaaaaa" //lowercase only
+        this._invalidPasswordFormat = "aaaaaaaaaa" //similar lowercases only
 
     }
 
@@ -151,7 +151,7 @@ class RegisterPageInvalidSingularInput extends BasePage{
     async inputInvalidPasswordFormatIntoPasswordInputField(){
         const passwordInputField = await this.driver.findElement(this._registerPagePasswordInputField);
         const invalidPasswordFormat = this._invalidPasswordFormat;
-        Logger.info("Invalid user password format (lowercase only): ", invalidPasswordFormat);
+        Logger.info("Invalid user password format (similar lowercases only): ", invalidPasswordFormat);
         await passwordInputField.sendKeys(invalidPasswordFormat);
     }
 
