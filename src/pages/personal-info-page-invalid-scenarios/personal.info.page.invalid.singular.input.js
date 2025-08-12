@@ -22,6 +22,7 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         //invalid personal info user data input - no singular input
         this._noEditedFirstName = "";
         this._noEditedLastName = "";
+        this._noEditedEmail = "";
     }
 
     //invalid user edited data input methods - no singular input
@@ -38,6 +39,13 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const noEditedLastName = this._noEditedLastName;
         Logger.info("No edited user last name: ", noEditedLastName);
         await editedLastNameInputField.sendKeys(noEditedLastName);
+    }
+    async inputNoEditedEmailIntoEmailInputField(){
+        const editedEmailInputField = await this.driver.findElement(this._personalInfoPageEmailInputField);
+        await editedEmailInputField.clear();
+        const noEditedEmail = this._noEditedEmail;
+        Logger.info("No edited user email: ", noEditedEmail);
+        await editedEmailInputField.sendKeys(noEditedEmail);
     }
 
 }
