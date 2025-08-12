@@ -24,6 +24,14 @@ describe('Register Page Tests', () => {
             await testMethods.validUserAccountCreationTest();
         });
 
+        //Test 002a -> valid (female) user account creation test
+        test("Valid (Female) User Account Creation Test", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (female) user account creation test
+            await testMethods.validFemaleUserAccountCreationTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
