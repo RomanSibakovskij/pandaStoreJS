@@ -101,6 +101,12 @@ class PersonalInfoPage extends BasePage{
         Logger.info("Valid user old password: ", oldPassword);
         await editedOldPasswordInputField.sendKeys(oldPassword);
     }
+    async inputNewPasswordIntoNewPasswordInputField(){
+        const editedNewPasswordInputField = await this.driver.findElement(this._personalInfoPageNewPasswordInputField);
+        const newPassword = this._newPassword;
+        Logger.info("Valid user new password: ", newPassword);
+        await editedNewPasswordInputField.sendKeys(newPassword);
+    }
 
     //personal info page information update success message getter
     async getPersonalInfoUpdateSuccessMessage(){

@@ -26,6 +26,16 @@ describe('Personal Info Page Tests', () => {
             await testMethods.validEditAccountWithEmailTest();
         });
 
+        //Test 003a -> valid edit user (with login password) account test
+        test("Valid Edit User (With Login Password) Account Test", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid edit user (with login password) account test
+            await testMethods.validEditAccountWithPasswordTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
