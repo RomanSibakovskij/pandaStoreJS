@@ -28,6 +28,7 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         //invalid personal info user data input - too short singular input
         this._tooShortEditedFirstName = "D"; //1 char
         this._tooShortEditedLastName = "C"; //1 char
+        this._tooShortEditedEmail = testDataGenerator.generateRandomTooShortEmailAddress(1); //1 char -> name, domain
     }
 
     //invalid user edited data input methods - no singular input
@@ -73,6 +74,13 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const tooShortEditedLastName = this._tooShortEditedLastName;
         Logger.info("Too short edited user last name: ", tooShortEditedLastName);
         await editedLastNameInputField.sendKeys(tooShortEditedLastName);
+    }
+    async inputTooShortEditedEmailIntoEmailInputField(){
+        const editedEmailInputField = await this.driver.findElement(this._personalInfoPageEmailInputField);
+        await editedEmailInputField.clear();
+        const tooShortEditedEmail = this._tooShortEditedEmail;
+        Logger.info("Too short edited user email: ", tooShortEditedEmail);
+        await editedEmailInputField.sendKeys(tooShortEditedEmail);
     }
 
 }

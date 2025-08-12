@@ -104,6 +104,16 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountTooShortLastNameTest();
         });
 
+        //Test 003h -> invalid edit user (with login email) account test - too short edited email (1 char -> name, domain) (the edit account process doesn't get aborted, test has failed)
+        test("Invalid Edit User Account Test - Too Short Edited Email", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - too short edited email (1 char -> name, domain)
+            await testMethods.invalidEditAccountTooShortEmailTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
