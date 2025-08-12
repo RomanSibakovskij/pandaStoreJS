@@ -168,6 +168,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationInvalidEmailFormatTest();
         });
 
+        //Test 002q -> invalid (male) user account creation test - existing user email (used beforehand in manual testing)
+        test("Invalid (Male) User Account Creation Test - Existing Email", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - existing user email (used beforehand in manual testing)
+            await testMethods.invalidUserAccountCreationExistingEmailTest();
+        });
+
     });
 
 

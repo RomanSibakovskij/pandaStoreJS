@@ -962,6 +962,62 @@ class TestMethods extends BaseTest{
         assert.strictEqual(currentURL, regPageURL, "The user was able to create an account with invalid email input format, test has failed");
     }
 
+    //invalid user (male) account creation test method - existing user email (used beforehand in manual testing)
+    async invalidUserAccountCreationExistingEmailTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const registerPage = new RegisterPage(this.driver);
+        const registerPageInvalidSingularInput = new RegisterPageInvalidSingularInput(this.driver);
+        const registerPageTextElementAssert = new RegisterPageTextElementAssert(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //register page web element assert
+        await registerPage.isRegisterPageWebElementDisplayed();
+        //register page text element assert
+        await registerPageTextElementAssert.isRegisterPageTextElementAsExpected();
+        //capture screenshot of the register page display before data input
+        await captureScreenshot(this.driver, "Register Page Display Before Data Input");
+        //click "Mr." radio button
+        await registerPage.clickMrRadioButton();
+        //input valid user first name into first name input field
+        await registerPage.inputFirstNameIntoFirstNameInputField();
+        //input valid user last name into last name input field
+        await registerPage.inputLastNameIntoLastNameInputField();
+        //input existing user email into email input field (used beforehand in manual testing)
+        await registerPageInvalidSingularInput.inputExistingEmailIntoEmailInputField();
+        //input valid user password into password input field
+        await registerPage.inputPasswordIntoPasswordInputField();
+        //click "View Password" button
+        await registerPage.clickViewRegisterPasswordButton();
+        //capture screenshot of the register page display after invalid data input - existing email
+        await captureScreenshot(this.driver, "Register Page Display After Invalid Data Input (Male) - Existing Email");
+        //click "Save" button
+        await registerPage.clickSaveButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad();
+        //log the product addition issue if it gets added without any predefined actions
+        const genPageSidebarCartCountText = await generalPage.getSidebarCartButtonText();
+        const headerShoppingCartLinkText = await generalPage.getHeaderShoppingCartLinkText();
+        if(genPageSidebarCartCountText !== "Cart\n0" && headerShoppingCartLinkText !== "0\\nSHOPPING CART\\n-\\n$0.00"){
+            Logger.error(`A random product(s) is getting added without any predefined action performed. Expected header shopping cart display: '0 SHOPPING CART - $0.00', Actual: ${headerShoppingCartLinkText}`)
+        } else {
+            Logger.info("No random product has been added.");
+        }
+        //assert the user gets an expected error message
+        const emailInputErrorMsg = await registerPage.getRegisterPageInvalidInputErrorMsg();
+        assert.strictEqual(emailInputErrorMsg, "The email is already used, please choose another one or sign in", "The existing email input error message doesn't match expectations or the error wasn't triggered.");
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Invalid User Account Creation Test Result (Male) - Existing Email");
+        //assert the user stays on register page after existing email input
+        const currentURL = await this.driver.getCurrentUrl();
+        const regPageURL = "https://panda2.sunnytoo.com/en/?controller=registration";
+        assert.strictEqual(currentURL, regPageURL, "The user was able to create an account with existing email input, test has failed");
+    }
+
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
