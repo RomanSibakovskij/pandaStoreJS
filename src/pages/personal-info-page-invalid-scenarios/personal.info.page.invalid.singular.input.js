@@ -34,6 +34,7 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         //invalid personal info user data input - too long singular input
         this._tooLongEditedFirstName = "Dsdfdgdfgfewtrythgydfggfgfjmbnjnvcvcxcsdrteytuiyioipokjghhfgdgrertrdtgdfghfjhgkjbvghgdfgfhfhujhjgfhg"; //100 chars
         this._tooLongEditedLastName = "Csdfdgdfgfewtrythgydfggfgfjmbnjnvcvcxcsdrteytuiyioipokjghhfgdgrertrdtgdfghfjhgkjbvghgdfgfhfhujhjgfhg"; //100 chars
+        this._tooLongEditedEmail = testDataGenerator.generateRandomTooLongEmailAddress(100); //100 chars -> name, domain
     }
 
     //invalid user edited data input methods - no singular input
@@ -108,6 +109,13 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const tooLongEditedLastName = this._tooLongEditedLastName;
         Logger.info("Too long edited user last name: ", tooLongEditedLastName);
         await editedLastNameInputField.sendKeys(tooLongEditedLastName);
+    }
+    async inputTooLongEditedEmailIntoEmailInputField(){
+        const editedEmailInputField = await this.driver.findElement(this._personalInfoPageEmailInputField);
+        await editedEmailInputField.clear();
+        const tooLongEditedEmail = this._tooLongEditedEmail;
+        Logger.info("Too long edited user email: ", tooLongEditedEmail);
+        await editedEmailInputField.sendKeys(tooLongEditedEmail);
     }
 
 }

@@ -148,6 +148,16 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountTooLongLastNameTest();
         });
 
+        //Test 003l -> invalid edit user (with login email) account test - too long edited email (100 chars -> name, domain)
+        test("Invalid Edit User Account Test - Too Long Edited Email", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - too long edited email (100 chars -> name, domain)
+            await testMethods.invalidEditAccountTooLongEmailTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
