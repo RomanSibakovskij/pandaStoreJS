@@ -22,6 +22,62 @@ class AccountDashboardPage extends BasePage{
         this._accountDashPageHomeLink = By.xpath("//div[@class='clearfix my_account_page_footer mt-3 mb-3']/a[2]");
     }
 
+    //account dashboard page text element getters
+    async getAccountDashboardPageTitle(){
+        const accountDashPageTitle = await this.driver.findElement(this._accountDashboardPageTitle);
+        const text = await accountDashPageTitle.getText();
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        return text.trim().split(',')[0];
+    }
+    async getAccountDashboardPageSubtitle(){
+        const accountDashPageSubtitle = await this.driver.findElement(this._accountDashboardPageSubtitle);
+        return await accountDashPageSubtitle.getText();
+    }
+
+    //aside link list text getter
+    async getAccountDashPageAsideLinkText() {
+        const elements = await this.driver.findElements(this._accountDashPageAsideLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get account dashboard page aside link text(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //main link list text getter
+    async getAccountDashPageDashboardLinkText() {
+        const elements = await this.driver.findElements(this._accountDashPageDashboardLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get account dashboard page main dashboard link text(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //singular text getters
+    async getAccountDashboardPageBackToAccountLinkText(){
+        const accountDashPageBackToAccountLink = await this.driver.findElement(this._accountDashPageBackToAccountLink);
+        return await accountDashPageBackToAccountLink.getText();
+    }
+    async getAccountDashboardPageHomeLinkText(){
+        const accountDashPageHomeLink = await this.driver.findElement(this._accountDashPageHomeLink);
+        return await accountDashPageHomeLink.getText();
+    }
+
     //account dashboard page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
