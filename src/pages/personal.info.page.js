@@ -157,6 +157,10 @@ class PersonalInfoPage extends BasePage{
         return await personalInfoNewsletterSubtext.getText();
     }
 
+    //private data getters
+    async getEditedEmail(){return this._editedEmail;}
+    async getEditedPassword(){return this._newPassword;}
+
     //personal information page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);

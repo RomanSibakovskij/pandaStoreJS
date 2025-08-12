@@ -9,10 +9,28 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
 
     constructor(driver) {
         super(driver);
+
+        //relevant web elements
+        this._personalInfoPageFirstNameInputField = By.xpath("//input[@name='firstname']");
+        this._personalInfoPageLastNameInputField = By.xpath("//input[@name='lastname']");
+        this._personalInfoPageEmailInputField = By.xpath("//input[@type='email']");
+        this._personalInfoPagePasswordInputField = By.xpath("//input[@name='password']");
+        this._personalInfoPageNewPasswordInputField = By.xpath("//input[@name='new_password']");
+
+        const testDataGenerator = new TestDataGenerator(this.driver);
+
+        //invalid personal info user data input - no singular input
+        this._noEditedFirstName = "";
     }
 
-
-
+    //invalid user edited data input methods - no singular input
+    async inputNoEditedFirstNameIntoFirstNameInputField(){
+        const editedFirstNameInputField = await this.driver.findElement(this._personalInfoPageFirstNameInputField);
+        await editedFirstNameInputField.clear();
+        const noEditedFirstName = this._noEditedFirstName;
+        Logger.info("No edited user first name: ", noEditedFirstName);
+        await editedFirstNameInputField.sendKeys(noEditedFirstName);
+    }
 
 }
 module.exports = PersonalInfoPageInvalidSingularInput;

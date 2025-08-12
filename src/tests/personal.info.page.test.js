@@ -38,6 +38,21 @@ describe('Personal Info Page Tests', () => {
 
     });
 
+    describe("Invalid Edit User Account Tests - No Singular Input", () => {
+
+        //Test 003b -> invalid edit user (with login email) account test - no edited first name
+        test("Invalid Edit User Account Test - No Edited First Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - no edited first name
+            await testMethods.invalidEditAccountNoFirstNameTest();
+        });
+
+    });
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
