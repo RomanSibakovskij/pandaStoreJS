@@ -41,7 +41,50 @@ class PersonalInfoPage extends BasePage{
         this._personalInfoSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
     }
 
-    //personal information page web element assert method (all pages have those elements)
+    //personal information page text element getters
+    async getPersonalInfoPageTitle(){
+        const personalInfoTitle = await this.driver.findElement(this._personalInfoPageTitle);
+        return await personalInfoTitle.getText();
+    }
+    //input form
+    async getPersonalInfoSocialSubtext(){
+        const personalInfoSocialSubtext = await this.driver.findElement(this._personalInfoPageSocialSubtext);
+        return await personalInfoSocialSubtext.getText();
+    }
+    async getPersonalInfoMrRadioSubtext(){
+        const personalInfoMrRadioButtonSubtext = await this.driver.findElement(this._personalInfoPageMrRadioSubtext);
+        return await personalInfoMrRadioButtonSubtext.getText();
+    }
+    async getPersonalInfoMrsRadioSubtext(){
+        const personalInfoMrsRadioButtonSubtext = await this.driver.findElement(this._personalInfoPageMrsRadioSubtext);
+        return await personalInfoMrsRadioButtonSubtext.getText();
+    }
+    async getPersonalInfoFirstNameSubtext(){
+        const personalInfoFirstNameSubtext = await this.driver.findElement(this._personalInfoPageFirstNameSubtext);
+        return await personalInfoFirstNameSubtext.getText();
+    }
+    async getPersonalInfoLastNameSubtext(){
+        const personalInfoLastNameSubtext = await this.driver.findElement(this._personalInfoPageLastNameSubtext);
+        return await personalInfoLastNameSubtext.getText();
+    }
+    async getPersonalInfoEmailSubtext(){
+        const personalInfoEmailSubtext = await this.driver.findElement(this._personalInfoPageEmailSubtext);
+        return await personalInfoEmailSubtext.getText();
+    }
+    async getPersonalInfoPasswordSubtext(){
+        const personalInfoPasswordSubtext = await this.driver.findElement(this._personalInfoPagePasswordSubtext);
+        return await personalInfoPasswordSubtext.getText();
+    }
+    async getPersonalInfoNewPasswordSubtext(){
+        const personalInfoNewPasswordSubtext = await this.driver.findElement(this._personalInfoPageNewPasswordSubtext);
+        return await personalInfoNewPasswordSubtext.getText();
+    }
+    async getPersonalInfoNewsletterSubtext(){
+        const personalInfoNewsletterSubtext = await this.driver.findElement(this._personalInfoPageNewsletterSubtext);
+        return await personalInfoNewsletterSubtext.getText();
+    }
+
+    //personal information page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
         return await element.isDisplayed();
