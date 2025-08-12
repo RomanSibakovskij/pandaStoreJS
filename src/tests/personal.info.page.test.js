@@ -192,14 +192,24 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountInvalidLastNameFormatTest();
         });
 
-        //Test 003p -> invalid edit user (with login email) account test - invalid edited email format (missing '@')
+        //Test 003p -> invalid edit user account test - invalid edited email format (missing '@')
         test("Invalid Edit User Account Test - Invalid Edited Email Format", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - invalid edited email format (missing '@')
+            //invalid edit user account test - invalid edited email format (missing '@')
             await testMethods.invalidEditAccountInvalidEmailFormatTest();
+        });
+
+        //Test 003q -> invalid edit user account test - existing email (used beforehand in manual testing) (the user account gets updated, test has failed)
+        test("Invalid Edit User Account Test - Existing Email", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user account test - existing email (used beforehand in manual testing)
+            await testMethods.invalidEditAccountExistingEmailTest();
         });
 
     });

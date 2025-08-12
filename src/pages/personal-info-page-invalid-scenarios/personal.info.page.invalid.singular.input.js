@@ -41,6 +41,7 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         this._invalidEditedFirstNameFormat = "%$#%^$^&^"; //special symbols only
         this._invalidEditedLastNameFormat = "(&*^%&^%%$)"; //special symbols only
         this._invalidEditedEmailFormat = "sfdsfdsffakemail.com"; //missing '@'
+        this._existingEmailAsEdited = "m0@example.com"; //used beforehand in manual testing
     }
 
     //invalid user edited data input methods - no singular input
@@ -151,6 +152,13 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const invalidEditedEmailFormat = this._invalidEditedEmailFormat;
         Logger.info("Invalid edited user email format: ", invalidEditedEmailFormat);
         await editedEmailInputField.sendKeys(invalidEditedEmailFormat);
+    }
+    async inputExistingEmailAsEditedIntoEmailInputField(){
+        const editedEmailInputField = await this.driver.findElement(this._personalInfoPageEmailInputField);
+        await editedEmailInputField.clear();
+        const existingEmail = this._existingEmailAsEdited;
+        Logger.info("Existing edited user email: ", existingEmail);
+        await editedEmailInputField.sendKeys(existingEmail);
     }
 
 }
