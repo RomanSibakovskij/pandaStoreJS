@@ -36,6 +36,9 @@ class RegisterPageInvalidSingularInput extends BasePage{
         this._tooLongEmail = testDataGenerator.generateRandomTooLongEmailAddress(100);
         this._tooLongPassword = "Khfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujy$%dsfgdfhtds12312"; //75 chars
 
+        //invalid user register data input - invalid singular input format
+        this._invalidFirstNameFormat = "@#$%#$#^"; //special symbols only
+
     }
 
     //invalid user register data input methods - no singular input
@@ -114,6 +117,14 @@ class RegisterPageInvalidSingularInput extends BasePage{
         const tooLongPassword = this._tooLongPassword;
         Logger.info("Too long user password: ", tooLongPassword);
         await passwordInputField.sendKeys(tooLongPassword);
+    }
+
+    //invalid user register data input methods - invalid singular input format
+    async inputInvalidFirstNameFormatIntoFirstNameInputField(){
+        const firstNameInputField = await this.driver.findElement(this._registerPageFirstNameInputField);
+        const invalidFirstNameFormat = this._invalidFirstNameFormat;
+        Logger.info("Invalid user first name format: ", invalidFirstNameFormat);
+        await firstNameInputField.sendKeys(invalidFirstNameFormat);
     }
 
 }

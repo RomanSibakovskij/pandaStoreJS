@@ -142,6 +142,19 @@ describe('Register Page Tests', () => {
 
     });
 
+    describe("Invalid User Account Creation Tests - Invalid Singular Input Format", () => {
+
+        //Test 002n -> invalid (male) user account creation test - invalid user first name format (special symbols only)
+        test("Invalid (Male) User Account Creation Test - Invalid First Name Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - invalid user first name format (special symbols only)
+            await testMethods.invalidUserAccountCreationInvalidFirstNameFormatTest();
+        });
+
+    });
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
