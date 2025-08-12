@@ -82,6 +82,19 @@ describe('Personal Info Page Tests', () => {
 
     });
 
+    describe("Invalid Edit User Account Tests - Too Short Singular Input", () => {
+
+        //Test 003f -> invalid edit user (with login email) account test - too short edited first name (1 char) (the edit account process doesn't get aborted, test has failed)
+        test("Invalid Edit User Account Test - Too Short Edited First Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - too short edited first name (1 char)
+            await testMethods.invalidEditAccountTooShortFirstNameTest();
+        });
+
+    });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

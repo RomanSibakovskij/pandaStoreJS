@@ -24,6 +24,9 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         this._noEditedLastName = "";
         this._noEditedEmail = "";
         this._noOldPassword = "";
+
+        //invalid personal info user data input - too short singular input
+        this._tooShortEditedFirstName = "D"; //1 char
     }
 
     //invalid user edited data input methods - no singular input
@@ -53,6 +56,15 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const noOldPassword = this._noOldPassword;
         Logger.info("No user password: ", noOldPassword);
         await editedNewPasswordInputField.sendKeys(noOldPassword);
+    }
+
+    //invalid user edited data input methods - too short singular input
+    async inputTooShortEditedFirstNameIntoFirstNameInputField(){
+        const editedFirstNameInputField = await this.driver.findElement(this._personalInfoPageFirstNameInputField);
+        await editedFirstNameInputField.clear();
+        const tooShortEditedFirstName = this._tooShortEditedFirstName;
+        Logger.info("Too short edited user first name: ", tooShortEditedFirstName);
+        await editedFirstNameInputField.sendKeys(tooShortEditedFirstName);
     }
 
 }
