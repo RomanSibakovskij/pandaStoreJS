@@ -29,6 +29,7 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         this._tooShortEditedFirstName = "D"; //1 char
         this._tooShortEditedLastName = "C"; //1 char
         this._tooShortEditedEmail = testDataGenerator.generateRandomTooShortEmailAddress(1); //1 char -> name, domain
+        this._tooShortNewPassword = "Hg%4sas"; //7 chars
     }
 
     //invalid user edited data input methods - no singular input
@@ -81,6 +82,12 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const tooShortEditedEmail = this._tooShortEditedEmail;
         Logger.info("Too short edited user email: ", tooShortEditedEmail);
         await editedEmailInputField.sendKeys(tooShortEditedEmail);
+    }
+    async inputTooShortNewPasswordIntoNewPasswordInputField(){
+        const editedNewPasswordInputField = await this.driver.findElement(this._personalInfoPageNewPasswordInputField);
+        const tooShortNewPassword = this._tooShortNewPassword;
+        Logger.info("Too short user new password: ", tooShortNewPassword);
+        await editedNewPasswordInputField.sendKeys(tooShortNewPassword);
     }
 
 }

@@ -37,7 +37,7 @@ class PersonalInfoPage extends BasePage{
         //update success message box element
         this._personalInfoEditSuccessMessage = By.xpath("//article[@class='alert alert-success']");
         //input error message elements
-        this._personalInfoEditFailureMessage = By.xpath("//aside[@id='notifications']");
+        this._personalInfoEditFailureMessage = By.xpath("//section[@id='notifications']");
         this._personalInfoSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
 
         const testDataGenerator = new TestDataGenerator(this.driver);
@@ -155,6 +155,17 @@ class PersonalInfoPage extends BasePage{
     async getPersonalInfoNewsletterSubtext(){
         const personalInfoNewsletterSubtext = await this.driver.findElement(this._personalInfoPageNewsletterSubtext);
         return await personalInfoNewsletterSubtext.getText();
+    }
+
+    //personal info page information update failure message getter
+    async getPersonalInfoUpdateFailureMessage(){
+        const personalInfoUpdateFailureMessage = await this.driver.findElement(this._personalInfoEditFailureMessage);
+        return await personalInfoUpdateFailureMessage.getText();
+    }
+    //personal info page singular input error message getter
+    async getPersonalInfoSingularInputErrorMsg(){
+        const personalInfoSingularInputErrorMsg = await this.driver.findElement(this._personalInfoSingularInputErrorMessage);
+        return await personalInfoSingularInputErrorMsg.getText();
     }
 
     //private data getters

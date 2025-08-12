@@ -114,6 +114,16 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountTooShortEmailTest();
         });
 
+        //Test 003i -> invalid edit user (with login email) account test - too short new password (7 chars)
+        test("Invalid Edit User Account Test - Too Short New Password", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - too short new password (4 chars)
+            await testMethods.invalidEditAccountTooShortNewPasswordTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
