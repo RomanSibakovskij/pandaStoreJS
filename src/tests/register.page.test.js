@@ -176,6 +176,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationExistingEmailTest();
         });
 
+        //Test 002q -> invalid (male) user account creation test - invalid user password format (similar lowercases only)
+        test("Invalid (Male) User Account Creation Test - Invalid Password Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - invalid user password format (similar lowercases only)
+            await testMethods.invalidUserAccountCreationInvalidPasswordFormatTest();
+        });
+
     });
 
 
