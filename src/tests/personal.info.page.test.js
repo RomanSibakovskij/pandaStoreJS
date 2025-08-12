@@ -46,7 +46,7 @@ describe('Personal Info Page Tests', () => {
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - no edited first name
+            //invalid edit user account test - no edited first name
             await testMethods.invalidEditAccountNoFirstNameTest();
         });
 
@@ -56,7 +56,7 @@ describe('Personal Info Page Tests', () => {
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - no edited last name
+            //invalid edit user account test - no edited last name
             await testMethods.invalidEditAccountNoLastNameTest();
         });
 
@@ -66,7 +66,7 @@ describe('Personal Info Page Tests', () => {
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - no edited email
+            //invalid edit user account test - no edited email
             await testMethods.invalidEditAccountNoEmailTest();
         });
 
@@ -76,7 +76,7 @@ describe('Personal Info Page Tests', () => {
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - no user password
+            //invalid edit user account test - no user password
             await testMethods.invalidEditAccountNoPasswordTest();
         });
 
@@ -90,7 +90,7 @@ describe('Personal Info Page Tests', () => {
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - too short edited first name (1 char)
+            //invalid edit user account test - too short edited first name (1 char)
             await testMethods.invalidEditAccountTooShortFirstNameTest();
         });
 
@@ -100,27 +100,27 @@ describe('Personal Info Page Tests', () => {
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - too short edited last name (1 char)
+            //invalid edit user account test - too short edited last name (1 char)
             await testMethods.invalidEditAccountTooShortLastNameTest();
         });
 
-        //Test 003h -> invalid edit user (with login email) account test - too short edited email (1 char -> name, domain) (the edit account process doesn't get aborted, test has failed)
+        //Test 003h -> invalid edit user account test - too short edited email (1 char -> name, domain) (the edit account process doesn't get aborted, test has failed)
         test("Invalid Edit User Account Test - Too Short Edited Email", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - too short edited email (1 char -> name, domain)
+            //invalid edit user account test - too short edited email (1 char -> name, domain)
             await testMethods.invalidEditAccountTooShortEmailTest();
         });
 
-        //Test 003i -> invalid edit user (with login email) account test - too short new password (7 chars)
+        //Test 003i -> invalid edit user account test - too short new password (7 chars)
         test("Invalid Edit User Account Test - Too Short New Password", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - too short new password (4 chars)
+            //invalid edit user account test - too short new password (4 chars)
             await testMethods.invalidEditAccountTooShortNewPasswordTest();
         });
 
@@ -128,34 +128,44 @@ describe('Personal Info Page Tests', () => {
 
     describe("Invalid Edit User Account Tests - Too Long Singular Input", () => {
 
-        //Test 003j -> invalid edit user (with login email) account test - too long edited first name (100 chars) (the edit account process doesn't get aborted, test has failed)
+        //Test 003j -> invalid edit user account test - too long edited first name (100 chars) (the edit account process doesn't get aborted, test has failed)
         test("Invalid Edit User Account Test - Too Long Edited First Name", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - too long edited first name (100 chars)
+            //invalid edit user account test - too long edited first name (100 chars)
             await testMethods.invalidEditAccountTooLongFirstNameTest();
         });
 
-        //Test 003k -> invalid edit user (with login email) account test - too long edited last name (100 chars) (the edit account process doesn't get aborted, test has failed)
+        //Test 003k -> invalid edit user account test - too long edited last name (100 chars) (the edit account process doesn't get aborted, test has failed)
         test("Invalid Edit User Account Test - Too Long Edited Last Name", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - too long edited last name (100 chars)
+            //invalid edit user account test - too long edited last name (100 chars)
             await testMethods.invalidEditAccountTooLongLastNameTest();
         });
 
-        //Test 003l -> invalid edit user (with login email) account test - too long edited email (100 chars -> name, domain)
+        //Test 003l -> invalid edit user account test - too long edited email (100 chars -> name, domain)
         test("Invalid Edit User Account Test - Too Long Edited Email", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
             await testMethods.validUserAccountCreationTest();
-            //invalid edit user (with login email) account test - too long edited email (100 chars -> name, domain)
+            //invalid edit user account test - too long edited email (100 chars -> name, domain)
             await testMethods.invalidEditAccountTooLongEmailTest();
+        });
+
+        //Test 003m -> invalid edit user account test - too long new password (73 chars) (the edit account process doesn't get aborted, test has failed)
+        test("Invalid Edit User Account Test - Too Long New Password", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user account test - too long new password (73 chars)
+            await testMethods.invalidEditAccountTooLongNewPasswordTest();
         });
 
     });

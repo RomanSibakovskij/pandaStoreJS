@@ -35,6 +35,7 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         this._tooLongEditedFirstName = "Dsdfdgdfgfewtrythgydfggfgfjmbnjnvcvcxcsdrteytuiyioipokjghhfgdgrertrdtgdfghfjhgkjbvghgdfgfhfhujhjgfhg"; //100 chars
         this._tooLongEditedLastName = "Csdfdgdfgfewtrythgydfggfgfjmbnjnvcvcxcsdrteytuiyioipokjghhfgdgrertrdtgdfghfjhgkjbvghgdfgfhfhujhjgfhg"; //100 chars
         this._tooLongEditedEmail = testDataGenerator.generateRandomTooLongEmailAddress(100); //100 chars -> name, domain
+        this._tooLongNewPassword = "Hghfgdsgdtwetrtjdsfgrfdgjhkjmngbfds*&^(kjgsehgt@#$detgujy$%dsgdfhtds675"; //73 chars
     }
 
     //invalid user edited data input methods - no singular input
@@ -116,6 +117,12 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const tooLongEditedEmail = this._tooLongEditedEmail;
         Logger.info("Too long edited user email: ", tooLongEditedEmail);
         await editedEmailInputField.sendKeys(tooLongEditedEmail);
+    }
+    async inputTooLongNewPasswordIntoNewPasswordInputField(){
+        const editedNewPasswordInputField = await this.driver.findElement(this._personalInfoPageNewPasswordInputField);
+        const tooLongNewPassword = this._tooLongNewPassword;
+        Logger.info("Too long user new password: ", tooLongNewPassword);
+        await editedNewPasswordInputField.sendKeys(tooLongNewPassword);
     }
 
 }
