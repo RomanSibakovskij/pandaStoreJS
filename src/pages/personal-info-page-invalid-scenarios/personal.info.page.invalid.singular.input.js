@@ -39,6 +39,7 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
 
         //invalid personal info user data input - invalid singular input format
         this._invalidEditedFirstNameFormat = "%$#%^$^&^"; //special symbols only
+        this._invalidEditedLastNameFormat = "(&*^%&^%%$)"; //special symbols only
     }
 
     //invalid user edited data input methods - no singular input
@@ -135,6 +136,13 @@ class PersonalInfoPageInvalidSingularInput extends BasePage{
         const invalidEditedFirstNameFormat = this._invalidEditedFirstNameFormat;
         Logger.info("Invalid edited user first name format: ", invalidEditedFirstNameFormat);
         await editedFirstNameInputField.sendKeys(invalidEditedFirstNameFormat);
+    }
+    async inputInvalidEditedLastNameFormatIntoLastNameInputField(){
+        const editedLastNameInputField = await this.driver.findElement(this._personalInfoPageLastNameInputField);
+        await editedLastNameInputField.clear();
+        const invalidEditedLastNameFormat = this._invalidEditedLastNameFormat;
+        Logger.info("Invalid edited user last name format: ", invalidEditedLastNameFormat);
+        await editedLastNameInputField.sendKeys(invalidEditedLastNameFormat);
     }
 
 }
