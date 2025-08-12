@@ -192,6 +192,16 @@ describe('Personal Info Page Tests', () => {
             await testMethods.invalidEditAccountInvalidLastNameFormatTest();
         });
 
+        //Test 003p -> invalid edit user (with login email) account test - invalid edited email format (missing '@')
+        test("Invalid Edit User Account Test - Invalid Edited Email Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid edit user (with login email) account test - invalid edited email format (missing '@')
+            await testMethods.invalidEditAccountInvalidEmailFormatTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
