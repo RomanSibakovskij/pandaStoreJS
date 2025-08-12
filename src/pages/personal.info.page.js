@@ -39,6 +39,73 @@ class PersonalInfoPage extends BasePage{
         //input error message elements
         this._personalInfoEditFailureMessage = By.xpath("//aside[@id='notifications']");
         this._personalInfoSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
+
+        const testDataGenerator = new TestDataGenerator(this.driver);
+        const registerPage = new RegisterPage(this.driver);
+
+        //valid edited account input data
+        const { editedFirstName, editedLastName } = testDataGenerator.getRandomEditedName();
+        this._editedFirstName = editedFirstName;
+        this._editedLastName =  editedLastName;
+        this._editedEmail = testDataGenerator.generateRandomEditedEmailAddress(8);
+        this._oldPassword = registerPage.getPassword();
+        this._newPassword = "Kankterdsad@#";
+    }
+
+    //click "View Password" button method
+    async clickViewPersonalInfoPasswordButton(){
+        const personalInfoViewPasswordButton = this.driver.findElement(this._personalInfoPageViewPasswordButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: personalInfoViewPasswordButton }).click().perform();
+    }
+
+    //click "View New Password" button method
+    async clickViewPersonalInfoNewPasswordButton(){
+        const personalInfoViewNewPasswordButton = this.driver.findElement(this._personalInfoPageViewNewPasswordButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: personalInfoViewNewPasswordButton }).click().perform();
+    }
+
+    //click "Save" button method
+    async clickSaveButton(){
+        const personalInfoSaveButton = this.driver.findElement(this._personalInfoPageSaveButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: personalInfoSaveButton }).click().perform();
+    }
+
+    //valid user edited data input methods
+    async inputEditedFirstNameIntoFirstNameInputField(){
+        const editedFirstNameInputField = await this.driver.findElement(this._personalInfoPageFirstNameInputField);
+        await editedFirstNameInputField.clear();
+        const editedFirstName = this._editedFirstName;
+        Logger.info("Valid edited user first name: ", editedFirstName);
+        await editedFirstNameInputField.sendKeys(editedFirstName);
+    }
+    async inputEditedLastNameIntoLastNameInputField(){
+        const editedLastNameInputField = await this.driver.findElement(this._personalInfoPageLastNameInputField);
+        await editedLastNameInputField.clear();
+        const editedLastName = this._editedLastName;
+        Logger.info("Valid edited user last name: ", editedLastName);
+        await editedLastNameInputField.sendKeys(editedLastName);
+    }
+    async inputEditedEmailIntoEmailInputField(){
+        const editedEmailInputField = await this.driver.findElement(this._personalInfoPageEmailInputField);
+        await editedEmailInputField.clear();
+        const editedEmail = this._editedEmail;
+        Logger.info("Valid edited user email: ", editedEmail);
+        await editedEmailInputField.sendKeys(editedEmail);
+    }
+    async inputOldPasswordIntoOldPasswordInputField(){
+        const editedOldPasswordInputField = await this.driver.findElement(this._personalInfoPagePasswordInputField);
+        const oldPassword = await this._oldPassword;
+        Logger.info("Valid user old password: ", oldPassword);
+        await editedOldPasswordInputField.sendKeys(oldPassword);
+    }
+
+    //personal info page information update success message getter
+    async getPersonalInfoUpdateSuccessMessage(){
+        const personalInfoUpdateSuccessMessage = await this.driver.findElement(this._personalInfoEditSuccessMessage);
+        return await personalInfoUpdateSuccessMessage.getText();
     }
 
     //personal information page text element getters
@@ -95,9 +162,9 @@ class PersonalInfoPage extends BasePage{
             this._personalInfoPageTitle,
             this._personalInfoPageSocialSubtext,
             this._personalInfoPageMrRadioSubtext,
-            this._personalInfoPageMrRadioButton,
+            //this._personalInfoPageMrRadioButton,
             this._personalInfoPageMrsRadioSubtext,
-            this._personalInfoPageMrsRadioButton,
+            //this._personalInfoPageMrsRadioButton,
             this._personalInfoPageFirstNameSubtext,
             this._personalInfoPageFirstNameInputField,
             this._personalInfoPageLastNameSubtext,
@@ -111,7 +178,7 @@ class PersonalInfoPage extends BasePage{
             this._personalInfoPageNewPasswordInputField,
             this._personalInfoPageViewNewPasswordButton,
             this._personalInfoPageNewsletterSubtext,
-            this._personalInfoPageNewsletterCheckbox,
+            //this._personalInfoPageNewsletterCheckbox,
             this._personalInfoPageSaveButton
         ];
 
@@ -124,4 +191,4 @@ class PersonalInfoPage extends BasePage{
     }
 
 }
-module.exports = PersonalInfoPage;
+module.exports = { PersonalInfoPage };

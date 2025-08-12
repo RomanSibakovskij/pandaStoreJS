@@ -6,6 +6,8 @@ const { GeneralPage } = require("../../pages/general.page.js");
 const { HomePage } = require("../../pages/home.page.js");
 const { LoginRegisterDashboardPage } = require("../../pages/login.register.dashboard.page.js");
 const { RegisterPage } = require("../../pages/register.page.js");
+const { AccountDashboardPage } = require("../../pages/account.dashboard.page.js");
+const { PersonalInfoPage } = require("../../pages/personal.info.page.js");
 
 const RegisterPageInvalidSingularInput = require("../../pages/reg-page-invalid-scenarios/register.page.invalid.singular.input.js");
 
@@ -15,6 +17,8 @@ const HomePageTextElementAssert = require("../test-text-element-asserts/home.pag
 const HomePageDataLoggers = require("../data-loggers/home.page.data.loggers.js");
 const LoginRegisterDashPageTextElementAssert = require("../test-text-element-asserts/login.register.dash.page.text.element.assert.js");
 const RegisterPageTextElementAssert = require("../test-text-element-asserts/register.page.text.element.assert.js");
+const AccountDashboardPageTextElementAssert = require("../test-text-element-asserts/account.dash.page.text.element.assert.js");
+const PersonalInfoPageTextElementAssert = require("../test-text-element-asserts/personal.info.page.text.element.assert.js");
 
 const BaseTest = require("./base.test");
 const {captureScreenshot} = require("./screehot.class.js");
@@ -1017,6 +1021,86 @@ class TestMethods extends BaseTest{
         assert.strictEqual(currentURL, regPageURL, "The user was able to create an account with existing email input, test has failed");
     }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //valid edit account tests
+
+    //valid edit account (with login email) test method
+    async validEditAccountWithEmailTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const homePage = new HomePage(this.driver);
+        const homePageTextElementAssert = new HomePageTextElementAssert(this.driver);
+        const homePageDataLoggers = new HomePageDataLoggers(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const personalInfoPage = new PersonalInfoPage(this.driver);
+        const personalInfoPageTextElementAssert = new PersonalInfoPageTextElementAssert(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //home page web element assert
+        await homePage.isHomePageWebElementDisplayed();
+        //home page text element assert
+        await homePageTextElementAssert.isHomePageTextElementAsExpected();
+        //log home page featured product data
+        await homePageDataLoggers.logHomePageFeaturedProductData();
+        //log home page new product data
+        await homePageDataLoggers.logHomePageNewProductData();
+        //log home page featured articles data
+        await homePageDataLoggers.logHomePageFeaturedArticlesData();
+        //capture screenshot of the home page display
+        await captureScreenshot(this.driver, "Home Page Display");
+        //click "My Account" upper header navbar link
+        await generalPage.clickMyAccountUpperNavLink();
+        //account dashboard page breadcrumb web element assert
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside section web element assert
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page web element assert
+        await accountDashboardPage.isAccountDashboardPageWebElementDisplayed();
+        //account dashboard page aside section text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //account dashboard page text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageTextElementAsExpected();
+        //capture screenshot of the account dashboard page display
+        await captureScreenshot(this.driver, "Account Dashboard Page Display");
+        //click "Information" link method
+        await accountDashboardPage.clickAccountDashboardSetLinkMethod(0);
+        //wait for elements to load
+        await basePage.waitForElementLoad(3000);
+        //account dashboard page breadcrumb web element assert
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //personal info page web element assert
+        await personalInfoPage.isPersonalInformationPageWebElementDisplayed();
+        //personal info page text element assert
+        await personalInfoPageTextElementAssert.isPersonalInfoPageTextElementAsExpected();
+        //capture screenshot of the personal info page display before edited data input
+        await captureScreenshot(this.driver, "Personal Info Page Display Before Edited Data Input");
+        //input valid edited first name into first name input field
+        await personalInfoPage.inputEditedFirstNameIntoFirstNameInputField();
+        //input valid edited last name into last name input field
+        await personalInfoPage.inputEditedLastNameIntoLastNameInputField();
+        //input valid edited email into email input field
+        await personalInfoPage.inputEditedEmailIntoEmailInputField();
+        //input valid old password into old password input field (without it, the user won't be able to save edited data)
+        await personalInfoPage.inputOldPasswordIntoOldPasswordInputField();
+        //click "View old password" button
+        await personalInfoPage.clickViewPersonalInfoPasswordButton();
+        //capture screenshot of the personal info page display after valid edited data input
+        await captureScreenshot(this.driver, "Personal Info Page Display After Valid Edited Data Input (with edited email)");
+        //click "Save" button
+        await personalInfoPage.clickSaveButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(2000);
+        //assert the user receives an expected success message
+        const updateSuccessMessage = await personalInfoPage.getPersonalInfoUpdateSuccessMessage();
+        assert.strictEqual(updateSuccessMessage, "Information successfully updated.", "The information update success message doesn't match expectations or the edit user account data process has failed.");
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Valid Edit Account Data Test Result (with email)");
+    }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -22,6 +22,12 @@ class AccountDashboardPage extends BasePage{
         this._accountDashPageHomeLink = By.xpath("//div[@class='clearfix my_account_page_footer mt-3 mb-3']/a[2]");
     }
 
+    //click "Add new address" link method
+    async clickAccountDashboardSetLinkMethod(index){
+        const dashboardLinkElements = await this.driver.findElements(this._accountDashPageDashboardLinkElements);
+        await dashboardLinkElements[index].click();
+    }
+
     //account dashboard page text element getters
     async getAccountDashboardPageTitle(){
         const accountDashPageTitle = await this.driver.findElement(this._accountDashboardPageTitle);
@@ -129,4 +135,4 @@ class AccountDashboardPage extends BasePage{
 
 
 }
-module.exports = AccountDashboardPage;
+module.exports = { AccountDashboardPage };
