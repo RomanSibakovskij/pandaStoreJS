@@ -96,6 +96,14 @@ describe('Register Page Tests', () => {
             await testMethods.invalidUserAccountCreationTooShortEmailTest();
         });
 
+        //Test 002i -> invalid (male) user account creation test - too short user password (7 chars)
+        test("Invalid (Male) User Account Creation Test - Too Short Password", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //invalid (male) user account creation test - too short user password (7 chars)
+            await testMethods.invalidUserAccountCreationTooShortPasswordTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
