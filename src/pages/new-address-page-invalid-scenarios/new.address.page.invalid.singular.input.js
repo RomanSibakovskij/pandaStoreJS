@@ -45,6 +45,7 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         //invalid new address data input - invalid singular input format
         this._invalidNewAddressFirstNameFormat = "$^$%&%^&"; //special symbols only
         this._invalidNewAddressLastNameFormat = "#$%$^%$&^"; //special symbols only
+        this._invalidNewAddressFormat = "@$#@$%$#"; //special symbols only
 
     }
 
@@ -164,6 +165,12 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const invalidNewAddressLastNameFormat = this._invalidNewAddressLastNameFormat;
         Logger.info("Invalid new address last name format: ", invalidNewAddressLastNameFormat);
         await addressLastNameInputField.sendKeys(invalidNewAddressLastNameFormat);
+    }
+    async inputInvalidNewAddressFormatIntoAddressOneInputField(){
+        const addressAliasInputField = await this.driver.findElement(this._newAddressPageAddressOneInputField);
+        const invalidNewAddressFormat = this._invalidNewAddressFormat;
+        Logger.info("Invalid new address format: ", invalidNewAddressFormat);
+        await addressAliasInputField.sendKeys(invalidNewAddressFormat);
     }
 
 }
