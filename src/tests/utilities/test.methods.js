@@ -3411,6 +3411,87 @@ class TestMethods extends BaseTest{
         assert.strictEqual(currentURL, newAddressPageURL, "The user was able to add new address without city input, test has failed");
     }
 
+    //invalid add user address test method - no post code
+    async invalidAddNewUserAddressNoPostCodeTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const homePage = new HomePage(this.driver);
+        const homePageTextElementAssert = new HomePageTextElementAssert(this.driver);
+        const homePageDataLoggers = new HomePageDataLoggers(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const newAddressPage = new NewAddressPage(this.driver);
+        const newAddressPageInvalidSingularInput = new NewAddressPageInvalidSingularInput(this.driver);
+        const newAddressPageTextElementAssert = new NewAddressPageTextElementAssert(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //home page web element assert
+        await homePage.isHomePageWebElementDisplayed();
+        //home page text element assert
+        await homePageTextElementAssert.isHomePageTextElementAsExpected();
+        //log home page featured product data
+        await homePageDataLoggers.logHomePageFeaturedProductData();
+        //log home page new product data
+        await homePageDataLoggers.logHomePageNewProductData();
+        //log home page featured articles data
+        await homePageDataLoggers.logHomePageFeaturedArticlesData();
+        //capture screenshot of the home page display
+        await captureScreenshot(this.driver, "Home Page Display");
+        //click "My Account" upper header navbar link
+        await generalPage.clickMyAccountUpperNavLink();
+        //account dashboard page breadcrumb web element assert
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside section web element assert
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page web element assert
+        await accountDashboardPage.isAccountDashboardPageWebElementDisplayed();
+        //account dashboard page aside section text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //account dashboard page text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageTextElementAsExpected();
+        //capture screenshot of the account dashboard page display
+        await captureScreenshot(this.driver, "Account Dashboard Page Display");
+        //click "Addresses" link method
+        await accountDashboardPage.clickAccountDashboardSetLinkMethod(1);
+        //wait for elements to load
+        await basePage.waitForElementLoad(2000);
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //new address page web element assert
+        await newAddressPage.isNewAddressPageWebElementDisplayed();
+        //new address page text element assert
+        await newAddressPageTextElementAssert.isNewAddressPageTextElementAsExpected();
+        //capture screenshot of the new address page display before data input
+        await captureScreenshot(this.driver, "New Address Page Display Before Data Input");
+        //input valid new address into new address one input field
+        await newAddressPage.inputNewAddressIntoAddressOneInputField();
+        //input valid new address city into new address city input field
+        await newAddressPage.inputNewAddressCityIntoAddressCityInputField();
+        //don't input new address post code into new address post code input field
+        await newAddressPageInvalidSingularInput.inputNoNewAddressPostCodeIntoAddressPostCodeInputField();
+        //click "State" dropdown menu
+        await newAddressPage.clickStateDropdownMenu();
+        //select "Illinois" option
+        await newAddressPage.selectIllinoisStateOption();
+        //capture screenshot of the new address page display after invalid data input - no post code
+        await captureScreenshot(this.driver, "New Address Page Display After Invalid Data Input - No Post Code");
+        //click "Save" button
+        await newAddressPage.clickNewAddressSaveButton();
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Invalid Add New User Address Test Result - No Post Code");
+        //assert the user stays on the same page (process doesn't get completed)
+        const currentURL = await this.driver.getCurrentUrl();
+        const newAddressPageURL = "https://panda2.sunnytoo.com/en/address";
+        assert.strictEqual(currentURL, newAddressPageURL, "The user was able to add new address without post code input, test has failed");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

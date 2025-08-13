@@ -24,6 +24,7 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         this._noNewAddressLastName = "";
         this._noNewAddress = "";
         this._noNewAddressCity = "";
+        this._noNewAddressPostCode = "";
     }
 
     //invalid user new address data input methods - no singular input
@@ -52,6 +53,12 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const noNewAddressCity = this._noNewAddressCity;
         Logger.info("No user new address city: ", noNewAddressCity);
         await addressCityInputField.sendKeys(noNewAddressCity);
+    }
+    async inputNoNewAddressPostCodeIntoAddressPostCodeInputField(){
+        const addressPostCodeInputField = await this.driver.findElement(this._newAddressPagePostCodeInputField);
+        const noNewAddressPostCode = this._noNewAddressPostCode;
+        Logger.info("No user new address post code: ", noNewAddressPostCode);
+        await addressPostCodeInputField.sendKeys(noNewAddressPostCode);
     }
 
 }
