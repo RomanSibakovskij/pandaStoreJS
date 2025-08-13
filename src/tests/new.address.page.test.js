@@ -168,6 +168,20 @@ describe('New Address Page Tests', () => {
 
     });
 
+    describe("Invalid Add New User Address(es) Tests - Too Long Singular Input", () => {
+
+        //Test 004m -> invalid add new user address test - too long first name (100 chars)(the new address addition doesn't get aborted, test has failed)
+        test("Invalid Add New User Address Test - Too Long First Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - too long first name (100 chars)
+            await testMethods.invalidAddNewUserAddressTooLongFirstNameTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
