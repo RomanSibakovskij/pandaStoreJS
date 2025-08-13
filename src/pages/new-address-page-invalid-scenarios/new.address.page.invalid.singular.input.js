@@ -23,6 +23,7 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         this._noNewAddressFirstName = "";
         this._noNewAddressLastName = "";
         this._noNewAddress = "";
+        this._noNewAddressCity = "";
     }
 
     //invalid user new address data input methods - no singular input
@@ -45,6 +46,12 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const noNewAddress = this._noNewAddress;
         Logger.info("No user new address: ", noNewAddress);
         await addressAliasInputField.sendKeys(noNewAddress);
+    }
+    async inputNoNewAddressCityIntoAddressCityInputField(){
+        const addressCityInputField = await this.driver.findElement(this._newAddressPageCityInputField);
+        const noNewAddressCity = this._noNewAddressCity;
+        Logger.info("No user new address city: ", noNewAddressCity);
+        await addressCityInputField.sendKeys(noNewAddressCity);
     }
 
 }

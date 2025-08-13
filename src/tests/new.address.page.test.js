@@ -92,6 +92,16 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressNoAddressTest();
         });
 
+        //Test 004g -> invalid add new user address test - no city
+        test("Invalid Add New User Address Test - No City", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - no city
+            await testMethods.invalidAddNewUserAddressNoCityTest();
+        });
+
     });
 
 
