@@ -42,6 +42,9 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         this._tooLongNewAddressCity = "Dhfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
         this._tooLongNewAddressPostCode = 567243; //6 digits
 
+        //invalid new address data input - invalid singular input format
+        this._invalidNewAddressFirstNameFormat = "$^$%&%^&"; //special symbols only
+
     }
 
     //invalid user new address data input methods - no singular input
@@ -144,6 +147,15 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const tooLongNewAddressPostCode = this._tooLongNewAddressPostCode;
         Logger.info("Too long new address post code: ", tooLongNewAddressPostCode);
         await addressPostCodeInputField.sendKeys(tooLongNewAddressPostCode);
+    }
+
+    //invalid user new address data input methods - invalid singular input format
+    async inputInvalidNewAddressFirstNameFormatIntoAddressFirstNameInputField(){
+        const addressFirstNameInputField = await this.driver.findElement(this._newAddressPageFirstNameInputField);
+        await addressFirstNameInputField.clear();
+        const invalidNewAddressFirstNameFormat = this._invalidNewAddressFirstNameFormat;
+        Logger.info("Invalid new address first name format: ", invalidNewAddressFirstNameFormat);
+        await addressFirstNameInputField.sendKeys(invalidNewAddressFirstNameFormat);
     }
 
 }

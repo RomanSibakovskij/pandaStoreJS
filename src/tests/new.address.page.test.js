@@ -222,6 +222,20 @@ describe('New Address Page Tests', () => {
 
     });
 
+    describe("Invalid Add New User Address(es) Tests - Invalid Singular Input Format", () => {
+
+        //Test 004r -> invalid add new user address test - invalid first name format (special symbols only)
+        test("Invalid Add New User Address Test - Invalid First Name Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - invalid first name format (special symbols only)
+            await testMethods.invalidAddNewUserAddressInvalidFirstNameFormatTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
