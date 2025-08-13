@@ -39,6 +39,8 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         this._tooLongNewAddressFirstName = "Chfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
         this._tooLongNewAddressLastName = "Shfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
         this._tooLongNewAddress = testDataGenerator.generateRandomAddress(93); //3 chars
+        this._tooLongNewAddressCity = "Dhfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
+
 
     }
 
@@ -130,6 +132,12 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const tooLongNewAddress = this._tooLongNewAddress;
         Logger.info("Too long new address: ", tooLongNewAddress);
         await addressAliasInputField.sendKeys(tooLongNewAddress);
+    }
+    async inputTooLongNewAddressCityIntoAddressCityInputField(){
+        const addressCityInputField = await this.driver.findElement(this._newAddressPageCityInputField);
+        const tooLongNewAddressCity = this._tooLongNewAddressCity;
+        Logger.info("Too long new address city: ", tooLongNewAddressCity);
+        await addressCityInputField.sendKeys(tooLongNewAddressCity);
     }
 
 }
