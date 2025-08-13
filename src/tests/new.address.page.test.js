@@ -234,6 +234,16 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressInvalidFirstNameFormatTest();
         });
 
+        //Test 004s -> invalid add new user address test - invalid last name format (special symbols only)
+        test("Invalid Add New User Address Test - Invalid Last Name Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - invalid last name format (special symbols only)
+            await testMethods.invalidAddNewUserAddressInvalidLastNameFormatTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
