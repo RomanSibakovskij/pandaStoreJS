@@ -38,6 +38,19 @@ describe('New Address Page Tests', () => {
             await testMethods.validAddAdditionalNewUserAddressTest();
         });
 
+    });
+
+    describe("Invalid Add New User Address(es) Tests - No Singular Input", () => {
+
+        //Test 004b -> invalid add new user address test - no country (the element fails to be interacted with -> whether with click or sendKeys, test has failed)
+        test("Invalid Add New User Address Test - No Country", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - no country
+            await testMethods.invalidAddNewUserAddressNoCountryTest();
+        });
 
     });
 
