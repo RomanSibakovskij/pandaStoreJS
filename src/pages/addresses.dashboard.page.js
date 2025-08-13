@@ -22,6 +22,75 @@ class AddressesDashboardPage extends BasePage{
         this._addressDashPageCreateNewAddressLink = By.xpath("//div[@class='addresses-footer mb-3']/a");
     }
 
+    //address dashboard page text element getters
+    async getAddressesDashboardPageTitle(){
+        const addressesDashPageTitle = await this.driver.findElement(this._addressDashPageTitle);
+        return await addressesDashPageTitle.getText();
+    }
+
+    async getUpdateAddressLinkText() {
+        const elements = await this.driver.findElements(this._addressDashPageAddressUpdateLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get user address update link(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getDeleteAddressLinkText() {
+        const elements = await this.driver.findElements(this._addressDashPageAddressDeleteLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get user address delete link(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //addresses data getters
+    async getDisplayedUserAddressTitle() {
+        const elements = await this.driver.findElements(this._addressDashPageAddressTitleElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get user address title(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getDisplayedUserAddress() {
+        const elements = await this.driver.findElements(this._addressDashPageAddressElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get user address(es):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
     //addresses dashboard page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
