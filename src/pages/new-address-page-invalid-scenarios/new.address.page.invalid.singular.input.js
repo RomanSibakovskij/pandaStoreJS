@@ -35,6 +35,7 @@ class NewAddressPageInvalidSingularInput extends BasePage{
 
         //invalid new address data input - too long singular input
         this._tooLongNewAddressFirstName = "Chfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
+        this._tooLongNewAddressLastName = "Shfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
     }
 
     //invalid user new address data input methods - no singular input
@@ -112,6 +113,13 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const tooLongNewAddressFirstName = this._tooLongNewAddressFirstName;
         Logger.info("Too long new address first name: ", tooLongNewAddressFirstName);
         await addressFirstNameInputField.sendKeys(tooLongNewAddressFirstName);
+    }
+    async inputTooLongNewAddressLastNameIntoAddressLastNameInputField(){
+        const addressLastNameInputField = await this.driver.findElement(this._newAddressPageLastNameInputField);
+        await addressLastNameInputField.clear();
+        const tooLongNewAddressLastName = this._tooLongNewAddressLastName;
+        Logger.info("Too long new address last name: ", tooLongNewAddressLastName);
+        await addressLastNameInputField.sendKeys(tooLongNewAddressLastName);
     }
 
 }
