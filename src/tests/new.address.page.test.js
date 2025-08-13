@@ -146,6 +146,16 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressTooShortAddressTest();
         });
 
+        //Test 004k -> invalid add new user address test - too short city (1 char)(the new address addition doesn't get aborted, test has failed)
+        test("Invalid Add New User Address Test - Too Short City", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - too short city (1 char)
+            await testMethods.invalidAddNewUserAddressTooShortCityTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

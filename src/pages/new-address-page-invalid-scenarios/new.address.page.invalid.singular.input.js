@@ -30,6 +30,7 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         this._tooShortNewAddressFirstName = "C"; //1 char
         this._tooShortNewAddressLastName = "S"; //1 char
         this._tooShortNewAddress = "3.D"; //3 chars
+        this._tooShortNewAddressCity = "D"; //1 char
     }
 
     //invalid user new address data input methods - no singular input
@@ -86,6 +87,12 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const tooShortNewAddress = this._tooShortNewAddress;
         Logger.info("Too short new address: ", tooShortNewAddress);
         await addressAliasInputField.sendKeys(tooShortNewAddress);
+    }
+    async inputTooShortNewAddressCityIntoAddressCityInputField(){
+        const addressCityInputField = await this.driver.findElement(this._newAddressPageCityInputField);
+        const tooShortNewAddressCity = this._tooShortNewAddressCity;
+        Logger.info("Too short new address city: ", tooShortNewAddressCity);
+        await addressCityInputField.sendKeys(tooShortNewAddressCity);
     }
 
 }
