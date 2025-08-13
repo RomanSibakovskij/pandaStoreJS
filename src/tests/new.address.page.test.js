@@ -62,7 +62,7 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressNoStateTest();
         });
 
-        //Test 004d -> invalid add new user address test - no first name 
+        //Test 004d -> invalid add new user address test - no first name
         test("Invalid Add New User Address Test - No First Name", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
@@ -70,6 +70,16 @@ describe('New Address Page Tests', () => {
             await testMethods.validUserAccountCreationTest();
             //invalid add new user address test - no first name
             await testMethods.invalidAddNewUserAddressNoFirstNameTest();
+        });
+
+        //Test 004e -> invalid add new user address test - no last name
+        test("Invalid Add New User Address Test - No Last Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - no last name
+            await testMethods.invalidAddNewUserAddressNoLastNameTest();
         });
 
     });
