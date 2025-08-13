@@ -114,7 +114,19 @@ describe('New Address Page Tests', () => {
 
     });
 
+    describe("Invalid Add New User Address(es) Tests - Too Short Singular Input", () => {
 
+        //Test 004i -> invalid add new user address test - too short first name (1 char)(the new address addition doesn't get aborted, test has failed)
+        test("Invalid Add New User Address Test - Too Short First Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - too short first name (1 char)
+            await testMethods.invalidAddNewUserAddressTooShortFirstNameTest();
+        });
+
+    });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
