@@ -29,6 +29,12 @@ class AddressesDashboardPage extends BasePage{
         dashboardCreateNewAddressLink.click();
     }
 
+    //click set "Delete" address link method
+    async clickAddressesDashSetDeleteAddressLinkMethod(index){
+        const dashboardDeleteAddressLinkElements = await this.driver.findElements(this._addressDashPageAddressDeleteLinkElements);
+        await dashboardDeleteAddressLinkElements[index].click();
+    }
+
     //address dashboard page text element getters
     async getAddressesDashboardPageTitle(){
         const addressesDashPageTitle = await this.driver.findElement(this._addressDashPageTitle);

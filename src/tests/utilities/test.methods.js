@@ -4858,6 +4858,50 @@ class TestMethods extends BaseTest{
         await captureScreenshot(this.driver, "Invalid Add New User Address Test Result - Too Long Post Code");
     }
 
+    //remove user address test method
+    async removeUserAddressTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const addressesDashboardPage = new AddressesDashboardPage(this.driver);
+        const addressesDashPageTextElementAssert = new AddressesDashPageTextElementAssert(this.driver);
+        //wait for elements to load
+        await basePage.waitForElementLoad(1500);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //addresses dashboard page web element assert
+        await addressesDashboardPage.isAddressesDashboardPageWebElementDisplayed();
+        //addresses dashboard page text element assert
+        await addressesDashPageTextElementAssert.isAddressesDashboardPageTextElementAsExpected();
+        //account dashboard page aside section text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //capture screenshot of the addresses dashboard page display
+        await captureScreenshot(this.driver, "Addresses Dashboard Page Display");
+        //click "Delete" address link
+        await addressesDashboardPage.clickAddressesDashSetDeleteAddressLinkMethod(0)
+        //wait for elements to load
+        await basePage.waitForElementLoad(1500);
+        //assert the user gets an expected address removal success message
+        const removeAddressSuccessMessage = await addressesDashboardPage.getAddressesDashboardPageAddressAddSuccessMessage();
+        assert.strictEqual(removeAddressSuccessMessage, "Address successfully deleted.", "The address dashboard address removal success message doesn't match expectation or the address removal has failed.");
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Remove User Address Test Result");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
