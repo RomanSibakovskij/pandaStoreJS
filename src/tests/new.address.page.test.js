@@ -190,6 +190,16 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressTooLongLastNameTest();
         });
 
+        //Test 004o -> invalid add new user address test - too long address (100 chars)(the new address addition doesn't get aborted, test has failed)
+        test("Invalid Add New User Address Test - Too Long Address", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - too long address (100 chars)
+            await testMethods.invalidAddNewUserAddressTooLongAddressTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

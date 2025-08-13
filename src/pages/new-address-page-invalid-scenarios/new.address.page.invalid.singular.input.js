@@ -19,6 +19,8 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         this._newAddressPagePostCodeInputField = By.xpath("//input[@name='postcode']");
         this._newAddressPagePhoneInputField = By.xpath("//input[@name='phone']");
 
+        const testDataGenerator = new TestDataGenerator(this.driver);
+
         //invalid new address data input - no singular input
         this._noNewAddressFirstName = "";
         this._noNewAddressLastName = "";
@@ -36,6 +38,8 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         //invalid new address data input - too long singular input
         this._tooLongNewAddressFirstName = "Chfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
         this._tooLongNewAddressLastName = "Shfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
+        this._tooLongNewAddress = testDataGenerator.generateRandomAddress(93); //3 chars
+
     }
 
     //invalid user new address data input methods - no singular input
@@ -120,6 +124,12 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const tooLongNewAddressLastName = this._tooLongNewAddressLastName;
         Logger.info("Too long new address last name: ", tooLongNewAddressLastName);
         await addressLastNameInputField.sendKeys(tooLongNewAddressLastName);
+    }
+    async inputTooLongNewAddressIntoAddressOneInputField(){
+        const addressAliasInputField = await this.driver.findElement(this._newAddressPageAddressOneInputField);
+        const tooLongNewAddress = this._tooLongNewAddress;
+        Logger.info("Too long new address: ", tooLongNewAddress);
+        await addressAliasInputField.sendKeys(tooLongNewAddress);
     }
 
 }
