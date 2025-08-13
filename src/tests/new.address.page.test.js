@@ -62,6 +62,16 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressNoStateTest();
         });
 
+        //Test 004d -> invalid add new user address test - no first name 
+        test("Invalid Add New User Address Test - No First Name", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - no first name
+            await testMethods.invalidAddNewUserAddressNoFirstNameTest();
+        });
+
     });
 
 

@@ -19,8 +19,19 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         this._newAddressPagePostCodeInputField = By.xpath("//input[@name='postcode']");
         this._newAddressPagePhoneInputField = By.xpath("//input[@name='phone']");
 
+        //invalid new address data input - no singular input
+        this._noNewAddressFirstName = "";
+
     }
 
+    //invalid user new address data input methods - no singular input
+    async inputNoNewAddressFirstNameIntoAddressFirstNameInputField(){
+        const addressFirstNameInputField = await this.driver.findElement(this._newAddressPageFirstNameInputField);
+        await addressFirstNameInputField.clear();
+        const noNewAddressFirstName = this._noNewAddressFirstName;
+        Logger.info("No user new address first name: ", noNewAddressFirstName);
+        await addressFirstNameInputField.sendKeys(noNewAddressFirstName);
+    }
 
 }
 module.exports = NewAddressPageInvalidSingularInput;
