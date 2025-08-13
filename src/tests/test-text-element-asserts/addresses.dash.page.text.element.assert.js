@@ -7,7 +7,8 @@ const { AddressesDashboardPage } = require("../../pages/addresses.dashboard.page
 class AddressesDashPageTextElementAssert extends BaseTest{
 
     constructor(driver) {
-        super(driver);
+        super();
+        this.driver = driver;
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -29,7 +30,7 @@ class AddressesDashPageTextElementAssert extends BaseTest{
                 `Update link text at index ${index} was "${text}", expected "Update"`
             );
         });
-        
+
         //assert the addresses dashboard page delete link text is as expected
         const addressesDashPageDeleteAddressLinkText = await addressesDashboardPage.getDeleteAddressLinkText();
         addressesDashPageDeleteAddressLinkText.forEach((text, index) => {
