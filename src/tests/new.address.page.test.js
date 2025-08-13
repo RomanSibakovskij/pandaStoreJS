@@ -254,6 +254,16 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressInvalidAddressFormatTest();
         });
 
+        //Test 004u -> invalid add new user address test - invalid city format (special symbols only)(the new address addition doesn't get aborted, test has failed)
+        test("Invalid Add New User Address Test - Invalid City Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - invalid city format (special symbols only)
+            await testMethods.invalidAddNewUserAddressInvalidCityFormatTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
