@@ -44,6 +44,57 @@ class NewAddressPage extends BasePage {
         this._newAddressSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
     }
 
+    //new address page text element getters
+    async getNewAddressPageTitle(){
+        const newAddressPageTitle = await this.driver.findElement(this._newAddressPageTitle);
+        return await newAddressPageTitle.getText();
+    }
+    //input form
+    async getNewAddressPageAliasSubtext(){
+        const newAddressPageAliasSubtext = await this.driver.findElement(this._newAddressPageAliasSubtext);
+        return await newAddressPageAliasSubtext.getText();
+    }
+    async getNewAddressPageFirstNameSubtext(){
+        const newAddressPageFirstNameSubtext = await this.driver.findElement(this._newAddressPageFirstNameSubtext);
+        return await newAddressPageFirstNameSubtext.getText();
+    }
+    async getNewAddressPageLastNameSubtext(){
+        const newAddressPageLastNameSubtext = await this.driver.findElement(this._newAddressPageLastNameSubtext);
+        return await newAddressPageLastNameSubtext.getText();
+    }
+    async getNewAddressPageCompanySubtext(){
+        const newAddressPageCompanySubtext = await this.driver.findElement(this._newAddressPageCompanySubtext);
+        return await newAddressPageCompanySubtext.getText();
+    }
+    async getNewAddressPageAddressOneSubtext(){
+        const newAddressPageAddressOneSubtext = await this.driver.findElement(this._newAddressPageAddressOneSubtext);
+        return await newAddressPageAddressOneSubtext.getText();
+    }
+    async getNewAddressPageAddressTwoSubtext(){
+        const newAddressPageAddressTwoSubtext = await this.driver.findElement(this._newAddressPageAddressTwoSubtext);
+        return await newAddressPageAddressTwoSubtext.getText();
+    }
+    async getNewAddressPageCitySubtext(){
+        const newAddressPageCitySubtext = await this.driver.findElement(this._newAddressPageCitySubtext);
+        return await newAddressPageCitySubtext.getText();
+    }
+    async getNewAddressPageStateSubtext(){
+        const newAddressPageStateSubtext = await this.driver.findElement(this._newAddressPageStateSubtext);
+        return await newAddressPageStateSubtext.getText();
+    }
+    async getNewAddressPagePostCodeSubtext(){
+        const newAddressPagePostCodeSubtext = await this.driver.findElement(this._newAddressPagePostCodeSubtext);
+        return await newAddressPagePostCodeSubtext.getText();
+    }
+    async getNewAddressPageCountrySubtext(){
+        const newAddressPageCountrySubtext = await this.driver.findElement(this._newAddressPageCountrySubtext);
+        return await newAddressPageCountrySubtext.getText();
+    }
+    async getNewAddressPagePhoneSubtext(){
+        const newAddressPagePhoneSubtext = await this.driver.findElement(this._newAddressPagePhoneSubtext);
+        return await newAddressPagePhoneSubtext.getText();
+    }
+
     //new address page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
