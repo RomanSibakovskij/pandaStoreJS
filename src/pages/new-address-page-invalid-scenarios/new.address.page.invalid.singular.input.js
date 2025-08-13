@@ -40,7 +40,7 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         this._tooLongNewAddressLastName = "Shfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
         this._tooLongNewAddress = testDataGenerator.generateRandomAddress(93); //3 chars
         this._tooLongNewAddressCity = "Dhfgdsgdtwetrtjdsfgrfdgjhkjmngbfdsfffhkjgsedhgtfgsdetgtujyfdsfgdfsdffdgfdhgdvcxvcfghfgjjfggfdfgddgfd"; //100 chars
-
+        this._tooLongNewAddressPostCode = 567243; //6 digits
 
     }
 
@@ -138,6 +138,12 @@ class NewAddressPageInvalidSingularInput extends BasePage{
         const tooLongNewAddressCity = this._tooLongNewAddressCity;
         Logger.info("Too long new address city: ", tooLongNewAddressCity);
         await addressCityInputField.sendKeys(tooLongNewAddressCity);
+    }
+    async inputTooLongNewAddressPostCodeIntoAddressPostCodeInputField(){
+        const addressPostCodeInputField = await this.driver.findElement(this._newAddressPagePostCodeInputField);
+        const tooLongNewAddressPostCode = this._tooLongNewAddressPostCode;
+        Logger.info("Too long new address post code: ", tooLongNewAddressPostCode);
+        await addressPostCodeInputField.sendKeys(tooLongNewAddressPostCode);
     }
 
 }

@@ -210,6 +210,16 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressTooLongCityTest();
         });
 
+        //Test 004q -> invalid add new user address test - too long post code (6 digits)
+        test("Invalid Add New User Address Test - Too Long Post Code", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - too long post code (6 digits)
+            await testMethods.invalidAddNewUserAddressTooLongPostCodeTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

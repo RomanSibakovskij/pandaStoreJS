@@ -4316,6 +4316,90 @@ class TestMethods extends BaseTest{
         }
     }
 
+    //invalid add user address test method - too long post code (6 digits)
+    async invalidAddNewUserAddressTooLongPostCodeTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const homePage = new HomePage(this.driver);
+        const homePageTextElementAssert = new HomePageTextElementAssert(this.driver);
+        const homePageDataLoggers = new HomePageDataLoggers(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const newAddressPage = new NewAddressPage(this.driver);
+        const newAddressPageInvalidSingularInput = new NewAddressPageInvalidSingularInput(this.driver);
+        const newAddressPageTextElementAssert = new NewAddressPageTextElementAssert(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //home page web element assert
+        await homePage.isHomePageWebElementDisplayed();
+        //home page text element assert
+        await homePageTextElementAssert.isHomePageTextElementAsExpected();
+        //log home page featured product data
+        await homePageDataLoggers.logHomePageFeaturedProductData();
+        //log home page new product data
+        await homePageDataLoggers.logHomePageNewProductData();
+        //log home page featured articles data
+        await homePageDataLoggers.logHomePageFeaturedArticlesData();
+        //capture screenshot of the home page display
+        await captureScreenshot(this.driver, "Home Page Display");
+        //click "My Account" upper header navbar link
+        await generalPage.clickMyAccountUpperNavLink();
+        //account dashboard page breadcrumb web element assert
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside section web element assert
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page web element assert
+        await accountDashboardPage.isAccountDashboardPageWebElementDisplayed();
+        //account dashboard page aside section text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //account dashboard page text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageTextElementAsExpected();
+        //capture screenshot of the account dashboard page display
+        await captureScreenshot(this.driver, "Account Dashboard Page Display");
+        //click "Addresses" link method
+        await accountDashboardPage.clickAccountDashboardSetLinkMethod(1);
+        //wait for elements to load
+        await basePage.waitForElementLoad(2000);
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //new address page web element assert
+        await newAddressPage.isNewAddressPageWebElementDisplayed();
+        //new address page text element assert
+        await newAddressPageTextElementAssert.isNewAddressPageTextElementAsExpected();
+        //capture screenshot of the new address page display before data input
+        await captureScreenshot(this.driver, "New Address Page Display Before Data Input");
+        //input valid new address into new address one input field
+        await newAddressPage.inputNewAddressIntoAddressOneInputField();
+        //input valid new address city into new address city input field
+        await newAddressPage.inputNewAddressCityIntoAddressCityInputField();
+        //input too long new address post code into new address post code input field (6 digits)
+        await newAddressPageInvalidSingularInput.inputTooLongNewAddressPostCodeIntoAddressPostCodeInputField();
+        //click "State" dropdown menu
+        await newAddressPage.clickStateDropdownMenu();
+        //select "Illinois" option
+        await newAddressPage.selectIllinoisStateOption();
+        //capture screenshot of the new address page display after invalid data input - too long post code
+        await captureScreenshot(this.driver, "New Address Page Display After Invalid Data Input - Too Long Post Code");
+        //click "Save" button
+        await newAddressPage.clickNewAddressSaveButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(2000);
+        //assert the user gets expected error messages
+        const addressAddFailureMessage = await newAddressPage.getNewAddressInfoAddFailureMessage();
+        assert.strictEqual(addressAddFailureMessage, "Please fix the error below.", "The new address page address addition failure message doesn't match expectations.")
+        const invalidPostCodeError = await newAddressPage.getNewAddressSingularInputErrorMsg();
+        assert.strictEqual(invalidPostCodeError, "Invalid postcode - should look like \"NNNNN\"", "The new address too long post code input error doesn't match expectations or the error wasn't triggered.");
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Invalid Add New User Address Test Result - Too Long Post Code");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
