@@ -22,6 +22,13 @@ class AddressesDashboardPage extends BasePage{
         this._addressDashPageCreateNewAddressLink = By.xpath("//div[@class='addresses-footer mb-3']/a");
     }
 
+    //click "Create new address" link method
+    async clickAddressesDashboardCreateNewAddressLink(){
+        const dashboardCreateNewAddressLink = await this.driver.findElement(this._addressDashPageCreateNewAddressLink);
+        await new Promise(resolve => setTimeout(resolve, 900))
+        dashboardCreateNewAddressLink.click();
+    }
+
     //address dashboard page text element getters
     async getAddressesDashboardPageTitle(){
         const addressesDashPageTitle = await this.driver.findElement(this._addressDashPageTitle);

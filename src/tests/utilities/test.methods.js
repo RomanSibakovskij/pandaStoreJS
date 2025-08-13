@@ -2785,6 +2785,95 @@ class TestMethods extends BaseTest{
         await captureScreenshot(this.driver, "Valid Add New User Address Test Result");
     }
 
+    //valid add additional user address test method
+    async validAddAdditionalNewUserAddressTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const newAddressPage = new NewAddressPage(this.driver);
+        const newAddressPageTextElementAssert = new NewAddressPageTextElementAssert(this.driver);
+        const addressesDashboardPage = new AddressesDashboardPage(this.driver);
+        const addressesDashboardPageTextElementAssert = new AddressesDashPageTextElementAssert(this.driver);
+        const addressesDashboardPageDataLogger = new AddressesDashPageDataLogger(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //account dashboard page breadcrumb web element assert
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside section web element assert
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //addresses dashboard page web element assert
+        await addressesDashboardPage.isAddressesDashboardPageWebElementDisplayed();
+        //addresses dashboard page text element assert
+        await addressesDashboardPageTextElementAssert.isAddressesDashboardPageTextElementAsExpected();
+        //account dashboard page aside section text element assert
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //capture screenshot of the addresses dashboard page display
+        await captureScreenshot(this.driver, "Addresses Dashboard Page Display");
+        //click "Create new address" link method
+        await addressesDashboardPage.clickAddressesDashboardCreateNewAddressLink();
+        //wait for elements to load
+        await basePage.waitForElementLoad(2000);
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //new address page web element assert
+        await newAddressPage.isNewAddressPageWebElementDisplayed();
+        //new address page text element assert
+        await newAddressPageTextElementAssert.isNewAddressPageTextElementAsExpected();
+        //capture screenshot of the new address page display before data input
+        await captureScreenshot(this.driver, "New Address Page Display Before Data Input");
+        //input valid new address alias (optional, more for visual assert) into new address alias input field
+        await newAddressPage.inputNewAddressAliasIntoAddressAliasInputField();
+        //input valid new address into new address one input field
+        await newAddressPage.inputNewAddressIntoAddressOneInputField();
+        //input valid new address city into new address city input field
+        await newAddressPage.inputNewAddressCityIntoAddressCityInputField();
+        //input valid new address post code into new address post code input field
+        await newAddressPage.inputNewAddressPostCodeIntoAddressPostCodeInputField();
+        //click "State" dropdown menu
+        await newAddressPage.clickStateDropdownMenu();
+        //select "Illinois" option
+        await newAddressPage.selectIllinoisStateOption();
+        //capture screenshot of the new address page display after valid data input
+        await captureScreenshot(this.driver, "New Address Page Display After Valid Data Input");
+        //click "Save" button
+        await newAddressPage.clickNewAddressSaveButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(2000);
+        //log the product addition issue if it gets added without any predefined actions
+        const genPageSidebarCartCountText = await generalPage.getSidebarCartButtonText();
+        const headerShoppingCartLinkText = await generalPage.getHeaderShoppingCartLinkText();
+        if(genPageSidebarCartCountText !== "Cart\n0" && headerShoppingCartLinkText !== "0\\nSHOPPING CART\\n-\\n$0.00"){
+            Logger.error(`A random product(s) was added (during user account creation) without any predefined action performed. Expected header shopping cart display: '0 SHOPPING CART - $0.00', Actual: ${headerShoppingCartLinkText}`)
+        } else {
+            Logger.info("No random product has been added.");
+        }
+        //assert the user gets an expected success message
+        const addAddressSuccessMessage = await addressesDashboardPage.getAddressesDashboardPageAddressAddSuccessMessage();
+        assert.strictEqual(addAddressSuccessMessage, "Address successfully added.", "The address dashboard new address addition success message doesn't match expectation or the new address addition has failed.");
+        //addresses dashboard page web element assert
+        await addressesDashboardPage.isAddressesDashboardPageWebElementDisplayed();
+        //addresses dashboard page text element assert
+        await addressesDashboardPageTextElementAssert.isAddressesDashboardPageTextElementAsExpected();
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //log user address displayed data
+        await addressesDashboardPageDataLogger.logAddressesDashPageData();
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Valid Add New User Address Test Result");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

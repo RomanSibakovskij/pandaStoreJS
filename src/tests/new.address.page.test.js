@@ -26,6 +26,19 @@ describe('New Address Page Tests', () => {
             await testMethods.validAddNewUserAddressTest();
         });
 
+        //Test 004a -> valid add additional new user address test
+        test("Valid Add Additional New User Address Test", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //add additional user address test
+            await testMethods.validAddAdditionalNewUserAddressTest();
+        });
+
+
     });
 
 
