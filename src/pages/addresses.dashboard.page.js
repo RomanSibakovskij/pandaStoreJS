@@ -91,6 +91,12 @@ class AddressesDashboardPage extends BasePage{
         );
     }
 
+    //address dashboard page address addition success message element getter
+    async getAddressesDashboardPageAddressAddSuccessMessage(){
+        const addAddressSuccessMessage = await this.driver.findElement(this._addressDashPageAddressAddSuccessMessage);
+        return await addAddressSuccessMessage.getText();
+    }
+
     //addresses dashboard page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);

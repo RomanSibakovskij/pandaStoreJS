@@ -57,6 +57,10 @@ class TestDataGenerator extends BasePage{
 
         this._streetTypes = ["St.", "Ave.", "Blvd.", "Rd.", "Ln.", "Dr.", "Ct.", "Pl."];
 
+        this._newAddressAliases = ["Home", "Work", "Billing", "Shipping", "Vacation House", "Parents' Place", "Temporary Address",
+            "Main Address", "Vault", "Secret Store Address"
+        ];
+
     }
 
     //random item function
@@ -214,6 +218,10 @@ class TestDataGenerator extends BasePage{
         return TestDataGenerator.generatedZipCode;
     }
 
+    //get random new address alias title
+    getRandomNewAddressAlias(){
+        return this.getRandomItem(this._newAddressAliases)
+    }
 
 }
 module.exports = TestDataGenerator;

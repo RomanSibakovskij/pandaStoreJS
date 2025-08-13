@@ -42,6 +42,79 @@ class NewAddressPage extends BasePage {
         //input error message elements
         this._newAddressAddFailureMessage = By.xpath("//aside[@id='notifications']");
         this._newAddressSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
+
+        const testDataGenerator = new TestDataGenerator(this.driver);
+
+        //valid new address input data
+        this._newAddressAlias = testDataGenerator.getRandomNewAddressAlias();
+        this._newAddress = testDataGenerator.generateRandomAddress(8);
+        this._newAddressCity = testDataGenerator.getRandomCity();
+        this._newAddressPostCode = testDataGenerator.getRandomPostalCode();
+    }
+
+    //valid user new address data input methods
+    async inputNewAddressAliasIntoAddressAliasInputField(){
+        const addressAliasInputField = await this.driver.findElement(this._newAddressPageAliasInputField);
+        const newAddressAlias = this._newAddressAlias;
+        Logger.info("Valid user new address alias: ", newAddressAlias);
+        await addressAliasInputField.sendKeys(newAddressAlias);
+    }
+    async inputNewAddressIntoAddressOneInputField(){
+        const addressAliasInputField = await this.driver.findElement(this._newAddressPageAddressOneInputField);
+        const newAddress = this._newAddress;
+        Logger.info("Valid user new address: ", newAddress);
+        await addressAliasInputField.sendKeys(newAddress);
+    }
+    async inputNewAddressCityIntoAddressCityInputField(){
+        const addressCityInputField = await this.driver.findElement(this._newAddressPageCityInputField);
+        const newAddressCity = this._newAddressCity;
+        Logger.info("Valid user new address city: ", newAddressCity);
+        await addressCityInputField.sendKeys(newAddressCity);
+    }
+    async inputNewAddressPostCodeIntoAddressPostCodeInputField(){
+        const addressPostCodeInputField = await this.driver.findElement(this._newAddressPagePostCodeInputField);
+        const newAddressPostCode = this._newAddressPostCode;
+        Logger.info("Valid user new address post code: ", newAddressPostCode);
+        await addressPostCodeInputField.sendKeys(newAddressPostCode);
+    }
+
+    //click "State" dropdown menu method
+    async clickStateDropdownMenu(){
+        const stateDropdownMenu = this.driver.findElement(this._newAddressPageStateDropdownMenu);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: stateDropdownMenu }).click().perform();
+    }
+
+    //select "Please choose" state option method
+    async selectChooseStateOption(){
+        const newAddressChooseStateOption = await this.driver.findElement(this._newAddressPageSelectStateOption);
+        newAddressChooseStateOption.click();
+    }
+
+    //select "Illinois" state option method
+    async selectIllinoisStateOption(){
+        const newAddressIllinoisStateOption = await this.driver.findElement(this._newAddressPageIllinoisStateOption);
+        newAddressIllinoisStateOption.click();
+    }
+
+    //click "Country" dropdown menu method
+    async clickCountryDropdownMenu(){
+        const countryDropdownMenu = this.driver.findElement(this._newAddressPageCountryDropdownMenu);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: countryDropdownMenu }).click().perform();
+    }
+
+    //select "Please choose" country option method
+    async selectChooseCountryOption(){
+        const newAddressChooseCountryOption = await this.driver.findElement(this._newAddressPageSelectCountryOption);
+        await newAddressChooseCountryOption.sendKeys(Key.ENTER);
+    }
+
+    //click "Save" button method
+    async clickNewAddressSaveButton(){
+        const newAddressSaveButton = this.driver.findElement(this._newAddressPageSaveButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: newAddressSaveButton }).click().perform();
     }
 
     //new address page text element getters
