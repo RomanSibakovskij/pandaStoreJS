@@ -40,7 +40,7 @@ class NewAddressPage extends BasePage {
         this._newAddressPagePhoneInputField = By.xpath("//input[@name='phone']");
         this._newAddressPageSaveButton = By.xpath("//button[@class='btn btn-default form-control-submit']");
         //input error message elements
-        this._newAddressAddFailureMessage = By.xpath("//aside[@id='notifications']");
+        this._newAddressAddFailureMessage = By.xpath("//section[@id='notifications']");
         this._newAddressSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
 
         const testDataGenerator = new TestDataGenerator(this.driver);
@@ -166,6 +166,17 @@ class NewAddressPage extends BasePage {
     async getNewAddressPagePhoneSubtext(){
         const newAddressPagePhoneSubtext = await this.driver.findElement(this._newAddressPagePhoneSubtext);
         return await newAddressPagePhoneSubtext.getText();
+    }
+
+    //new address page addition failure message getter
+    async getNewAddressInfoAddFailureMessage(){
+        const newAddressAddFailureMessage = await this.driver.findElement(this._newAddressAddFailureMessage);
+        return await newAddressAddFailureMessage.getText();
+    }
+    //personal info page singular input error message getter
+    async getNewAddressSingularInputErrorMsg(){
+        const newAddressSingularInputErrorMsg = await this.driver.findElement(this._newAddressSingularInputErrorMessage);
+        return await newAddressSingularInputErrorMsg.getText();
     }
 
     //new address page web element assert method

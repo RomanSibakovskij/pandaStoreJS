@@ -156,6 +156,16 @@ describe('New Address Page Tests', () => {
             await testMethods.invalidAddNewUserAddressTooShortCityTest();
         });
 
+        //Test 004l -> invalid add new user address test - too short post code (4 digits)
+        test("Invalid Add New User Address Test - Too Short Post Code", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //invalid add new user address test - too short post code (4 digits)
+            await testMethods.invalidAddNewUserAddressTooShortPostCodeTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
