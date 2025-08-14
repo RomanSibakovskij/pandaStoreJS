@@ -76,6 +76,24 @@ describe('Login/Register Dashboard Page Tests', () => {
 
     });
 
+    describe("Invalid User Login Tests - No Singular Input", () => {
+
+        //Test 007c -> invalid user login test - no login email
+        test("Invalid User Login Test - No Login Email", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //user logout test
+            await testMethods.userLogoutTest();
+            //invalid user login test - no login email
+            await testMethods.invalidUserLoginNoEmailTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run
