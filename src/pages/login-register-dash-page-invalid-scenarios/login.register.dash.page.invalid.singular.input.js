@@ -19,6 +19,7 @@ class LoginRegisterDashPageInvalidSingularInput extends BasePage{
 
         //invalid user login data - invalid singular input
         this._invalidLoginEmail = "kHGJGFHf@fakemail.com";
+        this._invalidLoginEmailFormat = "kHGJGFHffakemail.com"; //missing '@'
     }
 
     //invalid login data input methods - no singular input
@@ -41,6 +42,12 @@ class LoginRegisterDashPageInvalidSingularInput extends BasePage{
         const invalidLoginEmail = this._invalidLoginEmail;
         Logger.info("Invalid login email: ", invalidLoginEmail);
         await loginEmailInputField.sendKeys(invalidLoginEmail);
+    }
+    async inputInvalidLoginEmailFormatIntoEmailInputField(){
+        const loginEmailInputField = await this.driver.findElement(this._loginSectionEmailInputField);
+        const invalidLoginEmailFormat = this._invalidLoginEmailFormat;
+        Logger.info("Invalid login email format: ", invalidLoginEmailFormat);
+        await loginEmailInputField.sendKeys(invalidLoginEmailFormat);
     }
 
 }
