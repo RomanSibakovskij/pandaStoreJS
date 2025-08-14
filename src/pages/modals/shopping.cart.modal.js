@@ -7,6 +7,82 @@ class ShoppingCartModal extends BasePage{
 
     constructor(driver) {
         super(driver);
+
+        //shopping cart modal web elements
+        this._shopCartModalCloseButton = By.xpath("//div[@class='modal-content']/a");
+        this._shopCartModalProductImage = By.xpath("//div[@class='modal-content']//picture/img");
+        this._shopCartModalProductName = By.xpath("//div[@class='modal-content']//h1");
+        this._shopCartModalProductColorSubtext = By.xpath("//ul[@class='list_detail_item m-b-1']/li[1]/span");
+        this._shopCartModalProductColor = By.xpath("//ul[@class='list_detail_item m-b-1']/li[1]");
+        this._shopCartModalProductSizeSubtext = By.xpath("//ul[@class='list_detail_item m-b-1']/li[2]/span");
+        this._shopCartModalProductSize = By.xpath("//ul[@class='list_detail_item m-b-1']/li[2]");
+        this._shopCartModalProductQuantitySubtext = By.xpath("//ul[@class='list_detail_item m-b-1']/li[3]/span");
+        this._shopCartModalProductQuantity = By.xpath("//ul[@class='list_detail_item m-b-1']/li[3]");
+        this._shopCartModalProductAdditionSuccessMessage = By.xpath("//div[@class='alert alert-success']");
+        this._shopCartModalItemQuantity = By.xpath("//p[@class='cart-products-count']");
+        this._shopCartModalTotalItemPriceSubtext = By.xpath("//ul[@class='list_detail_item']/li[1]/span");
+        this._shopCartModalTotalItemPrice = By.xpath("//ul[@class='list_detail_item']/li[1]");
+        this._shopCartModalTotalShippingPriceSubtext = By.xpath("//ul[@class='list_detail_item']/li[2]/span");
+        this._shopCartModalTotalShippingPrice = By.xpath("//ul[@class='list_detail_item']/li[2]");
+        this._shopCartModalTaxesSubtext = By.xpath("//ul[@class='list_detail_item']/li[3]/span");
+        this._shopCartModalTaxes = By.xpath("//ul[@class='list_detail_item']/li[3]");
+        this._shopCartModalTotalPriceNoTaxSubtext = By.xpath("//ul[@class='list_detail_item']/li[4]/span");
+        this._shopCartModalTotalPriceNoTax = By.xpath("//ul[@class='list_detail_item']/li[4]");
+        //button elements
+        this._shopCartModalProceedToShoppingCartButton = By.xpath("//div[@class='cart-content-btn']//a[@title='Shopping cart']");
+        this._shopCartModalProceedToCheckoutButton = By.xpath("//div[@class='cart-content-btn']//a[@title='Proceed to checkout']");
+        this._shopCartModalContinueShoppingLink = By.xpath("//div[@class='cart-content-btn']//a[@class='inline_block mb-2']");
+        //products you may like section
+        this._shopCartModalProductsMayLikeSectionTitle = By.xpath("//section[@class='modal_products_container products_slider']//div[@class='title_block_inner']");
+        this._shopCartModalProductsMayLikeScrollLeftButton = By.xpath("//section[@class='modal_products_container products_slider']//div[@class='swiper-button-tr']/div[1]");
+        this._shopCartModalProductsMayLikeScrollRightButton = By.xpath("//section[@class='modal_products_container products_slider']//div[@class='swiper-button-tr']/div[2]");
+        //list elements
+        this._shopCartModalProductsMayLikeProductImgElements = By.xpath("//section[@class='modal_products_container products_slider']//div[@class='swiper-wrapper']//img");
+        this._shopCartModalProductsMayLikeProductUnitPriceElements = By.xpath("//section[@class='modal_products_container products_slider']//div[@class='swiper-wrapper']//div[@class='price']");
+    }
+
+    //shopping cart modal web element assert method (all pages have those elements)
+    async isElementDisplayed(locator) {
+        const element = await this.driver.findElement(locator);
+        return await element.isDisplayed();
+    }
+
+    async isShopCartModalWebElementDisplayed(){
+        const elementsToCheck = [
+            //this._shopCartModalCloseButton,
+            //this._shopCartModalProductImage,
+            this._shopCartModalProductName,
+            this._shopCartModalProductColorSubtext,
+            this._shopCartModalProductColor,
+            this._shopCartModalProductSizeSubtext,
+            this._shopCartModalProductSize,
+            this._shopCartModalProductQuantitySubtext,
+            this._shopCartModalProductQuantity,
+            this._shopCartModalItemQuantity,
+            this._shopCartModalTotalItemPriceSubtext,
+            this._shopCartModalTotalItemPrice,
+            this._shopCartModalTotalShippingPriceSubtext,
+            this._shopCartModalTotalShippingPrice,
+            this._shopCartModalTaxesSubtext,
+            this._shopCartModalTaxes,
+            this._shopCartModalTotalPriceNoTaxSubtext,
+            this._shopCartModalTotalPriceNoTax,
+            this._shopCartModalProceedToShoppingCartButton,
+            this._shopCartModalProceedToCheckoutButton,
+            //this._shopCartModalProductsMayLikeSectionTitle, //not all products have this element
+            //this._shopCartModalProductsMayLikeScrollLeftButton, //not all products have this element
+            //this._shopCartModalProductsMayLikeScrollRightButton, //not all products have this element
+            //this._shopCartModalProductsMayLikeProductImgElements, //not all products have these elements
+            //this._shopCartModalProductsMayLikeProductUnitPriceElements //not all products have these elements
+        ];
+
+        for (let element of elementsToCheck) {
+            const isDisplayed = await this.isElementDisplayed(element);
+            if (!isDisplayed) {
+                throw new Error(`Element ${element} is not displayed.`);
+            }
+        }
+
     }
 
 }
