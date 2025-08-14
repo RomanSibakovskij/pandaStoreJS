@@ -51,6 +51,18 @@ describe('Home Page Tests', () => {
             await testMethods.addMultipleFeaturedProductToCartTest();
         });
 
+        //Test 008c -> add multiple featured product ("Women's Heathered Middle Sleeve Shirt") to cart test (as a registered user) (the webpage is bugged -> sometimes, additional random product is being added to cart without test script)
+        test("Add Multiple Featured Product To Cart Test (as a registered user)", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //add multiple featured product ("Women's Heathered Middle Sleeve Shirt") to cart test (as a registered user)
+            await testMethods.addMultipleFeaturedProductToCartRegUserTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
