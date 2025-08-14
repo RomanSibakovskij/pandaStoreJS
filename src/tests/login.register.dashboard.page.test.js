@@ -60,6 +60,20 @@ describe('Login/Register Dashboard Page Tests', () => {
             await testMethods.validUserLoginEditedEmailTest();
         });
 
+        //Test 007b -> valid user login with edited password test
+        test("Valid User Login With Edited Password Test", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid edit user (with login password) account test
+            await testMethods.validEditAccountWithPasswordTest();
+            //user logout test
+            await testMethods.userLogoutTest();
+            //valid user login with edited password test
+            await testMethods.validUserLoginEditedPasswordTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

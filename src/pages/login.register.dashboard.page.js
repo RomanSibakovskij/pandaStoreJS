@@ -38,6 +38,7 @@ class LoginRegisterDashboardPage extends BasePage{
 
         //valid edited user login data
         this._validEditedLoginEmail = personalInfoPage.getEditedEmail();
+        this._validEditedLoginPassword = personalInfoPage.getEditedPassword();
 
     }
 
@@ -61,6 +62,12 @@ class LoginRegisterDashboardPage extends BasePage{
         const validEditedLoginEmail = await this._validEditedLoginEmail;
         Logger.info("Valid user edited login email: ", validEditedLoginEmail);
         await loginEmailInputField.sendKeys(validEditedLoginEmail);
+    }
+    async inputValidEditedLoginPasswordIntoPasswordInputField(){
+        const validPasswordInputField = await this.driver.findElement(this._loginSectionPasswordInputField);
+        const validEditedLoginPassword = await this._validEditedLoginPassword;
+        Logger.info("Valid user edited login password: ", validPasswordInputField);
+        await validPasswordInputField.sendKeys(validEditedLoginPassword);
     }
 
     //click "View Password" button method
