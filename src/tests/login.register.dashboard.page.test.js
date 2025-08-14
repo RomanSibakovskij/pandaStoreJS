@@ -30,6 +30,24 @@ describe('Login/Register Dashboard Page Tests', () => {
 
     });
 
+    describe("Valid User Login Tests", () => {
+
+        //Test 007 -> valid user login test
+        test("Valid User Login Test", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //user logout test
+            await testMethods.userLogoutTest();
+            //valid user login test
+            await testMethods.validUserLoginTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run

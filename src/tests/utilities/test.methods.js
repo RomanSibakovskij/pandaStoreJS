@@ -4916,7 +4916,7 @@ class TestMethods extends BaseTest{
         const loginRegisterDashboardPage = new LoginRegisterDashboardPage(this.driver);
         const loginRegisterDashPageTextElementAssert = new LoginRegisterDashPageTextElementAssert(this.driver);
         //wait for elements to load
-        await basePage.waitForElementLoad();
+        await basePage.waitForElementLoad(1000);
         //general page web element assert
         await generalPage.isGeneralPageWebElementDisplayed();
         //general page text element assert
@@ -4937,6 +4937,66 @@ class TestMethods extends BaseTest{
         await loginRegisterDashPageTextElementAssert.isLoginRegisterDashPageTextElementAsExpected();
         //capture screenshot of the test result
         await captureScreenshot(this.driver, "User Logout Test Result");
+    }
+
+    //valid user login test method
+    async validUserLoginTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const loginRegisterDashboardPage = new LoginRegisterDashboardPage(this.driver);
+        const loginRegisterDashPageTextElementAssert = new LoginRegisterDashPageTextElementAssert(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const addressesDashboardPage = new AddressesDashboardPage(this.driver);
+        const addressesDashPageTextElementAssert = new AddressesDashPageTextElementAssert(this.driver);
+        //wait for elements to load
+        await basePage.waitForElementLoad(1000);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //login/register dashboard page web element assert
+        await loginRegisterDashboardPage.isLoginRegisterDashPageWebElementDisplayed();
+        //login/register dashboard page text element assert
+        await loginRegisterDashPageTextElementAssert.isLoginRegisterDashPageTextElementAsExpected();
+        //capture screenshot of the login/register dashboard page before data input
+        await captureScreenshot(this.driver, "Login and Register Dashboard Page Display Before Data Input");
+        //input valid login email into login email input field
+        await loginRegisterDashboardPage.inputValidLoginEmailIntoEmailInputField();
+        //input valid login password into login password input field
+        await loginRegisterDashboardPage.inputValidLoginPasswordIntoPasswordInputField();
+        //click "View password" button
+        await loginRegisterDashboardPage.clickViewLoginPasswordButton();
+        //capture screenshot of the login/register dashboard page after valid data input
+        await captureScreenshot(this.driver, "Login and Register Dashboard Page Display After Valid Data Input");
+        //click "Sign in" button
+        await loginRegisterDashboardPage.clickSignInButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(1000);
+        //assert the user gets logged in (transferred to addresses dashboard page)
+        const addressesDashPageTitle = await addressesDashboardPage.getAddressesDashboardPageTitle();
+        assert.strictEqual(addressesDashPageTitle, "YOUR ADDRESSES", "The addresses dashboard page title doesn't match expectations.");
+        //log the product addition issue if it gets added without any predefined actions
+        const genPageSidebarCartCountText = await generalPage.getSidebarCartButtonText();
+        const headerShoppingCartLinkText = await generalPage.getHeaderShoppingCartLinkText();
+        if(genPageSidebarCartCountText !== "Cart\n0" && headerShoppingCartLinkText !== "0\\nSHOPPING CART\\n-\\n$0.00"){
+            Logger.error(`A random product(s) was added (during user account creation) without any predefined action performed. Expected header shopping cart display: '0 SHOPPING CART - $0.00', Actual: ${headerShoppingCartLinkText}`)
+        } else {
+            Logger.info("No random product has been added.");
+        }
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //addresses dashboard page web element assert
+        await addressesDashboardPage.isAddressesDashboardPageWebElementDisplayed();
+        //addresses dashboard page text element assert
+        await addressesDashPageTextElementAssert.isAddressesDashboardPageTextElementAsExpected();
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Valid User Login Test Result");
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

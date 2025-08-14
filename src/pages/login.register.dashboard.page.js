@@ -2,6 +2,7 @@
 
 const {By} = require("selenium-webdriver");
 const BasePage = require("./utilities/base.page.js");
+const { RegisterPage } = require("../pages/register.page.js");
 const Logger = require("./utilities/logger");
 
 class LoginRegisterDashboardPage extends BasePage{
@@ -27,6 +28,40 @@ class LoginRegisterDashboardPage extends BasePage{
         //singular input error message
         this._loginSectionSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
 
+        const registerPage = new RegisterPage(this.driver);
+
+        //valid user login data
+        this._validLoginEmail = registerPage.getEmail();
+        this._validLoginPassword = registerPage.getPassword();
+
+    }
+
+    //valid login data input methods
+    async inputValidLoginEmailIntoEmailInputField(){
+        const loginEmailInputField = await this.driver.findElement(this._loginSectionEmailInputField);
+        const validLoginEmail = await this._validLoginEmail;
+        Logger.info("Valid user login email: ", validLoginEmail);
+        await loginEmailInputField.sendKeys(validLoginEmail);
+    }
+    async inputValidLoginPasswordIntoPasswordInputField(){
+        const validPasswordInputField = await this.driver.findElement(this._loginSectionPasswordInputField);
+        const validLoginPassword = await this._validLoginPassword;
+        Logger.info("Valid user login password: ", validLoginPassword);
+        await validPasswordInputField.sendKeys(validLoginPassword);
+    }
+
+    //click "View Password" button method
+    async clickViewLoginPasswordButton(){
+        const loginViewPasswordButton = this.driver.findElement(this._loginSectionViewPasswordButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: loginViewPasswordButton }).click().perform();
+    }
+
+    //click "Sign in" button method
+    async clickSignInButton(){
+        const signInButton = this.driver.findElement(this._loginSectionSignInButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: signInButton }).click().perform();
     }
 
     //click "Create account" button method
