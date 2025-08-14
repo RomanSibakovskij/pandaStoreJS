@@ -41,6 +41,37 @@ class ShoppingCartModal extends BasePage{
         this._shopCartModalProductsMayLikeProductUnitPriceElements = By.xpath("//section[@class='modal_products_container products_slider']//div[@class='swiper-wrapper']//div[@class='price']");
     }
 
+    //shopping cart modal text element getters
+    async getShoppingCartModalProductColorSubtext(){
+        const shopCartModalProductColorSubtext = await this.driver.findElement(this._shopCartModalProductColorSubtext);
+        return await shopCartModalProductColorSubtext.getText();
+    }
+    async getShoppingCartModalProductSizeSubtext(){
+        const shopCartModalProductSizeSubtext = await this.driver.findElement(this._shopCartModalProductSizeSubtext);
+        return await shopCartModalProductSizeSubtext.getText();
+    }
+    async getShoppingCartModalProductQtySubtext(){
+        const shopCartModalProductQtySubtext = await this.driver.findElement(this._shopCartModalProductQuantitySubtext);
+        return await shopCartModalProductQtySubtext.getText();
+    }
+    //total item section
+    async getShoppingCartModalTotalShippingPriceSubtext(){
+        const shopCartModalTotalShippingPriceSubtext = await this.driver.findElement(this._shopCartModalTotalShippingPriceSubtext);
+        return await shopCartModalTotalShippingPriceSubtext.getText();
+    }
+    async getShoppingCartModalTaxesSubtext(){
+        const shopCartModalTaxesSubtext = await this.driver.findElement(this._shopCartModalTaxesSubtext);
+        return await shopCartModalTaxesSubtext.getText();
+    }
+    async getShoppingCartModalTotalPriceNoTaxSubtext(){
+        const shopCartModalTotalPriceNoTaxSubtext = await this.driver.findElement(this._shopCartModalTotalPriceNoTaxSubtext);
+        return await shopCartModalTotalPriceNoTaxSubtext.getText();
+    }
+    async getShoppingCartModalContinueShoppingLinkText(){
+        const shopCartModalContinueShoppingLinkText = await this.driver.findElement(this._shopCartModalContinueShoppingLink);
+        return await shopCartModalContinueShoppingLinkText.getText();
+    }
+
     //shopping cart modal web element assert method (all pages have those elements)
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
