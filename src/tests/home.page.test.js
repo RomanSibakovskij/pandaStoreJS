@@ -65,6 +65,16 @@ describe('Home Page Tests', () => {
 
     });
 
+    describe("Add Single New Product To Cart Tests", () => {
+
+        //Test 009 -> add single new product ("Daily Black Crew Neck Shirt") to cart test (as a guest) (the webpage is bugged -> additional random product is being added to cart without test script)
+        test("Add Single New Product To Cart Test (as a guest)", async function () {
+            await testMethods.addSingleNewProductToCartTest();
+        });
+
+    });
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run

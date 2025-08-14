@@ -101,6 +101,13 @@ class HomePage extends BasePage{
         await actions.move({ origin: featuredProductAddToCartButton[index] }).click().perform();
     }
 
+    //click set new product "Add to Cart" button method
+    async clickSetNewProductAddToCartButton(index){
+        const newProductAddToCartButtons = await this.driver.findElements(this._homePageNewProductAddToCartButtonElements);
+        const setNewProductButton = newProductAddToCartButtons[index];
+        await this.driver.executeScript("arguments[0].click();", setNewProductButton);
+    }
+
     //home page product data getters
     //featured products section
     async getHomePageFeaturedProductName() {
