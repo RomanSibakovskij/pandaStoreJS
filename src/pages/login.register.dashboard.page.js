@@ -3,6 +3,7 @@
 const {By} = require("selenium-webdriver");
 const BasePage = require("./utilities/base.page.js");
 const { RegisterPage } = require("../pages/register.page.js");
+const { PersonalInfoPage } = require("../pages/personal.info.page.js");
 const Logger = require("./utilities/logger");
 
 class LoginRegisterDashboardPage extends BasePage{
@@ -29,10 +30,14 @@ class LoginRegisterDashboardPage extends BasePage{
         this._loginSectionSingularInputErrorMessage = By.xpath("//div[@class='help-block  alert alert-danger']");
 
         const registerPage = new RegisterPage(this.driver);
+        const personalInfoPage = new PersonalInfoPage(this.driver);
 
         //valid user login data
         this._validLoginEmail = registerPage.getEmail();
         this._validLoginPassword = registerPage.getPassword();
+
+        //valid edited user login data
+        this._validEditedLoginEmail = personalInfoPage.getEditedEmail();
 
     }
 
@@ -48,6 +53,14 @@ class LoginRegisterDashboardPage extends BasePage{
         const validLoginPassword = await this._validLoginPassword;
         Logger.info("Valid user login password: ", validLoginPassword);
         await validPasswordInputField.sendKeys(validLoginPassword);
+    }
+
+    //valid edited login data input methods
+    async inputValidEditedLoginEmailIntoEmailInputField(){
+        const loginEmailInputField = await this.driver.findElement(this._loginSectionEmailInputField);
+        const validEditedLoginEmail = await this._validEditedLoginEmail;
+        Logger.info("Valid user edited login email: ", validEditedLoginEmail);
+        await loginEmailInputField.sendKeys(validEditedLoginEmail);
     }
 
     //click "View Password" button method

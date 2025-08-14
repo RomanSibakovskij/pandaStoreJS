@@ -4999,6 +4999,66 @@ class TestMethods extends BaseTest{
         await captureScreenshot(this.driver, "Valid User Login Test Result");
     }
 
+    //valid user login with edited login email test method
+    async validUserLoginEditedEmailTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const loginRegisterDashboardPage = new LoginRegisterDashboardPage(this.driver);
+        const loginRegisterDashPageTextElementAssert = new LoginRegisterDashPageTextElementAssert(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const personalInfoPage = new PersonalInfoPage(this.driver);
+        const personalInfoPageTextElementAssert = new PersonalInfoPageTextElementAssert(this.driver);
+        //wait for elements to load
+        await basePage.waitForElementLoad(1000);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //login/register dashboard page web element assert
+        await loginRegisterDashboardPage.isLoginRegisterDashPageWebElementDisplayed();
+        //login/register dashboard page text element assert
+        await loginRegisterDashPageTextElementAssert.isLoginRegisterDashPageTextElementAsExpected();
+        //capture screenshot of the login/register dashboard page before data input
+        await captureScreenshot(this.driver, "Login and Register Dashboard Page Display Before Data Input");
+        //input valid edited login email into login email input field
+        await loginRegisterDashboardPage.inputValidEditedLoginEmailIntoEmailInputField();
+        //input valid login password into login password input field
+        await loginRegisterDashboardPage.inputValidLoginPasswordIntoPasswordInputField();
+        //click "View password" button
+        await loginRegisterDashboardPage.clickViewLoginPasswordButton();
+        //capture screenshot of the login/register dashboard page after valid data input - edited login email
+        await captureScreenshot(this.driver, "Login and Register Dashboard Page Display After Valid Data Input - Edited Login Email");
+        //click "Sign in" button
+        await loginRegisterDashboardPage.clickSignInButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(2000);
+        //assert the user gets logged in (transferred to personal information page)
+        const personalInfoPageTitle = await personalInfoPage.getPersonalInfoPageTitle();
+        assert.strictEqual(personalInfoPageTitle, "YOUR PERSONAL INFORMATION", "The personal info page title doesn't match expectations.");
+        //log the product addition issue if it gets added without any predefined actions
+        const genPageSidebarCartCountText = await generalPage.getSidebarCartButtonText();
+        const headerShoppingCartLinkText = await generalPage.getHeaderShoppingCartLinkText();
+        if(genPageSidebarCartCountText !== "Cart\n0" && headerShoppingCartLinkText !== "0\\nSHOPPING CART\\n-\\n$0.00"){
+            Logger.error(`A random product(s) was added (during user account creation) without any predefined action performed. Expected header shopping cart display: '0 SHOPPING CART - $0.00', Actual: ${headerShoppingCartLinkText}`)
+        } else {
+            Logger.info("No random product has been added.");
+        }
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //personal info page web element assert
+        await personalInfoPage.isPersonalInformationPageWebElementDisplayed();
+        //personal info page text element assert
+        await personalInfoPageTextElementAssert.isPersonalInfoPageTextElementAsExpected();
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Valid User Login With Edited Email Test Result");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
