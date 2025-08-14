@@ -72,6 +72,18 @@ describe('Home Page Tests', () => {
             await testMethods.addSingleNewProductToCartTest();
         });
 
+        //Test 009a -> add single new product ("Blue Long Denim Shirt") to cart test (as a registered user) (the webpage is bugged -> additional random product is being added to cart without test script)
+        test("Add Single New Product To Cart Test (as a registered user)", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //add single new product ("Blue Long Denim Shirt") to cart test (as a registered user)
+            await testMethods.addSingleNewProductToCartRegUserTest();
+        });
+
     });
 
 
