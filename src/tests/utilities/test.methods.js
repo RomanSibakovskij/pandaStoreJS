@@ -5273,6 +5273,45 @@ class TestMethods extends BaseTest{
         await captureScreenshot(this.driver, "Invalid User Login Test Result - Invalid Login Email Format");
     }
 
+    //invalid user login test method - invalid login password
+    async invalidUserLoginInvalidPasswordTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const loginRegisterDashboardPage = new LoginRegisterDashboardPage(this.driver);
+        const loginRegisterDashPageInvalidSingularInput = new LoginRegisterDashPageInvalidSingularInput(this.driver);
+        const loginRegisterDashPageTextElementAssert = new LoginRegisterDashPageTextElementAssert(this.driver);
+        //wait for elements to load
+        await basePage.waitForElementLoad(1500);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //login/register dashboard page web element assert
+        await loginRegisterDashboardPage.isLoginRegisterDashPageWebElementDisplayed();
+        //login/register dashboard page text element assert
+        await loginRegisterDashPageTextElementAssert.isLoginRegisterDashPageTextElementAsExpected();
+        //capture screenshot of the login/register dashboard page before data input
+        await captureScreenshot(this.driver, "Login and Register Dashboard Page Display Before Data Input");
+        //input valid login email into login email input field
+        await loginRegisterDashboardPage.inputValidLoginEmailIntoEmailInputField();
+        //input invalid login password into login password input field
+        await loginRegisterDashPageInvalidSingularInput.inputInvalidLoginPasswordIntoPasswordInputField();
+        //click "View password" button
+        await loginRegisterDashboardPage.clickViewLoginPasswordButton();
+        //capture screenshot of the login/register dashboard page after invalid data input - invalid login password
+        await captureScreenshot(this.driver, "Login and Register Dashboard Page Display After Invalid Data Input - Invalid Login Password");
+        //click "Sign in" button
+        await loginRegisterDashboardPage.clickSignInButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(1200);
+        //assert the user gets an expected error message
+        const loginSectionSingularInputErrorMsg = await loginRegisterDashboardPage.getLoginSectionSingularInputErrorMsg();
+        assert.strictEqual(loginSectionSingularInputErrorMsg, "Authentication failed.", "The login register dashboard page invalid password input error doesn't match expectations or the error wasn't triggered.");
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Invalid User Login Test Result - Invalid Login Password");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

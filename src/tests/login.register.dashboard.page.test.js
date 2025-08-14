@@ -138,6 +138,20 @@ describe('Login/Register Dashboard Page Tests', () => {
             await testMethods.invalidUserLoginInvalidEmailFormatTest();
         });
 
+        //Test 007g -> invalid user login test - invalid login password format
+        test("Invalid User Login Test - Invalid Login Password Format", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //user logout test
+            await testMethods.userLogoutTest();
+            //invalid user login test - invalid login password format
+            await testMethods.invalidUserLoginInvalidPasswordTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
