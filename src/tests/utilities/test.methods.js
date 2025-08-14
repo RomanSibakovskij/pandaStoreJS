@@ -5598,8 +5598,8 @@ class TestMethods extends BaseTest{
         if(actualProductNames.length === 1 && actualProductNames[0] === expectedProductName){
             Logger.info("Only the expected product is added into shopping cart, test has passed")
         } else {
-            await captureScreenshot(this.driver, "Add Multiple Featured Products To Cart Test Result (as a guest) - Not Only Set Featured Product is Added");
-            throw new Error(`Not only the required product is present in shopping cart after ${expectedProductName} addition to cart. Actual display: ${actualProductNames}. Test has failed.`);
+            await captureScreenshot(this.driver, "Add Multiple Featured Products To Cart Test Result (as a guest) - Not Only Set Featured Products are Added");
+            throw new Error(`Not only the required products are present in shopping cart after ${expectedProductName} addition to cart. Actual display: ${actualProductNames}. Test has failed.`);
         }
         //capture screenshot of the test result
         await captureScreenshot(this.driver, "Add Multiple Homepage Featured Products To Cart Test Result (as a guest)");
@@ -5715,10 +5715,10 @@ class TestMethods extends BaseTest{
         const expectedProductName = "Women's heathered middle sleeve shirt dress";
         const actualProductNames = await shoppingCartPage.getShoppingCartTableProductName();
         if(actualProductNames.length === 1 && actualProductNames[0] === expectedProductName){
-            Logger.info("Only the expected product is added into shopping cart, test has passed")
+            Logger.info("Only the expected products are added into shopping cart, test has passed")
         } else {
-            await captureScreenshot(this.driver, "Add Multiple Featured Products To Cart Test Result (as a registered user) - Not Only Set Featured Product is Added");
-            throw new Error(`Not only the required product is present in shopping cart after ${expectedProductName} addition to cart. Actual display: ${actualProductNames}. Test has failed.`);
+            await captureScreenshot(this.driver, "Add Multiple Featured Products To Cart Test Result (as a registered user) - Not Only Set Featured Products are Added");
+            throw new Error(`Not only the required products are present in shopping cart after ${expectedProductName} addition to cart. Actual display: ${actualProductNames}. Test has failed.`);
         }
         //capture screenshot of the test result
         await captureScreenshot(this.driver, "Add Multiple Homepage Featured Products To Cart Test Result (as a registered user)");
@@ -5990,13 +5990,130 @@ class TestMethods extends BaseTest{
         const expectedProductName = "Daily black crew neck shirt, short sleeve crew neck";
         const actualProductNames = await shoppingCartPage.getShoppingCartTableProductName();
         if(actualProductNames.length === 1 && actualProductNames[0] === expectedProductName){
-            Logger.info("Only the expected product is added into shopping cart, test has passed")
+            Logger.info("Only the expected products are added into shopping cart, test has passed")
         } else {
             await captureScreenshot(this.driver, "Add Multiple Homepage New Product To Cart Test Result (as a guest) - Not Only Set Featured Products are Added");
             throw new Error(`Not only the required products are present in shopping cart after ${expectedProductName} addition to cart. Actual display: ${actualProductNames}. Test has failed.`);
         }
         //capture screenshot of the test result
         await captureScreenshot(this.driver, "Add Multiple Homepage New Product To Cart Test Result (as a guest)");
+    }
+
+    //add multiple new products ("Blue Long Denim Shirt") to cart test method (as a registered user)
+    async addMultipleNewProductsToCartRegUserTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        //const generalPageDataLoggers = new GeneralPageDataLoggers(this.driver);
+        const homePage = new HomePage(this.driver);
+        const homePageTextElementAssert = new HomePageTextElementAssert(this.driver);
+        const homePageDataLoggers = new HomePageDataLoggers(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const addressesDashboardPage = new AddressesDashboardPage(this.driver);
+        const addressesDashPageTextElementAssert = new AddressesDashPageTextElementAssert(this.driver);
+        const shoppingCartModal = new ShoppingCartModal(this.driver);
+        const shoppingCartModalTextElementAssert = new ShoppingCartModalTextElementAssert(this.driver);
+        //const shoppingCartModalDataLogger = new ShoppingCartModalDataLogger(this.driver);
+        const headerShoppingCartModal = new HeaderShoppingCartModal(this.driver);
+        const headerShoppingCartModalDataLogger = new HeaderShoppingCartModalDataLogger(this.driver);
+        const shoppingCartPage = new ShoppingCartPage(this.driver);
+        const shoppingCartPageTextElementAssert = new ShoppingCartPageTextElementAssert(this.driver);
+        const shoppingCartPageDataLogger = new ShoppingCartPageDataLogger(this.driver);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //log general page lower footer product data (Selenium can't seem to find these elements with VALID selectors)
+        //await generalPageDataLoggers.logLowerFooterSpecialsProductData();
+        //log general page lower footer recent articles data (Selenium can't seem to find these elements with VALID selectors)
+        //await generalPageDataLoggers.logLowerFooterRecentArticlesData();
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //addresses dashboard page web element assert
+        await addressesDashboardPage.isAddressesDashboardPageWebElementDisplayed();
+        //addresses dashboard page text element assert
+        await addressesDashPageTextElementAssert.isAddressesDashboardPageTextElementAsExpected();
+        //click header home page logo
+        await generalPage.clickHeaderHomePageLogoLink();
+        //wait for elements to load
+        await basePage.waitForElementLoad(1300);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //home page web element assert
+        await homePage.isHomePageWebElementDisplayed();
+        //home page text element assert
+        await homePageTextElementAssert.isHomePageTextElementAsExpected();
+        //log home page featured product data
+        await homePageDataLoggers.logHomePageFeaturedProductData();
+        //log home page new product data
+        await homePageDataLoggers.logHomePageNewProductData();
+        //log home page featured articles data
+        await homePageDataLoggers.logHomePageFeaturedArticlesData();
+        //capture screenshot of the home page display
+        await captureScreenshot(this.driver, "Home Page Display");
+        //click set new product ("Blue Long Denim Shirt") link
+        await homePage.clickSetNewProductAddToCartButton(2);
+        //wait for elements to load
+        await basePage.waitForElementLoad(1300);
+        //shopping cart modal web element assert
+        await shoppingCartModal.isShopCartModalWebElementDisplayed();
+        //shopping cart modal text element assert
+        await shoppingCartModalTextElementAssert.isShoppingCartModalTextElementAsExpected();
+        //log shopping cart modal product data (Selenium can't seem to find these elements with VALID selectors)
+        //await shoppingCartModalDataLogger.logShoppingCartModalProductData();
+        //capture screenshot of the shopping cart modal display
+        await captureScreenshot(this.driver, "Shopping Cart Modal Display");
+        //assert the user receives expected product addition success message
+        const productAdditionSuccessMessage = await shoppingCartModal.getShoppingCartModalProductAdditionSuccessMessage();
+        assert.strictEqual(productAdditionSuccessMessage, "Product successfully added to your shopping cart", "The product addition to shopping cart modal success message doesn't match expectations or the product addition process has failed.");
+        //click "Close" modal button
+        await shoppingCartModal.clickCloseButton();
+        //hover over header shopping cart dropdown link
+        await generalPage.hoverOverHeaderShoppingCartDropdownLink();
+        //wait for elements to load
+        await basePage.waitForElementLoad(1300);
+        //header shopping cart modal web element assert
+        await headerShoppingCartModal.isHeaderShopCartModalWebElementDisplayed();
+        //log header shopping cart modal product data
+        await headerShoppingCartModalDataLogger.logHeaderShoppingCartModalProductData();
+        //capture screenshot of the header shopping cart modal display before product quantity increase
+        await captureScreenshot(this.driver, "Header Shopping Cart Modal Display Before Product Quantity Increase (registered user)");
+        //click product quantity increase button
+        await headerShoppingCartModal.clickHeaderModalShoppingCartIncreaseQtyBtn(0);
+        //click product quantity increase button
+        await headerShoppingCartModal.clickHeaderModalShoppingCartIncreaseQtyBtn(0);
+        //capture screenshot of the header shopping cart modal display after product quantity increase
+        await captureScreenshot(this.driver, "Header Shopping Cart Modal Display After Product Quantity Increase (registered user)");
+        //log header shopping cart modal product data (to assert the product quantity has increased)
+        await headerShoppingCartModalDataLogger.logHeaderShoppingCartModalProductData();
+        //click header shopping cart modal "Shopping Cart" button
+        await headerShoppingCartModal.clickHeaderModalShoppingCartButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(1600);
+        //shopping cart web element assert
+        await shoppingCartPage.isShoppingCartPageWebElementDisplayed();
+        //shopping cart text element assert
+        await shoppingCartPageTextElementAssert.isShoppingCartPageTextElementAsExpected();
+        //log shopping cart displayed data
+        await shoppingCartPageDataLogger.logShoppingCartPageProductData();
+        //assert only the required product is in shopping cart, throw the error otherwise
+        const expectedProductName = "Blue long denim shirt jackets";
+        const actualProductNames = await shoppingCartPage.getShoppingCartTableProductName();
+        if(actualProductNames.length === 1 && actualProductNames[0] === expectedProductName){
+            Logger.info("Only the expected product are added into shopping cart, test has passed")
+        } else {
+            await captureScreenshot(this.driver, "Add Multiple Homepage New Products To Cart Test Result (as a registered user) - Not Only Set Featured Products are Added");
+            throw new Error(`Not only the required products are present in shopping cart after ${expectedProductName} addition to cart. Actual display: ${actualProductNames}. Test has failed.`);
+        }
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Add Multiple Homepage New Products To Cart Test Result (as a registered user)");
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
