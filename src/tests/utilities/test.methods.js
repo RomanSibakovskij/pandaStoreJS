@@ -4904,5 +4904,42 @@ class TestMethods extends BaseTest{
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //valid login / logout tests
+
+    //user logout test method
+    async userLogoutTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const accountDashboardPage = new AccountDashboardPage(this.driver);
+        const accountDashboardPageTextElementAssert = new AccountDashboardPageTextElementAssert(this.driver);
+        const loginRegisterDashboardPage = new LoginRegisterDashboardPage(this.driver);
+        const loginRegisterDashPageTextElementAssert = new LoginRegisterDashPageTextElementAssert(this.driver);
+        //wait for elements to load
+        await basePage.waitForElementLoad();
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //account dashboard page breadcrumb web assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageBreadcrumbWebElementDisplayed();
+        //account dashboard page aside web element assert (present on this page)
+        await accountDashboardPage.isAccountDashboardPageAsideWebElementDisplayed();
+        //account dashboard page aside text element assert (present on this page)
+        await accountDashboardPageTextElementAssert.isAccountDashboardPageAsideTextElementAsExpected();
+        //capture screenshot of the addresses dashboard page display
+        await captureScreenshot(this.driver, "Addresses Dashboard Page Display");
+        //click "Sign out" aside link
+        await accountDashboardPage.clickAccountDashboardSetAsideLinkMethod(11);
+        //login/register dashboard page web element assert
+        await loginRegisterDashboardPage.isLoginRegisterDashPageWebElementDisplayed();
+        //login/register dashboard page text element assert
+        await loginRegisterDashPageTextElementAssert.isLoginRegisterDashPageTextElementAsExpected();
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "User Logout Test Result");
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }
 module.exports = TestMethods;

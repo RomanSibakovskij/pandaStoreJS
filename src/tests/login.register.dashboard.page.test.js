@@ -1,0 +1,40 @@
+const TestMethods = require('./utilities/test.methods.js');
+const BaseTest = require('./utilities/base.test.js');
+
+describe('Login/Register Dashboard Page Tests', () => {
+    let testMethods; //testMethods initializer
+    let baseTest; //baseTest initializer
+
+    beforeEach(async function () {
+        baseTest = new BaseTest();  //BaseTest initialization
+        await baseTest.beforeEach();  //beforeEach caller for setup (from BaseTest)
+        testMethods = new TestMethods(baseTest.driver);  //driver passage to TestMethods
+    });
+
+    jest.setTimeout(95000) //timer for the whole single test run, otherwise throws a timeout error
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    describe("User Logout Test", () => {
+
+        //Test 006 -> user logout test
+        test("User Logout Test", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //user logout test
+            await testMethods.userLogoutTest();
+        });
+
+    });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //driver clean-up after each test run
+    afterEach(async function() {
+        await baseTest.afterEach();  //afterEach caller for cleanup (from BaseTest)
+    });
+
+});
