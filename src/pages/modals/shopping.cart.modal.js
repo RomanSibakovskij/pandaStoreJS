@@ -48,6 +48,13 @@ class ShoppingCartModal extends BasePage{
         await actions.move({ origin: shoppingCartModalButton }).click().perform();
     }
 
+    //click "Close" button method
+    async clickCloseButton(){
+        const shoppingCartModalCloseButton = this.driver.findElement(this._shopCartModalCloseButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: shoppingCartModalCloseButton }).click().perform();
+    }
+
     //shopping cart modal product data getters
     async getShoppingCartModalProductName(){
         const shopCartModalProductName = await this.driver.findElement(this._shopCartModalProductName);

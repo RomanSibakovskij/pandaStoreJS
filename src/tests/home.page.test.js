@@ -44,6 +44,15 @@ describe('Home Page Tests', () => {
 
     });
 
+    describe("Add Multiple Featured Product To Cart Tests", () => {
+
+        //Test 008b -> add multiple featured product ("Women's Heathered Middle Sleeve Shirt") to cart test (as a guest) (the webpage is bugged -> sometimes, additional random product is being added to cart without test script)
+        test("Add Multiple Featured Product To Cart Test (as a guest)", async function () {
+            await testMethods.addMultipleFeaturedProductToCartTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run

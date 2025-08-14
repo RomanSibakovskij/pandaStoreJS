@@ -26,6 +26,21 @@ class HeaderShoppingCartModal extends BasePage{
         this._headerShopCartModalCheckoutButton = By.xpath("//div[@class='dropdown_list cart_body ']//a[@title='Checkout']");
     }
 
+    //click increase product quantity button method
+    async clickHeaderModalShoppingCartIncreaseQtyBtn(index){
+        const headerShoppingCartModalButton = await this.driver.findElements(this._headerShopCartModalProductQtyIncreaseBtnElements);
+        const targetElement = headerShoppingCartModalButton[index];
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: targetElement }).click().perform();
+    }
+
+    //click "Shopping cart" button method
+    async clickHeaderModalShoppingCartButton(){
+        const headerShoppingCartModalButton = await this.driver.findElement(this._headerShopCartModalShoppingCartButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: headerShoppingCartModalButton }).click().perform();
+    }
+
     //header shopping cart product data getters
     async getHeaderShoppingCartModalProductName(){
         const elements = await this.driver.findElements(this._headerShopCartModalProductNameLinkElements);

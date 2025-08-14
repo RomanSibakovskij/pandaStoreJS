@@ -116,6 +116,13 @@ class GeneralPage extends BasePage{
         headerHomePageLogoLink.click();
     }
 
+    //hover over header shopping cart link method
+    async hoverOverHeaderShoppingCartDropdownLink(){
+        const headerShoppingCartDropdownLink = await this.driver.findElement(this._headerShopCartLink );
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: headerShoppingCartDropdownLink }).perform();
+    }
+
     //upper header 'Login' link text getter method
     async getUpperNavAccountLinkText(){
         const upperNavAccountLinkText = await this.driver.findElement(this._upperHeadNavAccountLink);
