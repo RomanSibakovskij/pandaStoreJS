@@ -43,6 +43,66 @@ class ShoppingCartPage extends BasePage{
         this._shoppingCartContinueShoppingButton = By.xpath("//a[@class='btn btn-default']");
     }
 
+    //shopping cart page text element getters
+    async getShoppingCartPageTitle(){
+        const shoppingCartPageTitle = await this.driver.findElement(this._shoppingCartPageTitle);
+        return await shoppingCartPageTitle.getText();
+    }
+
+    //product table
+    async getShoppingCartTableProductColorSubtext(){
+        const elements = await this.driver.findElements(this._shoppingCartTableProductColorSubtextElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get shopping cart page table product color subtext(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getShoppingCartTableProductSizeSubtext(){
+        const elements = await this.driver.findElements(this._shoppingCartTableProductSizeSubtextElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get shopping cart page table product size subtext(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //product summary table
+    async getShoppingCartSummaryTableProductShippingSubtext(){
+        const shoppingCartSummaryTableProductShippingSubtext = await this.driver.findElement(this._shoppingCartSummaryTableProductShippingSubtext);
+        return await shoppingCartSummaryTableProductShippingSubtext.getText();
+    }
+    async getShoppingCartSummaryTablePromoCodeLinkText(){
+        const shoppingCartSummaryTablePromoCodeLinkText = await this.driver.findElement(this._shoppingCartSummaryTablePromoCodeLink);
+        return await shoppingCartSummaryTablePromoCodeLinkText.getText();
+    }
+    async getShoppingCartSummaryTableOfferSubtext(){
+        const shoppingCartSummaryTableOfferSubtext = await this.driver.findElement(this._shoppingCartSummaryTableOfferSubtext);
+        return await shoppingCartSummaryTableOfferSubtext.getText();
+    }
+    async getShoppingCartSummaryTableTaxesSubtext(){
+        const shoppingCartSummaryTableTaxesSubtext = await this.driver.findElement(this._shoppingCartSummaryTableTaxesSubtext);
+        return await shoppingCartSummaryTableTaxesSubtext.getText();
+    }
+    async getShoppingCartSummaryTableTotalPriceSubtext(){
+        const shoppingCartSummaryTableTotalPriceSubtext = await this.driver.findElement(this._shoppingCartSummaryTableTotalPriceSubtext);
+        return await shoppingCartSummaryTableTotalPriceSubtext.getText();
+    }
+
     //shopping cart page web element assert method (all pages have those elements)
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
