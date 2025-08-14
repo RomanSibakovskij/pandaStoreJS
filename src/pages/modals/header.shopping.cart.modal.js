@@ -26,6 +26,89 @@ class HeaderShoppingCartModal extends BasePage{
         this._headerShopCartModalCheckoutButton = By.xpath("//div[@class='dropdown_list cart_body ']//a[@title='Checkout']");
     }
 
+    //header shopping cart product data getters
+    async getHeaderShoppingCartModalProductName(){
+        const elements = await this.driver.findElements(this._headerShopCartModalProductNameLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get header shopping cart modal product name(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getHeaderShoppingCartModalProductUnitPrice(){
+        const elements = await this.driver.findElements(this._headerShopCartModalProductUnitPriceElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get header shopping cart modal product unit price(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getHeaderShoppingCartModalProductQty(){
+        const elements = await this.driver.findElements(this._headerShopCartModalProductQtyInputFieldElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getDomAttribute("value");
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get header shopping cart modal product quantity(ies):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getHeaderShoppingCartModalProductColor(){
+        const elements = await this.driver.findElements(this._headerShopCartModalProductColorElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get header shopping cart modal product color(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getHeaderShoppingCartModalProductSize(){
+        const elements = await this.driver.findElements(this._headerShopCartModalProductSizeElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get header shopping cart modal product size(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //header shopping cart modal data total product price getter
+    async getHeaderShoppingCartModalTotalProductPriceData(){
+        const headerShoppingCartModalTotalProductPriceData = await this.driver.findElement(this._headerShopCartModalTotalItemSectionData);
+        return await headerShoppingCartModalTotalProductPriceData.getText();
+    }
+
     //header shopping cart modal web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
