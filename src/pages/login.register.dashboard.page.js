@@ -121,6 +121,12 @@ class LoginRegisterDashboardPage extends BasePage{
         return await forgotPasswordLinkText.getText();
     }
 
+    //singular input error message getter
+    async getLoginSectionSingularInputErrorMsg(){
+        const loginSectionSingularInputErrorMsg = await this.driver.findElement(this._loginSectionSingularInputErrorMessage);
+        return await loginSectionSingularInputErrorMsg.getText();
+    }
+
     //login/register dashboard page web element assert method
     async isElementDisplayed(locator) {
         const element = await this.driver.findElement(locator);
