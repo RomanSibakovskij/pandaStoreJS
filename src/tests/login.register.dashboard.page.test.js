@@ -138,8 +138,8 @@ describe('Login/Register Dashboard Page Tests', () => {
             await testMethods.invalidUserLoginInvalidEmailFormatTest();
         });
 
-        //Test 007g -> invalid user login test - invalid login password format
-        test("Invalid User Login Test - Invalid Login Password Format", async function () {
+        //Test 007g -> invalid user login test - invalid login password
+        test("Invalid User Login Test - Invalid Login Password", async function () {
             //user navigation to register page test
             await testMethods.navigateToRegisterPageTest();
             //valid (male) user account creation test
