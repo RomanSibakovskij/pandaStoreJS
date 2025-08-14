@@ -43,6 +43,124 @@ class ShoppingCartPage extends BasePage{
         this._shoppingCartContinueShoppingButton = By.xpath("//a[@class='btn btn-default']");
     }
 
+    //shopping cart page product data getters
+    async getShoppingCartTableProductName(){
+        const elements = await this.driver.findElements(this._shoppingCartTableProductNameLinkElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get shopping cart page table product name(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getShoppingCartTableProductCurrentPrice(){
+        const elements = await this.driver.findElements(this._shoppingCartTableProductCurrentPriceElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get shopping cart page table product price(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getShoppingCartTableProductColor(){
+        const elements = await this.driver.findElements(this._shoppingCartTableProductColorElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get shopping cart page table product color(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getShoppingCartTableProductSize(){
+        const elements = await this.driver.findElements(this._shoppingCartTableProductSizeElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get shopping cart page table product size(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getShoppingCartTableProductQty(){
+        const elements = await this.driver.findElements(this._shoppingCartTableProductQtyInputFieldElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get shopping cart page table product quantity(ies):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+    async getShoppingCartTableProductTotalPrice(){
+        const elements = await this.driver.findElements(this._shoppingCartTableProductTotalPriceElements);
+
+        return await Promise.all(
+            elements.map(async (element) => {
+                try {
+                    const text = await element.getText();
+                    return text.trim();
+                } catch (error) {
+                    Logger.warn('Failed to get shopping cart page table product total price(s):', error.message);
+                    return '';
+                }
+            })
+        );
+    }
+
+    //product summary table
+    async getShoppingCartSummaryProductCount(){
+        const shoppingCartProductCount = await this.driver.findElement(this._shoppingCartSummaryTableProductCount);
+        return await shoppingCartProductCount.getText();
+    }
+    async getShoppingCartSummaryProductPrice(){
+        const shoppingCartSummaryProductPrice = await this.driver.findElement(this._shoppingCartSummaryTableProductPrice);
+        return await shoppingCartSummaryProductPrice.getText();
+    }
+    async getShoppingCartSummaryProductShippingPrice(){
+        const shoppingCartSummaryProductShippingPrice = await this.driver.findElement(this._shoppingCartSummaryTableProductShippingPrice);
+        return await shoppingCartSummaryProductShippingPrice.getText();
+    }
+    async getShoppingCartSummaryOffer(){
+        const shoppingCartSummaryOffer = await this.driver.findElement(this._shoppingCartSummaryTableOffer);
+        return await shoppingCartSummaryOffer.getText();
+    }
+    async getShoppingCartSummaryTaxes(){
+        const shoppingCartSummaryTaxes = await this.driver.findElement(this._shoppingCartSummaryTableTaxesAmount);
+        return await shoppingCartSummaryTaxes.getText();
+    }
+    async getShoppingCartSummaryTotalPrice(){
+        const shoppingCartSummaryTotalPrice = await this.driver.findElement(this._shoppingCartSummaryTableTotalPrice);
+        return await shoppingCartSummaryTotalPrice.getText();
+    }
+
     //shopping cart page text element getters
     async getShoppingCartPageTitle(){
         const shoppingCartPageTitle = await this.driver.findElement(this._shoppingCartPageTitle);

@@ -23,6 +23,15 @@ describe('Home Page Tests', () => {
 
     });
 
+    describe("Add Single Featured Product To Cart Tests", () => {
+
+        //Test 008 -> add single featured product ("Women's Fashion Block Moto Jackets") to cart test (as a guest) (the webpage is bugged -> additional random product is being added to cart without test script)
+        test("Add Single Featured Product To Cart Test (as a guest)", async function () {
+            await testMethods.addSingleFeaturedProductToCartTest();
+        });
+
+    });
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //driver clean-up after each test run

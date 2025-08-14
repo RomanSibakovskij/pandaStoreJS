@@ -41,6 +41,13 @@ class ShoppingCartModal extends BasePage{
         this._shopCartModalProductsMayLikeProductUnitPriceElements = By.xpath("//section[@class='modal_products_container products_slider']//div[@class='swiper-wrapper']//div[@class='price']");
     }
 
+    //click "Shopping cart" button method
+    async clickShoppingCartButton(){
+        const shoppingCartModalButton = this.driver.findElement(this._shopCartModalProceedToShoppingCartButton);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: shoppingCartModalButton }).click().perform();
+    }
+
     //shopping cart modal product data getters
     async getShoppingCartModalProductName(){
         const shopCartModalProductName = await this.driver.findElement(this._shopCartModalProductName);
@@ -120,6 +127,12 @@ class ShoppingCartModal extends BasePage{
     async getShoppingCartModalContinueShoppingLinkText(){
         const shopCartModalContinueShoppingLinkText = await this.driver.findElement(this._shopCartModalContinueShoppingLink);
         return await shopCartModalContinueShoppingLinkText.getText();
+    }
+
+    //shopping cart modal product addition to cart success message getter
+    async getShoppingCartModalProductAdditionSuccessMessage(){
+        const shopCartModalProductAdditionSuccessMessage = await this.driver.findElement(this._shopCartModalProductAdditionSuccessMessage);
+        return await shopCartModalProductAdditionSuccessMessage.getText();
     }
 
     //shopping cart modal web element assert method (all pages have those elements)

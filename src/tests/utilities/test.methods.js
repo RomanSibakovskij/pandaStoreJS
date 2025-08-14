@@ -10,6 +10,9 @@ const { AccountDashboardPage } = require("../../pages/account.dashboard.page.js"
 const { PersonalInfoPage } = require("../../pages/personal.info.page.js");
 const { AddressesDashboardPage } = require("../../pages/addresses.dashboard.page.js");
 const { NewAddressPage } = require("../../pages/new.address.page.js");
+const { ShoppingCartPage } = require("../../pages/shopping.cart.page.js");
+
+const ShoppingCartModal = require("../../pages/modals/shopping.cart.modal.js");
 
 const RegisterPageInvalidSingularInput = require("../../pages/reg-page-invalid-scenarios/register.page.invalid.singular.input.js");
 const PersonalInfoPageInvalidSingularInput = require("../../pages/personal-info-page-invalid-scenarios/personal.info.page.invalid.singular.input.js");
@@ -25,9 +28,15 @@ const AccountDashboardPageTextElementAssert = require("../test-text-element-asse
 const PersonalInfoPageTextElementAssert = require("../test-text-element-asserts/personal.info.page.text.element.assert.js");
 const AddressesDashPageTextElementAssert = require("../test-text-element-asserts/addresses.dash.page.text.element.assert.js");
 const NewAddressPageTextElementAssert = require("../test-text-element-asserts/new.address.page.text.element.assert.js");
+const ShoppingCartPageTextElementAssert = require("../test-text-element-asserts/shopping.cart.page.text.element.assert.js");
+
+const ShoppingCartModalTextElementAssert = require("../modals/shopping.cart.modal.text.element.assert.js");
 
 const HomePageDataLoggers = require("../data-loggers/home.page.data.loggers.js");
 const AddressesDashPageDataLogger = require("../data-loggers/addresses.dash.page.data.logger.js");
+const ShoppingCartPageDataLogger = require("../data-loggers/shopping.cart.page.data.logger.js");
+
+const ShoppingCartModalDataLogger = require("../data-loggers/shopping.cart.modal.data.logger.js");
 
 const BaseTest = require("./base.test");
 const {captureScreenshot} = require("./screenshot.class.js");
@@ -5310,6 +5319,89 @@ class TestMethods extends BaseTest{
         assert.strictEqual(loginSectionSingularInputErrorMsg, "Authentication failed.", "The login register dashboard page invalid password input error doesn't match expectations or the error wasn't triggered.");
         //capture screenshot of the test result
         await captureScreenshot(this.driver, "Invalid User Login Test Result - Invalid Login Password");
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //home page featured product(s) addition to cart tests
+
+    //add single featured product ("Women's Fashion Block Moto Jackets") to cart test method (as a guest)
+    async addSingleFeaturedProductToCartTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        //const generalPageDataLoggers = new GeneralPageDataLoggers(this.driver);
+        const homePage = new HomePage(this.driver);
+        const homePageTextElementAssert = new HomePageTextElementAssert(this.driver);
+        const homePageDataLoggers = new HomePageDataLoggers(this.driver);
+        const shoppingCartModal = new ShoppingCartModal(this.driver);
+        const shoppingCartModalTextElementAssert = new ShoppingCartModalTextElementAssert(this.driver);
+        //const shoppingCartModalDataLogger = new ShoppingCartModalDataLogger(this.driver);
+        const shoppingCartPage = new ShoppingCartPage(this.driver);
+        const shoppingCartPageTextElementAssert = new ShoppingCartPageTextElementAssert(this.driver);
+        const shoppingCartPageDataLogger = new ShoppingCartPageDataLogger(this.driver);
+        //wait for elements to load
+        await basePage.waitForElementLoad(1500);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //log general page lower footer product data (Selenium can't seem to find these elements with VALID selectors)
+        //await generalPageDataLoggers.logLowerFooterSpecialsProductData();
+        //log general page lower footer recent articles data (Selenium can't seem to find these elements with VALID selectors)
+        //await generalPageDataLoggers.logLowerFooterRecentArticlesData();
+        //click upper header "Got it" cookies button
+        await generalPage.clickGotItButton();
+        //home page web element assert
+        await homePage.isHomePageWebElementDisplayed();
+        //home page text element assert
+        await homePageTextElementAssert.isHomePageTextElementAsExpected();
+        //log home page featured product data
+        await homePageDataLoggers.logHomePageFeaturedProductData();
+        //log home page new product data
+        await homePageDataLoggers.logHomePageNewProductData();
+        //log home page featured articles data
+        await homePageDataLoggers.logHomePageFeaturedArticlesData();
+        //capture screenshot of the home page display
+        await captureScreenshot(this.driver, "Home Page Display");
+        //hover over set featured product ("Women's Fashion Block Moto Jackets") link
+        await homePage.hoverOverSetFeaturedProductLink(2);
+        //click set featured product ("Women's Fashion Block Moto Jackets") link
+        await homePage.clickSetFeaturedProductAddToCartButton(2);
+        //wait for elements to load
+        await basePage.waitForElementLoad(1500);
+        //shopping cart modal web element assert
+        await shoppingCartModal.isShopCartModalWebElementDisplayed();
+        //shopping cart modal text element assert
+        await shoppingCartModalTextElementAssert.isShoppingCartModalTextElementAsExpected();
+        //log shopping cart modal product data (Selenium can't seem to find these elements with VALID selectors)
+        //await shoppingCartModalDataLogger.logShoppingCartModalProductData();
+        //capture screenshot of the shopping cart modal display
+        await captureScreenshot(this.driver, "Shopping Cart Modal Display");
+        //assert the user receives expected product addition success message
+        const productAdditionSuccessMessage = await shoppingCartModal.getShoppingCartModalProductAdditionSuccessMessage();
+        assert.strictEqual(productAdditionSuccessMessage, "Product successfully added to your shopping cart", "The product addition to shopping cart modal success message doesn't match expectations or the product addition process has failed.");
+        //click "Shopping cart" button
+        await shoppingCartModal.clickShoppingCartButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(1300);
+        //shopping cart web element assert
+        await shoppingCartPage.isShoppingCartPageWebElementDisplayed();
+        //shopping cart text element assert
+        await shoppingCartPageTextElementAssert.isShoppingCartPageTextElementAsExpected();
+        //log shopping cart displayed data
+        await shoppingCartPageDataLogger.logShoppingCartPageProductData();
+        //assert only the required product is in shopping cart, throw the error otherwise
+        const expectedProductName = "Women's fashion block moto jackets";
+        const actualProductNames = await shoppingCartPage.getShoppingCartTableProductName();
+        if(actualProductNames.length === 1 && actualProductNames[0] === expectedProductName){
+            Logger.info("Only the expected product is added into shopping cart, test has passed")
+        } else {
+            await captureScreenshot(this.driver, "Add Single Homepage Featured Product To Cart Test Result (as a guest) - Not Only Set Featured Product is Added");
+            throw new Error(`Not only the required product is present in shopping cart after ${expectedProductName} addition to cart. Actual display: ${actualProductNames}. Test has failed.`);
+        }
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Add Single Homepage Featured Product To Cart Test Result (as a guest)");
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

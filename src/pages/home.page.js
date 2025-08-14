@@ -87,6 +87,20 @@ class HomePage extends BasePage{
         this._homePageProductBrandsIconLinkElements = By.xpath("//section[@id='brands_slider_d40e96ddab']//div[@class='pro_outer_box']/a");
     }
 
+    //hover over set featured product link method
+    async hoverOverSetFeaturedProductLink(index){
+        const featuredProductLink = await this.driver.findElements(this._homePageFeaturedProductNameLinkElements);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: featuredProductLink[index] }).perform();
+    }
+
+    //click set featured product "Add to Cart" button method
+    async clickSetFeaturedProductAddToCartButton(index){
+        const featuredProductAddToCartButton = await this.driver.findElements(this._homePageFeaturedProductAddToCartButtonElements);
+        const actions = this.driver.actions({ bridge: true });
+        await actions.move({ origin: featuredProductAddToCartButton[index] }).click().perform();
+    }
+
     //home page product data getters
     //featured products section
     async getHomePageFeaturedProductName() {
