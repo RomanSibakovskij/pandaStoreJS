@@ -110,6 +110,12 @@ class GeneralPage extends BasePage{
         await actions.move({ origin: upperNavbarMyAccountLink }).click().perform();
     }
 
+    //click header home page logo link method
+    async clickHeaderHomePageLogoLink(){
+        const headerHomePageLogoLink = await this.driver.findElement(this._headerHomeLogoLink);
+        headerHomePageLogoLink.click();
+    }
+
     //upper header 'Login' link text getter method
     async getUpperNavAccountLinkText(){
         const upperNavAccountLinkText = await this.driver.findElement(this._upperHeadNavAccountLink);

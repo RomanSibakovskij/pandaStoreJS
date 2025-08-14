@@ -30,6 +30,18 @@ describe('Home Page Tests', () => {
             await testMethods.addSingleFeaturedProductToCartTest();
         });
 
+        //Test 008a -> add single featured product ("Women's Fashion Block Moto Jackets") to cart test (as a registered user) (the webpage is bugged -> additional random product is being added to cart without test script)
+        test("Add Single Featured Product To Cart Test (as a registered user)", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //add single featured product ("Women's Fashion Block Moto Jackets") to cart test (as a registered user)
+            await testMethods.addSingleFeaturedProductToCartRegUserTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
