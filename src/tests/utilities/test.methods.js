@@ -5160,6 +5160,42 @@ class TestMethods extends BaseTest{
         await captureScreenshot(this.driver, "Invalid User Login Test Result - No Login Email");
     }
 
+    //invalid user login test method - no login password
+    async invalidUserLoginNoPasswordTest(){
+        const basePage = new BasePage(this.driver);
+        const generalPage = new GeneralPage(this.driver);
+        const generalPageTextElementAssert = new GeneralPageTextElementAssert(this.driver);
+        const loginRegisterDashboardPage = new LoginRegisterDashboardPage(this.driver);
+        const loginRegisterDashPageInvalidSingularInput = new LoginRegisterDashPageInvalidSingularInput(this.driver);
+        const loginRegisterDashPageTextElementAssert = new LoginRegisterDashPageTextElementAssert(this.driver);
+        //wait for elements to load
+        await basePage.waitForElementLoad(1500);
+        //general page web element assert
+        await generalPage.isGeneralPageWebElementDisplayed();
+        //general page text element assert
+        await generalPageTextElementAssert.isGeneralPageTextElementAsExpected();
+        //login/register dashboard page web element assert
+        await loginRegisterDashboardPage.isLoginRegisterDashPageWebElementDisplayed();
+        //login/register dashboard page text element assert
+        await loginRegisterDashPageTextElementAssert.isLoginRegisterDashPageTextElementAsExpected();
+        //capture screenshot of the login/register dashboard page before data input
+        await captureScreenshot(this.driver, "Login and Register Dashboard Page Display Before Data Input");
+        //input valid login email into login email input field
+        await loginRegisterDashboardPage.inputValidLoginEmailIntoEmailInputField();
+        //don't input login password into login password input field
+        await loginRegisterDashPageInvalidSingularInput.inputNoLoginPasswordIntoPasswordInputField();
+        //click "View password" button
+        await loginRegisterDashboardPage.clickViewLoginPasswordButton();
+        //capture screenshot of the login/register dashboard page after invalid data input - no login password
+        await captureScreenshot(this.driver, "Login and Register Dashboard Page Display After Invalid Data Input - No Login Password");
+        //click "Sign in" button
+        await loginRegisterDashboardPage.clickSignInButton();
+        //wait for elements to load
+        await basePage.waitForElementLoad(1200);
+        //capture screenshot of the test result
+        await captureScreenshot(this.driver, "Invalid User Login Test Result - No Login Password");
+    }
+
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }

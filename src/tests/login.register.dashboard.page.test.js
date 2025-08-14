@@ -92,6 +92,20 @@ describe('Login/Register Dashboard Page Tests', () => {
             await testMethods.invalidUserLoginNoEmailTest();
         });
 
+        //Test 007d -> invalid user login test - no login password
+        test("Invalid User Login Test - No Login Password", async function () {
+            //user navigation to register page test
+            await testMethods.navigateToRegisterPageTest();
+            //valid (male) user account creation test
+            await testMethods.validUserAccountCreationTest();
+            //valid add new user address test
+            await testMethods.validAddNewUserAddressTest();
+            //user logout test
+            await testMethods.userLogoutTest();
+            //invalid user login test - no login password
+            await testMethods.invalidUserLoginNoPasswordTest();
+        });
+
     });
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
