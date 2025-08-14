@@ -8,6 +8,10 @@ class LoginRegisterDashPageInvalidSingularInput extends BasePage{
 
     constructor(driver) {
         super(driver);
+
+        //relevant web elements
+        this._loginSectionEmailInputField = By.xpath("//section[@id='login_form_block']//input[@name='email']");
+        this._loginSectionPasswordInputField = By.xpath("//section[@id='login_form_block']//input[@name='password']");
     }
 
 
