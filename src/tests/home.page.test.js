@@ -86,6 +86,15 @@ describe('Home Page Tests', () => {
 
     });
 
+    describe("Add Multiple New Products To Cart Tests", () => {
+
+        //Test 009b -> add multiple new products ("Daily Black Crew Neck Shirt") to cart test (as a guest) (the webpage is bugged -> additional random product is being added to cart without test script and the quantity doesn't change)
+        test("Add Multiple New Products To Cart Test (as a guest)", async function () {
+            await testMethods.addMultipleNewProductsToCartTest();
+        });
+
+    });
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
