@@ -41,6 +41,56 @@ class ShoppingCartModal extends BasePage{
         this._shopCartModalProductsMayLikeProductUnitPriceElements = By.xpath("//section[@class='modal_products_container products_slider']//div[@class='swiper-wrapper']//div[@class='price']");
     }
 
+    //shopping cart modal product data getters
+    async getShoppingCartModalProductName(){
+        const shopCartModalProductName = await this.driver.findElement(this._shopCartModalProductName);
+        const text = await shopCartModalProductName.getText();
+        return text.split(":")[1].trim();
+    }
+    async getShoppingCartModalProductColor(){
+        const shopCartModalProductColor = await this.driver.findElement(this._shopCartModalProductColor);
+        const text = await shopCartModalProductColor.getText();
+        return text.split(":")[1].trim();
+    }
+    async getShoppingCartModalProductSize(){
+        const shopCartModalProductSize = await this.driver.findElement(this._shopCartModalProductSize);
+        const text = await shopCartModalProductSize.getText();
+        return text.split(":")[1].trim();
+    }
+    async getShoppingCartModalProductQuantity(){
+        const shopCartModalProductQuantity = await this.driver.findElement(this._shopCartModalProductQuantity);
+        const text = shopCartModalProductQuantity.getText();
+        return text.split(":")[1].trim();
+    }
+
+    //total items section
+    async getShoppingCartModalTotalItemPrice(){
+        const shopCartModalTotalItemPrice = await this.driver.findElement(this._shopCartModalTotalItemPrice);
+        const text = await shopCartModalTotalItemPrice.getText();
+        return text.split(":")[1].trim();
+    }
+    async getShoppingCartModalTotalShippingPrice(){
+        const shopCartModalTotalShippingPrice = await this.driver.findElement(this._shopCartModalTotalShippingPrice);
+        const text = await shopCartModalTotalShippingPrice.getText();
+        return text.split(":")[1].trim();
+    }
+    async getShoppingCartModalTaxes(){
+        const shopCartModalTaxes = await this.driver.findElement(this._shopCartModalTaxes);
+        const text = await shopCartModalTaxes.getText();
+        return text.split(":")[1].trim();
+    }
+    async getShoppingCartModalTotalPriceNoTax(){
+        const shopCartModalTotalPriceNoTax = await this.driver.findElement(this._shopCartModalTotalItemPrice);
+        const text = await shopCartModalTotalPriceNoTax.getText();
+        return text.split(":")[1].trim();
+    }
+
+    //product you may like section
+    async getShoppingCartModalProductsMayLikeProductUnitPrice(){
+        const shopCartModalProductsMayLikeProductUnitPrice = await this.driver.findElement(this._shopCartModalProductsMayLikeProductUnitPriceElements);
+        return await shopCartModalProductsMayLikeProductUnitPrice.getText();
+    }
+
     //shopping cart modal text element getters
     async getShoppingCartModalProductColorSubtext(){
         const shopCartModalProductColorSubtext = await this.driver.findElement(this._shopCartModalProductColorSubtext);
